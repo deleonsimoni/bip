@@ -1,6 +1,9 @@
 const express = require('express');
 const userRoutes = require('./user.route');
 const authRoutes = require('./auth.route');
+const collectorRoutes = require('./collector.route');
+const clientRoutes = require('./client.route');
+
 
 const router = express.Router(); // eslint-disable-line new-cap
 
@@ -11,5 +14,8 @@ router.get('/health-check', (req, res) =>
 
 router.use('/auth', authRoutes);
 router.use('/user', userRoutes);
+router.use('/collector', collectorRoutes);
+router.use('/client', clientRoutes);
+
 
 module.exports = router;
