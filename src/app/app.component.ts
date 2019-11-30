@@ -74,9 +74,8 @@ export class AppComponent implements OnInit {
       } else if ($(".mobile-nav, .mobile-nav-toggle").length) {
         $(".mobile-nav, .mobile-nav-toggle").hide();
       }
-    }
-}
-
+    });
+  }
 
   logout(): void {
     this.authService.signOut();
@@ -131,5 +130,4 @@ export class AppComponent implements OnInit {
       this.matIconRegistry.addSvgIcon(icon, this.domSanitizer.bypassSecurityTrustResourceUrl(`assets/icons/${icon}.svg`))
     });
   }
-
 }
