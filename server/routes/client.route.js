@@ -29,7 +29,7 @@ async function getClient(req, res) {
 
 //POST
 async function insertClient(req, res) {
-  let client = await clientCtrl.insertClient(req.body, req.user.enterprise);
+  let client = await clientCtrl.insertClient(req.body.cliente, req.user.enterprise);
   res.json(client);
 }
 

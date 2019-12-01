@@ -1,1 +1,41 @@
-<app-menu></app-menu>
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Cadastro de Cliente</h1>
+</div>
+
+<form class="user" [formGroup]="clienteForm">
+    <div class="form-group row">
+        <div class="col-sm-12 mb-3 mb-sm-0">
+            <input type="text" class="form-control form-control-user" 
+                    name="fullname" formControlName="fullname" placeholder="Nome completo">
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-6 mb-3 mb-sm-0">
+            <input type="text" class="form-control form-control-user" 
+            formControlName="cnpj" name="cnpj" placeholder="CNPJ">
+        </div>
+        <div class="col-sm-6 mb-3 mb-sm-0">
+            <input type="text" class="form-control form-control-user" 
+                    formControlName="cpf" name="cpf" placeholder="CPF">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <input type="email" class="form-control form-control-user" 
+            formControlName="email" name="email" placeholder="Email Address">
+    </div>
+    <div class="form-group row" formArrayName="phones">
+        <div class="col-sm-6 mb-3 mb-sm-0">
+            <input type="tel" class="form-control form-control-user"
+                    formControlName="main" name="main" placeholder="Telefone Principal">
+        </div>
+        <div class="col-sm-6">
+            <input type="tel" class="form-control form-control-user"
+                formControlName="secundary" name="secundary" placeholder="Telefone Secundário">
+        </div>
+    </div>
+    <hr />
+    <a href="#" (click)="cadastrar()" class="btn btn-primary btn-user btn-block" >
+        Cadastrar Cliente
+    </a>
+</form>
