@@ -11,6 +11,10 @@ import { ManterComponent } from './cliente/manter/manter.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TopoComponent } from './topo/topo.component';
 
+import { NgxMaskModule, IConfig } from 'ngx-mask'
+
+export let options: Partial<IConfig> | (() => Partial<IConfig>);
+
 @NgModule({
   declarations: [
     AdminComponent,
@@ -23,6 +27,7 @@ import { TopoComponent } from './topo/topo.component';
   imports: [
     CommonModule,
     AdminRoutingModule,
+    NgxMaskModule.forRoot(options),
     FormsModule, ReactiveFormsModule
   ],
   providers: [

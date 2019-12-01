@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ClienteService } from '../../../services/admin/cliente.service';
+import { ClienteService } from '../../../resources/services/admin/cliente.service';
 
 @Component({
   selector: 'app-manter',

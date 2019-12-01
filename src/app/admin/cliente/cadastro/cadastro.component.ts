@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ClienteService } from '../../../services/admin/cliente.service';
+import { ClienteService } from '../../../resources/services/admin/cliente.service';
 import { HttpClient } from '@angular/common/http';
 import { TokenStorage } from '../../../auth/token.storage';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { CustomValidator } from '../../../resources/custom-validator';
 
 @Component({
   selector: 'app-cadastro',
@@ -20,7 +21,7 @@ export class CadastroComponent implements OnInit {
       fullname: ['', [Validators.required]],
       email: [''],
       cnpj: ['', [Validators.required]],
-      cpf: ['', [Validators.required]],
+      cpf: ['', [Validators.required, CustomValidator.isValidCpf]],
       phones: this.fb.group({
         main: ['', [Validators.required]],
         secundary: ['', [Validators.required]],
@@ -41,13 +42,13 @@ export class CadastroComponent implements OnInit {
   }
 
   cadastrar() {
+    event.preventDefault();
+
     if(!this.clienteForm.valid) return;
 
     this.clienteService.register(this.clienteForm.value)
     .subscribe(data => {
       alert("Cadastrado com sucesso" + data);
     });
-
-    event.preventDefault();
   }
 }
