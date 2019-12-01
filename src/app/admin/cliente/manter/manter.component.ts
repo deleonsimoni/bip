@@ -21,7 +21,5 @@ export class ManterComponent implements OnInit {
     .subscribe(data => {
        this.clientes = data;
     });
-
-    event.preventDefault();
   }
 }
