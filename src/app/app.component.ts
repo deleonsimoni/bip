@@ -74,8 +74,8 @@ export class AppComponent implements OnInit {
       } else if ($(".mobile-nav, .mobile-nav-toggle").length) {
         $(".mobile-nav, .mobile-nav-toggle").hide();
       }
-    }
-}
+    };
+  }
 
 
   logout(): void {

@@ -7,7 +7,8 @@ module.exports = router;
 
 
 router.get('/enterprise/:idEnterprise', passport.authenticate('jwt', { session: false }), getClientsByEnterprise);
-router.get('/:id', passport.authenticate('jwt', { session: false }), getClient);
+router.get('/:id', passport.authenticate('jwt', { session: false }), getClientByID);
+router.get('/branch/:id', passport.authenticate('jwt', { session: false }), getClientBranchByID);
 
 router.post('/', passport.authenticate('jwt', { session: false }), insertClient);
 router.post('/branch', passport.authenticate('jwt', { session: false }), insertClientBranch);
@@ -21,8 +22,13 @@ async function getClientsByEnterprise(req, res) {
   res.json(client);
 }
 
-async function getClient(req, res) {
-  let client = await clientCtrl.getClients(req.params.id);
+async function getClientByID(req, res) {
+  let client = await clientCtrl.getClientByID(req.params.id);
+  res.json(client);
+}
+
+async function getClientBranchByID(req, res) {
+  let client = await clientCtrl.getClientBranchByID(req.params.id);
   res.json(client);
 }
 //FIM GET

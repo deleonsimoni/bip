@@ -8,7 +8,7 @@
         <tr>
           <td>
             <mat-form-field>
-              <input matInput placeholder="Fullname" formControlName="fullname" name="fullname" required>
+              <input matInput placeholder="Nome completo" formControlName="fullname" name="fullname" required>
             </mat-form-field>
           </td>
         </tr>
@@ -23,15 +23,17 @@
         <tr>
           <td>
             <mat-form-field>
-              <input matInput placeholder="Password" formControlName="password" type="password" name="password" required>
+              <input matInput placeholder="Senha" formControlName="password" type="password" name="password" required>
             </mat-form-field>
           </td>
         </tr>
         <tr>
           <td>
             <mat-form-field>
-              <input matInput placeholder="Reapet Password" formControlName="repeatPassword" type="password" name="repeatPassword" required>
-              <mat-error *ngIf="repeatPassword.invalid && repeatPassword.errors.passwordMatch">Password mismatch</mat-error>
+              <input matInput placeholder="Repita sua senha" formControlName="repeatPassword" type="password"
+                name="repeatPassword" required>
+              <mat-error *ngIf="repeatPassword.invalid && repeatPassword.errors.passwordMatch">Password mismatch
+              </mat-error>
             </mat-form-field>
           </td>
         </tr>
@@ -40,6 +42,7 @@
   </mat-card-content>
   <mat-card-actions>
     <button mat-raised-button (click)="register()" color="primary">Register</button>
-    <span>Allrady have an account ? <a [routerLink]="['/auth/login']">login</a> here</span>
+    <br /><br />
+    <span>Já possui conta? <a [routerLink]="['/auth/login']">clique</a> aqui</span>
   </mat-card-actions>
 </mat-card>
