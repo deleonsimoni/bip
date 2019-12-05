@@ -7,11 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopoComponent implements OnInit {
 
-  usuario: any;
+  usuario = {};
 
   constructor() { }
 
   ngOnInit() {
-    this.usuario = (<any>window).user;
+    if ((<any>window).user)
+      this.usuario = (<any>window).user;
   }
 }

@@ -6,6 +6,8 @@ import { OnlyAdminUsersGuard } from './admin-user-guard';
 import { CadastroComponent } from './cliente/cadastro/cadastro.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ManterComponent } from './cliente/manter/manter.component';
+import { InventarioCadastrarComponent } from './inventario/inventario-cadastrar/inventario-cadastrar.component';
+import { ListarInventarioComponent } from './inventario/listar-inventario/listar-inventario.component';
 
 const routes: Routes = [{
   path: 'admin',
@@ -13,12 +15,14 @@ const routes: Routes = [{
   //canActivate: [OnlyAdminUsersGuard],
   children: [{
     path: '',
-    redirectTo: 'admin/dashboard',
+    redirectTo: 'dashboard',
     pathMatch: 'full'
   }
   ,{ path: 'clientecadastro', component: CadastroComponent }
   ,{ path: 'clientemanter', component: ManterComponent }
   ,{ path: 'dashboard', component: DashboardComponent }
+  ,{ path: 'inventariocadastro', component: InventarioCadastrarComponent }
+  ,{ path: 'inventariolista', component: ListarInventarioComponent }
 ]
 }];
 

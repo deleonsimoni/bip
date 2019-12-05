@@ -11,7 +11,9 @@ import { ManterComponent } from './cliente/manter/manter.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TopoComponent } from './topo/topo.component';
 
-import { NgxMaskModule, IConfig } from 'ngx-mask'
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { InventarioCadastrarComponent } from './inventario/inventario-cadastrar/inventario-cadastrar.component';
+import { ListarInventarioComponent } from './inventario/listar-inventario/listar-inventario.component'
 
 export let options: Partial<IConfig> | (() => Partial<IConfig>);
 
@@ -22,7 +24,9 @@ export let options: Partial<IConfig> | (() => Partial<IConfig>);
     CadastroComponent,
     ManterComponent,
     DashboardComponent,
-    TopoComponent
+    TopoComponent,
+    InventarioCadastrarComponent,
+    ListarInventarioComponent
   ],
   imports: [
     CommonModule,
