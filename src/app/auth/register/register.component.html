@@ -16,10 +16,19 @@
           <td>
             <mat-form-field>
               <input matInput placeholder="Email" formControlName="email" name="email" required>
-              <mat-error *ngIf="email.invalid && email.errors.email">Invalid email address</mat-error>
+              <mat-error *ngIf="email.invalid && email.errors.email">Email inválido</mat-error>
             </mat-form-field>
           </td>
         </tr>
+
+        <tr>
+          <td>
+            <mat-form-field>
+              <input matInput placeholder="CPF" mask="000.000.000-00" formControlName="cpf" name="cpf" required>
+            </mat-form-field>
+          </td>
+        </tr>
+
         <tr>
           <td>
             <mat-form-field>
@@ -32,7 +41,7 @@
             <mat-form-field>
               <input matInput placeholder="Repita sua senha" formControlName="repeatPassword" type="password"
                 name="repeatPassword" required>
-              <mat-error *ngIf="repeatPassword.invalid && repeatPassword.errors.passwordMatch">Password mismatch
+              <mat-error *ngIf="repeatPassword.invalid && repeatPassword.errors.passwordMatch">Senha diferente
               </mat-error>
             </mat-form-field>
           </td>
@@ -41,7 +50,7 @@
     </form>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-raised-button (click)="register()" color="primary">Register</button>
+    <button mat-raised-button (click)="register()" color="primary">Registrar</button>
     <br /><br />
     <span>Já possui conta? <a [routerLink]="['/auth/login']">clique</a> aqui</span>
   </mat-card-actions>

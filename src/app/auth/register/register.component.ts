@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators, ValidationErrors } from '@angular/forms';
-
-
-import {AuthService} from '../auth.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-register',
@@ -21,12 +19,13 @@ export class RegisterComponent implements OnInit {
     let password = control.root.get('password');
     return password && control.value !== password.value ? {
       passwordMatch: true
-    }: null;
+    } : null;
   }
 
   userForm = new FormGroup({
     fullname: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
+    cpf: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
     repeatPassword: new FormControl('', [Validators.required, this.passwordsMatchValidator])
   })
@@ -38,19 +37,20 @@ export class RegisterComponent implements OnInit {
 
   register() {
 
-    if(!this.userForm.valid) return;
+    if (!this.userForm.valid) return;
 
     let {
       fullname,
       email,
+      cpf,
       password,
       repeatPassword
     } = this.userForm.getRawValue();
 
-    this.authService.register(fullname, email, password, repeatPassword)
-    .subscribe(data => {
-      this.router.navigate(['']);
-    })
+    this.authService.register(fullname, email, cpf, password, repeatPassword)
+      .subscribe(data => {
+        this.router.navigate(['']);
+      })
   }
 
 }

@@ -7,10 +7,6 @@ const UserSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Enterprise'
   },
-  enterprise: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Enterprise'
-  },
   collectors: [{
     inventory: {
       type: mongoose.Schema.Types.ObjectId,
@@ -38,7 +34,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  document: {
+  cpf: {
     type: String,
     required: true
   },

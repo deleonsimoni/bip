@@ -7,6 +7,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './auth/auth.module';
 import { OwlModule } from 'ngx-owl-carousel';
+import { CommonModule } from '@angular/common';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
 import { AdminModule } from './admin/admin.module';
@@ -28,11 +30,14 @@ import { HomeComponent } from './home/home.component';
     BrowserAnimationsModule,
     HttpClientModule,
     RouterModule,
+    CommonModule,
+    BrowserAnimationsModule, // required animations module
     SharedModule,
     AuthModule,
     AdminModule,
     AppRoutingModule,
     OwlModule,
+    ToastrModule.forRoot(),
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

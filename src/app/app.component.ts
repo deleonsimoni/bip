@@ -38,7 +38,7 @@ export class AppComponent implements OnInit {
       this.user = user;
     });
 
-    $(document).ready(function () {
+    /*$(document).ready(function () {
 
       // Mobile Navigation
       if ($('.main-nav').length) {
@@ -74,8 +74,8 @@ export class AppComponent implements OnInit {
       } else if ($(".mobile-nav, .mobile-nav-toggle").length) {
         $(".mobile-nav, .mobile-nav-toggle").hide();
       }
-    };
-  }
+    }*/
+  };
 
 
   logout(): void {
