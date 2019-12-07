@@ -4,41 +4,36 @@
 
 <form class="user" [formGroup]="clienteForm">
     <div class="form-group row">
-        <div class="col-sm-12 mb-3 mb-sm-0">
-            <input type="text" class="form-control form-control-user" 
-                    name="fullname" formControlName="fullname" placeholder="Nome completo">
-        </div>
+        <mat-form-field class="col-sm-12 mb-3 mb-sm-0">
+            <input matInput placeholder="Nome completo" formControlName="fullname" name="fullname" required>
+        </mat-form-field>
     </div>
     <div class="form-group row">
-        <div class="col-sm-6 mb-3 mb-sm-0">
-            <input type="text" class="form-control form-control-user" mask="00.000.000/0000-00"
-            formControlName="cnpj" name="cnpj" placeholder="CNPJ">
-        </div>
-        <div class="col-sm-6 mb-3 mb-sm-0">
-            <input matInput type="text" class="form-control form-control-user" mask="000.000.000-99"
-                    formControlName="cpf" name="cpf" placeholder="CPF" >
-            <div *ngIf="clienteForm.get('cpf').getError('cpfNotValid')"> 
-                O cpf não é válido.
-            </div>
-        </div>
+        <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
+            <input matInput placeholder="CNPJ" formControlName="cnpj" name="cnpj" mask="00.000.000/0000-00">
+        </mat-form-field>
+        <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
+            <input matInput placeholder="CPF" formControlName="cpf" name="cpf" mask="000.000.000-99">
+            <mat-error *ngIf="clienteForm.get('cpf').getError('cpfNotValid')">O CPF é inválido</mat-error>
+        </mat-form-field>
     </div>
 
-    <div class="form-group">
-        <input type="email" class="form-control form-control-user" 
-            formControlName="email" name="email" placeholder="Email Address">
+    <div class="form-group row">
+        <mat-form-field class="col-sm-12 mb-3 mb-sm-0">
+            <input matInput placeholder="Email" formControlName="email" name="email" required>
+            <mat-error *ngIf="clienteForm.get('email').errors">Email inválido</mat-error>
+        </mat-form-field>
     </div>
     <div class="form-group row" formArrayName="phones">
-        <div class="col-sm-6 mb-3 mb-sm-0">
-            <input type="tel" class="form-control form-control-user"
-                    formControlName="main" name="main" placeholder="Telefone Principal">
-        </div>
-        <div class="col-sm-6">
-            <input type="tel" class="form-control form-control-user"
-                formControlName="secundary" name="secundary" placeholder="Telefone Secundário">
-        </div>
+        <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
+            <input matInput type="tel" placeholder="Telefone Principal" formControlName="main" name="main">
+        </mat-form-field>
+        <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
+            <input matInput type="tel" placeholder="Telefone Secundário" formControlName="secundary" name="secundary">
+        </mat-form-field>
     </div>
     <hr />
-    <a href="#" (click)="cadastrar()" class="btn btn-primary btn-user btn-block" >
+    <button (click)="cadastrar()"  [disabled]="clienteForm.invalid" class="btn btn-primary btn-user btn-block" >
         Cadastrar Cliente
-    </a>
+    </button>
 </form>

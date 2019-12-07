@@ -11,6 +11,7 @@ import { AuthService } from '../auth/auth.service';
 export class HeaderComponent implements OnInit {
 
   @Input() user: any = {};
+  areaAdministrativa: boolean;
 
   constructor(
     private authService: AuthService,

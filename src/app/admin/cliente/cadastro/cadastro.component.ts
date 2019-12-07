@@ -14,7 +14,7 @@ export class CadastroComponent implements OnInit {
 
   clienteForm: FormGroup;
 
-  constructor(private http : HttpClient, private token: TokenStorage, private fb: FormBuilder, private clienteService: ClienteService) {}
+  constructor(private fb: FormBuilder, private clienteService: ClienteService) {}
 
   ngOnInit() {
     this.clienteForm = this.fb.group({
