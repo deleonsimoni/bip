@@ -11,6 +11,7 @@ import { AuthService } from '../auth/auth.service';
 export class HeaderComponent implements OnInit {
 
   @Input() user: any = {};
+  public isPublic: boolean;
 
   constructor(
     private authService: AuthService,
@@ -18,6 +19,11 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    if (this.router.url.includes("/admin")) {
+      this.isPublic = false;
+    } else {
+      this.isPublic = true;
+    }
   }
 
   logout(): void {

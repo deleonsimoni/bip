@@ -16,7 +16,6 @@ export class AppComponent implements OnInit {
 
   private userSubscription: Subscription;
   public user: any;
-
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -27,6 +26,7 @@ export class AppComponent implements OnInit {
   }
 
   public ngOnInit() {
+
 
     // init this.user on startup
     this.authService.me().subscribe(data => {
