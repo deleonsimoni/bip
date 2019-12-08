@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { TokenStorage } from '../../../auth/token.storage';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { CustomValidator } from '../../../resources/custom-validator';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cadastro',
@@ -14,17 +15,17 @@ export class CadastroComponent implements OnInit {
 
   clienteForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private clienteService: ClienteService) {}
+  constructor(private fb: FormBuilder, private clienteService: ClienteService,private toastr: ToastrService) {}
 
   ngOnInit() {
     this.clienteForm = this.fb.group({
       fullname: ['', [Validators.required]],
       email: [''],
-      cnpj: ['', [Validators.required]],
-      cpf: ['', [Validators.required, CustomValidator.isValidCpf]],
+      cnpj: ['', [CustomValidator.isValidCnpj]],
+      cpf: ['', [CustomValidator.isValidCpf]],
       phones: this.fb.group({
         main: ['', [Validators.required]],
-        secundary: ['', [Validators.required]],
+        secundary: [''],
       }),
       address: this.fb.group({
         main: [''],
@@ -46,9 +47,12 @@ export class CadastroComponent implements OnInit {
 
     if(!this.clienteForm.valid) return;
 
-    this.clienteService.register(this.clienteForm.value)
-    .subscribe(data => {
-      alert("Cadastrado com sucesso" + data);
+    let enterprise = (<any>window).user._id;
+    this.clienteService.register(this.clienteForm.value, enterprise)
+    .subscribe(() => {
+      this.toastr.success('Cliente cadastrado com sucesso');
+    }, err => {
+        this.toastr.error('Email ou senha inválidos', 'Erro: ' + err);
     });
   }
 }

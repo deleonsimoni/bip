@@ -24,9 +24,10 @@ async function getClientBranchByID(id) {
   return await clientBranch.findById(id);
 }
 
-async function insertClient(client, idEnterprise) {
-  client.enterprise = idEnterprise;
-  return await new Client(client).save();
+async function insertClient(client) {
+  let cliente = client.cliente;
+  cliente.enterprise = client.enterprise;
+  return await new Client(cliente).save();
 }
 
 async function insertBranch(branch) {

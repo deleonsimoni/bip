@@ -15,9 +15,10 @@
             <div class="form-group row">
                 <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
                     <input matInput placeholder="CNPJ" formControlName="cnpj" name="cnpj" mask="00.000.000/0000-00">
+                    <mat-error *ngIf="clienteForm.get('cnpj').getError('cnpjNotValid')">O CNPJ é inválido</mat-error>
                 </mat-form-field>
                 <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
-                    <input matInput placeholder="CPF" formControlName="cpf" name="cpf" mask="000.000.000-99">
+                    <input matInput placeholder="CPF" formControlName="cpf" name="cpf" mask="000.000.000-00">
                     <mat-error *ngIf="clienteForm.get('cpf').getError('cpfNotValid')">O CPF é inválido</mat-error>
                 </mat-form-field>
             </div>
@@ -30,7 +31,7 @@
             </div>
             <div class="form-group row" formArrayName="phones">
                 <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
-                    <input matInput type="tel" placeholder="Telefone Principal" formControlName="main" name="main">
+                    <input matInput type="tel" mask="(00) 00009-0000" placeholder="Telefone Principal" formControlName="main" name="main">
                 </mat-form-field>
                 <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
                     <input matInput type="tel" placeholder="Telefone Secundário" formControlName="secundary"

@@ -13,11 +13,11 @@ const ClientSchema = new mongoose.Schema({
   },
   cnpj: {
     type: String,
-    required: true
+    //required: true
   },
   cpf: {
     type: String,
-    required: true
+    //required: true
   },
   phones: {
     main: { type: String },

@@ -35,7 +35,11 @@ async function getClientBranchByID(req, res) {
 
 //POST
 async function insertClient(req, res) {
-  let client = await clientCtrl.insertClient(req.body, req.user.enterprise);
+  let client = await clientCtrl.insertClient(req.body, req.user.enterprise).catch(
+    err => { res.json(400, {
+      error: 1,
+      msg: err
+   })})
   res.json(client);
 }
 

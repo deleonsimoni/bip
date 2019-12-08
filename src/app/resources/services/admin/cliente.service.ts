@@ -10,18 +10,21 @@ export class ClienteService {
 
   constructor(private http : HttpClient, private token: TokenStorage) {}
 
-  register(cliente: any) : Observable <any> {
-    return Observable.create(observer => {
+  register(cliente: any, enterprise) : Observable <any> {
+    return Observable.create(() => {
       this.http.post('/api/client/', {
-        cliente
+        cliente,
+        enterprise
       }).subscribe((data : any) => {
-        console.log(data);
+        return data;
+      }, err => {
+        this.toastr.error('Email ou senha inválidos', 'Erro: ' + err);
       })
     });
   }
 
   listaClientes() : Observable <any> {
-    return Observable.create(observer => {
+    return Observable.create(() => {
       this.http.get('/api/client/enterprise', {
       }).subscribe((data : any) => {
         console.log(data);
