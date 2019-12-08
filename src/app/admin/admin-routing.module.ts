@@ -9,6 +9,11 @@ import { ManterComponent } from './cliente/manter/manter.component';
 import { InventarioCadastrarComponent } from './inventario/inventario-cadastrar/inventario-cadastrar.component';
 import { ListarInventarioComponent } from './inventario/listar-inventario/listar-inventario.component';
 
+import { FuncionarioCadastrarComponent } from './funcionario/funcionario-cadastrar/funcionario-cadastrar.component';
+import { FuncionarioListarComponent } from './funcionario/funcionario-listar/funcionario-listar.component';
+import { EmpresaManterComponent } from './empresa/empresa-manter/empresa-manter.component';
+
+
 const routes: Routes = [{
   path: 'admin',
   component: AdminComponent,
@@ -18,12 +23,16 @@ const routes: Routes = [{
     redirectTo: 'dashboard',
     pathMatch: 'full'
   }
-  ,{ path: 'clientecadastro', component: CadastroComponent }
-  ,{ path: 'clientemanter', component: ManterComponent }
-  ,{ path: 'dashboard', component: DashboardComponent }
-  ,{ path: 'inventariocadastro', component: InventarioCadastrarComponent }
-  ,{ path: 'inventariolista', component: ListarInventarioComponent }
-]
+    , { path: 'clientecadastro', component: CadastroComponent }
+    , { path: 'clientemanter', component: ManterComponent }
+    , { path: 'dashboard', component: DashboardComponent }
+    , { path: 'inventariocadastro', component: InventarioCadastrarComponent }
+    , { path: 'inventariolista', component: ListarInventarioComponent }
+    , { path: 'funcionarioCadastro', component: FuncionarioCadastrarComponent }
+    , { path: 'funcionarioLista', component: FuncionarioListarComponent }
+    , { path: 'empresa', component: EmpresaManterComponent }
+
+  ]
 }];
 
 @NgModule({
@@ -31,4 +40,4 @@ const routes: Routes = [{
   exports: [RouterModule]
 })
 
-export class AdminRoutingModule {}
+export class AdminRoutingModule { }

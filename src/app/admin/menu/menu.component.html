@@ -28,6 +28,35 @@
 
   <!-- Nav Item - Pages Collapse Menu -->
   <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+      aria-controls="collapseOne">
+      <i class="fas fa-university"></i>
+      <span>Empresa</span>
+    </a>
+    <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <a class="collapse-item" [routerLink]="['/admin/empresa']">Manter</a>
+      </div>
+    </div>
+  </li>
+
+  <!-- Nav Item - Pages Collapse Menu -->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true"
+      aria-controls="collapseThree">
+      <i class="fas fa-id-card"></i>
+      <span>Funcionários</span>
+    </a>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <a class="collapse-item" [routerLink]="['/admin/funcionarioCadastro']">Cadastrar</a>
+        <a class="collapse-item" [routerLink]="['/admin/funcionarioLista']">Listar</a>
+      </div>
+    </div>
+  </li>
+
+  <!-- Nav Item - Pages Collapse Menu -->
+  <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
       aria-controls="collapseTwo">
       <i class="fas fa-users"></i>
@@ -36,13 +65,13 @@
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <a class="collapse-item" [routerLink]="['/admin/clientecadastro']">Cadastrar</a>
-        <a class="collapse-item" [routerLink]="['/admin/clientemanter']" >Listar</a>
+        <a class="collapse-item" [routerLink]="['/admin/clientemanter']">Listar</a>
       </div>
     </div>
   </li>
-  
+
   <li class="nav-item">
-    <a class="nav-link" [routerLink]="['/admin/inventariolista']" >
+    <a class="nav-link" [routerLink]="['/admin/inventariolista']">
       <i class="fas fa-fw fa-folder"></i>
       <span>Inventário</span>
     </a>
@@ -71,10 +100,10 @@
 
   <!-- Heading -->
   <div class="sidebar-heading">
-    Addons
+    Extras
   </div>
 
-  <!-- Nav Item - Pages Collapse Menu -->
+  <!-- Nav Item - Pages Collapse Menu
   <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
       aria-controls="collapsePages">
@@ -93,13 +122,13 @@
         <a class="collapse-item" href="blank.html">Blank Page</a>
       </div>
     </div>
-  </li>
+  </li> -->
 
   <!-- Nav Item - Tables -->
   <li class="nav-item">
-    <a class="nav-link" href="tables.html">
+    <a class="nav-link">
       <i class="fas fa-fw fa-table"></i>
-      <span>Tables</span></a>
+      <span>Gráficos</span></a>
   </li>
 
   <!-- Divider -->
