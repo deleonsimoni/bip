@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-topo',
@@ -9,10 +10,11 @@ export class TopoComponent implements OnInit {
 
   usuario = {};
 
-  constructor() { }
+  constructor(private authService: AuthService,) { }
 
   ngOnInit() {
-    if ((<any>window).user)
-      this.usuario = (<any>window).user;
+    this.authService.me().subscribe(data => {
+      this.usuario = data.user;
+    });
   }
 }

@@ -16,6 +16,8 @@ export class AppComponent implements OnInit {
 
   private userSubscription: Subscription;
   public user: any;
+  areaAdministrativa: boolean;
+
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -23,11 +25,10 @@ export class AppComponent implements OnInit {
     private matIconRegistry: MatIconRegistry
   ) {
     this.registerSvgIcons()
+    this.areaAdministrativa = window.location.href.includes("/admin");
   }
 
   public ngOnInit() {
-
-
     // init this.user on startup
     this.authService.me().subscribe(data => {
       this.user = data.user;
