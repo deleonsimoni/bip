@@ -30,7 +30,7 @@ export class AuthService {
         this.setUser(data.user);
         this.token.saveToken(data.token);
         observer.complete();
-        this.router.navigate(['home']);
+        window.location.assign("/admin");
       }, err => {
         if (err.status === 401) {
           this.toastr.error('Email ou senha inválidos', 'Erro: ');

@@ -1,7 +1,7 @@
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <h1 class="h3 mb-0 text-gray-800">Manter Clientes</h1>
+</div>
 <div class="card shadow mb-4">
-  <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary">Clientes</h6>
-  </div>
   <div class="card-body">
     <div class="table-responsive">
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -21,9 +21,22 @@
             <td>{{ cliente.cpf }}</td>
             <td>{{ cliente.cnpj }}</td>
             <td>{{ cliente.phones.main }}</td>
+            <td> 
+              <a class="btn btn-primary btn-user" [routerLink]="['/admin/clientecadastro']" [state]="cliente">
+                <i class="fas fa-pencil-alt"></i>
+              </a>
+            </td>
+            <td>
+              <a class="btn btn-danger btn-user" (click)="deletarCliente(cliente._id)">
+                <i class="fas fa-times-circle"></i>
+              </a>
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
+    <button [routerLink]="['/admin/clientecadastro']" class="btn btn-primary btn-user btn-block">
+      Cadastrar Cliente
+    </button>
   </div>
 </div>

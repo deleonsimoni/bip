@@ -7,6 +7,7 @@ module.exports = {
   getClientBranchByID,
   insertClient,
   insertBranch,
+  updateClient,
   deleteClient,
   deleteClientBranch
 }
@@ -34,6 +35,15 @@ async function insertBranch(branch) {
   return await new clientBranch(client).save();
 }
 
+async function updateClient(client) {
+  let cliente = client.cliente;
+  return await Client.findOneAndUpdate(
+    { _id: cliente._id},
+    {'$set': 
+      cliente
+    }
+  );
+}
 
 async function deleteClient(id) {
   return await Client.findOneAndRemove({ _id: id });

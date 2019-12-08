@@ -13,6 +13,8 @@ router.get('/branch/:id', passport.authenticate('jwt', { session: false }), getC
 router.post('/', passport.authenticate('jwt', { session: false }), insertClient);
 router.post('/branch', passport.authenticate('jwt', { session: false }), insertClientBranch);
 
+router.put('/', passport.authenticate('jwt', { session: false }), updateClient);
+
 router.delete('/:id', passport.authenticate('jwt', { session: false }), deleteClient);
 router.delete('/branch/:id', passport.authenticate('jwt', { session: false }), deleteClientBranch);
 
@@ -33,6 +35,15 @@ async function getClientBranchByID(req, res) {
 }
 //FIM GET
 
+async function updateClient(req, res) {
+  let client = await clientCtrl.updateClient(req.body).catch(
+    err => { res.json(400, {
+      error: 1,
+      msg: err
+   })})
+  res.json(client);
+}
+
 //POST
 async function insertClient(req, res) {
   let client = await clientCtrl.insertClient(req.body, req.user.enterprise).catch(
@@ -51,7 +62,11 @@ async function insertClientBranch(req, res) {
 
 //DELETE
 async function deleteClient(req, res) {
-  let client = await clientCtrl.deleteClient(req.params.id);
+  let client = await clientCtrl.deleteClient(req.params.id).catch(
+    err => { res.json(400, {
+      error: 1,
+      msg: err
+   })});
   res.json(client);
 }
 
