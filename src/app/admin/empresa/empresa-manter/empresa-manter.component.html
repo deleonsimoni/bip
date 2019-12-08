@@ -1,1 +1,38 @@
-<p>empresa-manter works!</p>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Sua Empresa</h6>
+    </div>
+    <div class="card-body">
+        <form class="user" [formGroup]="form">
+            <div class="form-group row">
+                <mat-form-field class="col-sm-12 mb-3 mb-sm-0">
+                    <input matInput placeholder="Nome completo" formControlName="fullname" name="fullname" required>
+                </mat-form-field>
+            </div>
+            <div class="form-group row">
+                <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
+                    <input matInput placeholder="CNPJ" formControlName="cnpj" name="cnpj" mask="00.000.000/0000-00">
+                </mat-form-field>
+            </div>
+            <div class="form-group row">
+                <mat-form-field class="col-sm-12 mb-3 mb-sm-0">
+                    <input matInput placeholder="Email" formControlName="email" name="email" required>
+                    <mat-error *ngIf="clienteForm.get('email').errors">Email inválido</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-group row" formArrayName="phones">
+                <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
+                    <input matInput type="tel" placeholder="Telefone Principal" formControlName="main" name="main">
+                </mat-form-field>
+                <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
+                    <input matInput type="tel" placeholder="Telefone Secundário" formControlName="secundary"
+                        name="secundary">
+                </mat-form-field>
+            </div>
+            <hr />
+            <button (click)="cadastrar()" [disabled]="clienteForm.invalid" class="btn btn-primary btn-user btn-block">
+                Cadastrar Empresa
+            </button>
+        </form>
+    </div>
+</div>

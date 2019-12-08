@@ -61,7 +61,8 @@ export let options: Partial<IConfig> | (() => Partial<IConfig>);
     ToastrModule.forRoot(),
     BrowserModule,
     BrowserAnimationsModule,
-    MatCardModule
+    MatCardModule,
+    MatFormFieldModule
   ],
   providers: [
     OnlyAdminUsersGuard
