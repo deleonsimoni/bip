@@ -1,1 +1,43 @@
-<button [routerLink]="['/admin/inventariocadastro']">Incluir</button>
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Manter Inventário</h1>
+</div>
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>CPF</th>
+                        <th>CNPJ</th>
+                        <th>Fone</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let cliente of clientes">
+                        <td>{{ cliente.fullname }}</td>
+                        <td>{{ cliente.cpf }}</td>
+                        <td>{{ cliente.cnpj }}</td>
+                        <td>{{ cliente.phones.main }}</td>
+                        <td>
+                            <a class="btn btn-primary btn-user" [routerLink]="['/admin/clientecadastro']"
+                                [state]="cliente">
+                                <i class="fas fa-pencil-alt"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <a class="btn btn-danger btn-user" (click)="deletarCliente(cliente._id)">
+                                <i class="fas fa-times-circle"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <button [routerLink]="['/admin/inventariocadastro']" class="btn btn-primary btn-user btn-block">
+            Incluir Inventário
+        </button>
+    </div>
+</div>

@@ -9,15 +9,15 @@ const InventarySchema = new mongoose.Schema({
     ref: 'User'
   },
   //Empresa que fará o inventário
-  enterprise: {
+  cliente: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Enterprise'
+    ref: 'Client'
   },
   //Filial que será feito o inventário
-  clientBranch: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'ClientBranch'
-  },
+  // clientBranch: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: 'ClientBranch'
+  // },
 
   collectors: [{
     //usuario da empresa que fara a coleta

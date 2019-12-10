@@ -27,6 +27,7 @@ async function getClientBranchByID(id) {
 
 async function insertClient(client) {
   let cliente = client.cliente;
+  delete cliente._id;
   cliente.enterprise = client.enterprise;
   return await new Client(cliente).save();
 }

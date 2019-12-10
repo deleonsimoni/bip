@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ClienteService } from '../../../resources/services/admin/cliente.service';
-import { HttpClient } from '@angular/common/http';
-import { TokenStorage } from '../../../auth/token.storage';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { CustomValidator } from '../../../resources/custom-validator';
 import { ToastrService } from 'ngx-toastr';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cadastro',
@@ -25,8 +23,8 @@ export class CadastroComponent implements OnInit {
   ngOnInit() {
     this.clienteForm = this.fb.group({
       fullname: ['', [Validators.required]],
-      _id: ['', [Validators.required]],
-      email: [''],
+      _id: ['', []],
+      email: ['', [Validators.email, Validators.required]],
       cnpj: ['', [CustomValidator.isValidCnpj]],
       cpf: ['', [CustomValidator.isValidCpf]],
       phones: this.fb.group({
@@ -63,6 +61,7 @@ export class CadastroComponent implements OnInit {
       this.clienteService.update(this.clienteForm.value)
       .subscribe(() => {
         this.toastr.success('Cliente atualizado com sucesso');
+        this.router.navigate(['/admin/clientemanter']);
       }, err => {
           this.toastr.error(''  + err, 'Erro: ');
       });
@@ -71,6 +70,7 @@ export class CadastroComponent implements OnInit {
       this.clienteService.register(this.clienteForm.value, enterprise)
       .subscribe(() => {
         this.toastr.success('Cliente cadastrado com sucesso');
+        this.router.navigate(['/admin/clientemanter']);
       }, err => {
           this.toastr.error('Email já cadastrado '  + err.keyValue.email, 'Erro: ');
       });

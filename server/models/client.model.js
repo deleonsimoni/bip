@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const ClientSchema = new mongoose.Schema({
+  enterprise: {
+    type: String,
+    required: true
+  },
   fullname: {
     type: String,
     required: true
@@ -8,8 +12,6 @@ const ClientSchema = new mongoose.Schema({
   email: {
     type: String,
     unique: true,
-    // Regexp to validate emails with more strict rules as added in tests/users.js which also conforms mostly with RFC2822 guide lines
-    match: [/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, 'Please enter a valid email'],
   },
   cnpj: {
     type: String,
@@ -40,6 +42,5 @@ const ClientSchema = new mongoose.Schema({
 }, {
   versionKey: false
 });
-
 
 module.exports = mongoose.model('Client', ClientSchema);

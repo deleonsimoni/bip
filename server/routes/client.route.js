@@ -20,7 +20,7 @@ router.delete('/branch/:id', passport.authenticate('jwt', { session: false }), d
 
 //GETS
 async function getClientsByEnterprise(req, res) {
-  let client = await clientCtrl.getClientsByEnterprise(req.params.id);
+  let client = await clientCtrl.getClientsByEnterprise(req.params.idEnterprise);
   res.json(client);
 }
 
