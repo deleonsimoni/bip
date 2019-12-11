@@ -22,4 +22,9 @@ export class TopoComponent implements OnInit {
     this.authService.signOut();
     window.location.assign("/");
   }
+
+  esconderMenu() {
+    const target: HTMLElement = document.getElementById("accordionSidebar");
+    target.classList.toggle('toggled');
+  }
 }

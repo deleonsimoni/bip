@@ -2,6 +2,14 @@
 /*--------------------------------------------------------------
 # Intro Section
 --------------------------------------------------------------*/
+.menuToggle {
+  top: 80px;
+  position: absolute;
+  background-color: white;
+  width: 10rem !important;
+  padding: 10px;
+  border-bottom-right-radius: 10px;
+}
 
 #intro {
     width: 100%;

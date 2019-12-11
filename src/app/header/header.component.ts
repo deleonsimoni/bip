@@ -19,7 +19,11 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+  }
 
+  esconderMenu() {
+    const target: HTMLElement = document.getElementById("accordionSidebar");
+    target.classList.toggle('d-none');
   }
 
   logout(): void {
@@ -30,5 +34,4 @@ export class HeaderComponent implements OnInit {
   navigate(link): void {
     this.router.navigate([link]);
   }
-
 }
