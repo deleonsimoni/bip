@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit {
 
   esconderMenu() {
     const target: HTMLElement = document.getElementById("accordionSidebar");
-    target.classList.toggle('d-none');
+    target.classList.toggle('mostrar');
   }
 
   logout(): void {

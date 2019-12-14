@@ -23,27 +23,27 @@
     </nav>
   </div>
   <nav class="main-nav float-right d-none d-lg-none d-md-block">
-      <ul>
-        <li class="active"><a href="#intro">Home</a></li>
-        <li><a href="#about">Conheça</a></li>
-        <li><a href="#services">Serviços</a></li>
-        <li><a href="#contact">Contato</a></li>
-        <li *ngIf="user"><a href="/admin">Area Administrativa</a></li>
-        <li *ngIf="!user"><a [routerLink]="['/auth/login']">Login</a></li>
-      </ul>
-    </nav>
-    <div id="accordionSidebar" class="menuToggle d-none">
-        <h2>
-          <b>
-            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion">
-              <li class="active"><a href="#intro">Home</a></li>
-              <li><a href="#about">Conheça</a></li>
-              <li><a href="#services">Serviços</a></li>
-              <li><a href="#contact">Contato</a></li>
-              <li *ngIf="user"><a href="/admin">Area Administrativa</a></li>
-              <li *ngIf="!user"><a [routerLink]="['/auth/login']">Login</a></li>
-            </ul>
-          </b>
-        </h2>
-      </div>
+    <ul>
+      <li class="active"><a href="#intro">Home</a></li>
+      <li><a href="#about">Conheça</a></li>
+      <li><a href="#services">Serviços</a></li>
+      <li><a href="#contact">Contato</a></li>
+      <li *ngIf="user"><a href="/admin">Area Administrativa</a></li>
+      <li *ngIf="!user"><a [routerLink]="['/auth/login']">Login</a></li>
+    </ul>
+  </nav>
+  <div id="accordionSidebar" class="menuToggle">
+    <h2>
+      <b>
+        <ul (click)="esconderMenu()" class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion">
+          <li class="active"><a href="#intro">Home</a></li>
+          <li><a href="#about">Conheça</a></li>
+          <li><a href="#services">Serviços</a></li>
+          <li><a href="#contact">Contato</a></li>
+          <li *ngIf="user"><a href="/admin">Area Administrativa</a></li>
+          <li *ngIf="!user"><a [routerLink]="['/auth/login']">Login</a></li>
+        </ul>
+      </b>
+    </h2>
+  </div>
 </header>
