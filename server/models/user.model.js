@@ -17,7 +17,7 @@ const UserSchema = new mongoose.Schema({
       ref: 'Collector'
     }
   }],
-
+//
   //Fim chaves
   fullname: {
     type: String,
