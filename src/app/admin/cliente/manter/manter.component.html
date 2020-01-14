@@ -10,7 +10,8 @@
             <th>Nome</th>
             <th>CPF</th>
             <th>CNPJ</th>
-            <th>Fone</th>
+            <th>Telefone Principal</th>
+            <th>Telefone Secundário</th>
             <th></th>
             <th></th>
           </tr>
@@ -18,9 +19,10 @@
         <tbody>
           <tr *ngFor="let cliente of clientes">
             <td>{{ cliente.fullname }}</td>
-            <td>{{ cliente.cpf }}</td>
-            <td>{{ cliente.cnpj }}</td>
-            <td>{{ cliente.phones.main }}</td>
+            <td>{{ cliente.cpf | mask: '000.000.000-00'}}</td>
+            <td>{{ cliente.cnpj | mask: '00.000.000/0000-00' }}</td>
+            <td>{{ cliente.phones.main | mask: '(00) 00000-0000'}}</td>
+            <td>{{ cliente.phones.secundary | mask: '(00) 00000-0000'}}</td>
             <td> 
               <a class="btn btn-primary btn-user" [routerLink]="['/admin/clientecadastro']" [state]="cliente">
                 <i class="fas fa-pencil-alt"></i>

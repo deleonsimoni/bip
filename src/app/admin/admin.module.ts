@@ -19,8 +19,6 @@ import { OwlModule } from 'ngx-owl-carousel';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { InventarioCadastrarComponent } from './inventario/inventario-cadastrar/inventario-cadastrar.component';
 import { ListarInventarioComponent } from './inventario/listar-inventario/listar-inventario.component';
-import { FuncionarioCadastrarComponent } from './funcionario/funcionario-cadastrar/funcionario-cadastrar.component';
-import { FuncionarioListarComponent } from './funcionario/funcionario-listar/funcionario-listar.component';
 import { EmpresaManterComponent } from './empresa/empresa-manter/empresa-manter.component'
 
 import {
@@ -34,6 +32,8 @@ import {
   MatCardModule,
   MatTableModule
 } from "@angular/material";
+import { ManterfuncionarioComponent } from './funcionario/manterfuncionario/manterfuncionario.component';
+import { CadastrofuncionarioComponent } from './funcionario/cadastrofuncionario/cadastrofuncionario.component';
 
 export let options: Partial<IConfig> | (() => Partial<IConfig>);
 
@@ -47,9 +47,9 @@ export let options: Partial<IConfig> | (() => Partial<IConfig>);
     TopoComponent,
     InventarioCadastrarComponent,
     ListarInventarioComponent,
-    FuncionarioCadastrarComponent,
-    FuncionarioListarComponent,
-    EmpresaManterComponent
+    EmpresaManterComponent,
+    ManterfuncionarioComponent,
+    CadastrofuncionarioComponent
   ],
   imports: [
     CommonModule,

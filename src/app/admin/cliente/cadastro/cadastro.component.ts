@@ -29,7 +29,7 @@ export class CadastroComponent implements OnInit {
       cpf: ['', [CustomValidator.isValidCpf]],
       phones: this.fb.group({
         main: ['', [Validators.required]],
-        secundary: [''],
+        secundary: ['',[Validators.required]],
       }),
       address: this.fb.group({
         main: [''],

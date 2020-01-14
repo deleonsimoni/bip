@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FuncionarioListarComponent } from './funcionario-listar.component';
+import { ManterfuncionarioComponent } from './manterfuncionario.component';
 
-describe('FuncionarioListarComponent', () => {
-  let component: FuncionarioListarComponent;
-  let fixture: ComponentFixture<FuncionarioListarComponent>;
+describe('ManterfuncionarioComponent', () => {
+  let component: ManterfuncionarioComponent;
+  let fixture: ComponentFixture<ManterfuncionarioComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FuncionarioListarComponent ]
+      declarations: [ ManterfuncionarioComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FuncionarioListarComponent);
+    fixture = TestBed.createComponent(ManterfuncionarioComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
