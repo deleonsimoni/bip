@@ -9,10 +9,13 @@ import { ManterComponent } from './cliente/manter/manter.component';
 import { InventarioCadastrarComponent } from './inventario/inventario-cadastrar/inventario-cadastrar.component';
 import { ListarInventarioComponent } from './inventario/listar-inventario/listar-inventario.component';
 
-import { EmpresaManterComponent } from './empresa/empresa-manter/empresa-manter.component';
+import { CadastroempresaComponent } from './empresa/cadastroempresa/cadastroempresa.component';
+import { ManterempresaComponent } from './empresa/manterempresa/manterempresa.component';
 import { ManterfuncionarioComponent } from './funcionario/manterfuncionario/manterfuncionario.component';
 import { CadastrofuncionarioComponent } from './funcionario/cadastrofuncionario/cadastrofuncionario.component';
-
+import { SupportemployeeComponent } from './employee/supportemployee/supportemployee.component';
+import { RegisteremployeeComponent } from './employee/registeremployee/registeremployee.component';
+  import { from } from 'rxjs';
 
 const routes: Routes = [{
   path: 'admin',
@@ -30,7 +33,10 @@ const routes: Routes = [{
     , { path: 'dashboard', component: DashboardComponent }
     , { path: 'inventariocadastro', component: InventarioCadastrarComponent }
     , { path: 'inventariolista', component: ListarInventarioComponent }
-    , { path: 'empresa', component: EmpresaManterComponent }
+    , { path: 'empresacadastro', component: CadastroempresaComponent }
+    , { path: 'empresamanter', component: ManterempresaComponent }
+    , { path: 'registeremployee', component: RegisteremployeeComponent}
+    , { path: 'supportemployee', component: SupportemployeeComponent}
 
   ]
 }];

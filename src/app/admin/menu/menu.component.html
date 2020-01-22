@@ -25,7 +25,7 @@
     Manutenção
   </div>
 
-  <li class="nav-item">
+  <!--li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
       aria-controls="collapseOne">
       <i class="fas fa-university"></i>
@@ -36,7 +36,7 @@
         <a class="collapse-item" [routerLink]="['/admin/empresa']">Manter</a>
       </div>
     </div>
-  </li>
+  </li-->
 
   <!--li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true"
@@ -52,7 +52,13 @@
     </div>
   </li-->
   <li class="nav-item">
-    <a class="nav-link" [routerLink]="['/admin/funcionariomanter']">
+    <a class="nav-link" [routerLink]="['/admin/empresamanter']">
+      <i class="fas fa-id-card"></i>
+      <span>Empresas</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" [routerLink]="['/admin/supportemployee']">
       <i class="fas fa-id-card"></i>
       <span>Funcionários</span>
     </a>

@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const EnterpriseSchema = new mongoose.Schema({
+  enterprise: {
+    type: String,
+    required: true
+  },
   fullname: {
     type: String,
     required: true

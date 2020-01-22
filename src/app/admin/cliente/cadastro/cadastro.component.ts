@@ -29,7 +29,7 @@ export class CadastroComponent implements OnInit {
       cpf: ['', [CustomValidator.isValidCpf]],
       phones: this.fb.group({
         main: ['', [Validators.required]],
-        secundary: ['',[Validators.required]],
+        secundary: [''],
       }),
       address: this.fb.group({
         main: [''],
@@ -75,5 +75,8 @@ export class CadastroComponent implements OnInit {
           this.toastr.error('Email já cadastrado '  + err.keyValue.email, 'Erro: ');
       });
     }
+  }
+  voltar(){
+    this.router.navigate(['/admin/clientemanter']);
   }
 }

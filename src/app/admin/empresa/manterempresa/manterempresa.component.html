@@ -1,5 +1,5 @@
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Manter Clientes</h1>
+    <h1 class="h3 mb-0 text-gray-800">Manter Empresa</h1>
   </div>
   <div class="card shadow mb-4">
     <div class="card-body">
@@ -7,8 +7,8 @@
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
           <thead>
             <tr>
+              <th>Código</th>
               <th>Nome</th>
-              <th>CPF</th>
               <th>CNPJ</th>
               <th>Telefone Principal</th>
               <th>Telefone Secundário</th>
@@ -17,19 +17,19 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let cliente of clientes">
-              <td>{{ cliente.fullname }}</td>
-              <td>{{ cliente.cpf | mask: '000.000.000-00'}}</td>
-              <td>{{ cliente.cnpj | mask: '00.000.000/0000-00' }}</td>
-              <td>{{ cliente.phones.main | mask: '(00) 00000-0000'}}</td>
-              <td>{{ cliente.phones.secundary | mask: '(00) 00000-0000'}}</td>
+            <tr *ngFor="let empresa of empresas">
+              <td>{{ empresa._id }}</td>
+              <td>{{ empresa.fullname }}</td>
+              <td>{{ empresa.cnpj | mask: '00.000.000/0000-00' }}</td>
+              <td>{{ empresa.phones.main | mask: '(00) 00000-0000'}}</td>
+              <td>{{ empresa.phones.secundary | mask: '(00) 00000-0000'}}</td>
               <td> 
-                <a class="btn btn-primary btn-user" [routerLink]="['/admin/clientecadastro']" [state]="cliente">
+                <a class="btn btn-primary btn-user" [routerLink]="['/admin/empresacadastro']" [state]="empresa">
                   <i class="fas fa-pencil-alt"></i>
                 </a>
               </td>
               <td>
-                <a class="btn btn-danger btn-user" (click)="deletarCliente(cliente._id)">
+                <a class="btn btn-danger btn-user" (click)="deletarEmpresa(empresa._id)">
                   <i class="fas fa-times-circle"></i>
                 </a>
               </td>
@@ -37,8 +37,8 @@
           </tbody>
         </table>
       </div>
-      <button [routerLink]="['/admin/clientecadastro']" class="btn btn-primary btn-user btn-block">
-        Cadastrar Cliente
+      <button [routerLink]="['/admin/empresacadastro']" class="btn btn-primary btn-user btn-block">
+        Cadastrar Empresa
       </button>
     </div>
   </div>

@@ -19,7 +19,17 @@ import { OwlModule } from 'ngx-owl-carousel';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { InventarioCadastrarComponent } from './inventario/inventario-cadastrar/inventario-cadastrar.component';
 import { ListarInventarioComponent } from './inventario/listar-inventario/listar-inventario.component';
-import { EmpresaManterComponent } from './empresa/empresa-manter/empresa-manter.component'
+
+
+
+
+
+import { ManterfuncionarioComponent } from './funcionario/manterfuncionario/manterfuncionario.component';
+import { CadastrofuncionarioComponent } from './funcionario/cadastrofuncionario/cadastrofuncionario.component';
+import { ManterempresaComponent } from './empresa/manterempresa/manterempresa.component';
+import { CadastroempresaComponent } from './empresa/cadastroempresa/cadastroempresa.component';
+import {SupportemployeeComponent} from './employee/supportemployee/supportemployee.component';
+import {RegisteremployeeComponent} from './employee/registeremployee/registeremployee.component';
 
 import {
   MatButtonModule,
@@ -32,8 +42,7 @@ import {
   MatCardModule,
   MatTableModule
 } from "@angular/material";
-import { ManterfuncionarioComponent } from './funcionario/manterfuncionario/manterfuncionario.component';
-import { CadastrofuncionarioComponent } from './funcionario/cadastrofuncionario/cadastrofuncionario.component';
+import { from } from 'rxjs';
 
 export let options: Partial<IConfig> | (() => Partial<IConfig>);
 
@@ -47,9 +56,12 @@ export let options: Partial<IConfig> | (() => Partial<IConfig>);
     TopoComponent,
     InventarioCadastrarComponent,
     ListarInventarioComponent,
-    EmpresaManterComponent,
     ManterfuncionarioComponent,
-    CadastrofuncionarioComponent
+    CadastrofuncionarioComponent,
+    ManterempresaComponent,
+    CadastroempresaComponent,
+    RegisteremployeeComponent,
+    SupportemployeeComponent
   ],
   imports: [
     CommonModule,
