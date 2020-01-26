@@ -5,6 +5,7 @@ import { CustomValidator } from '../../../resources/custom-validator';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-registeremployee',
   templateUrl: './registeremployee.component.html',
@@ -13,12 +14,16 @@ import { Router } from '@angular/router';
 export class RegisteremployeeComponent implements OnInit {
   employeeForm: FormGroup;
   employeeSelected: any;
+  empresas: [any];
 
   constructor(private fb: FormBuilder, private employeeService: EmployeeService, private toastr: ToastrService,
     private router: Router) {
-      this.employeeSelected = this.router.getCurrentNavigation().extras.state
-    }
+      this.employeeSelected = this.router.getCurrentNavigation().extras.state;
+  }
+   
+
     ngOnInit() {
+
         this.employeeForm = this.fb.group({
           fullname: ['', [Validators.required]],
           _id: [''],
@@ -28,6 +33,8 @@ export class RegisteremployeeComponent implements OnInit {
             main: ['', [Validators.required]],
             secundary: [''],
           }),
+
+          fullnamecompany: [''],
           address: this.fb.group({
             main: [''],
             secundary: [''],
@@ -47,6 +54,8 @@ export class RegisteremployeeComponent implements OnInit {
             this.employeeSelected
           );
         }
+        this.listar();
+
       }
     
       register() {
@@ -76,5 +85,17 @@ export class RegisteremployeeComponent implements OnInit {
   
       return(){
         this.router.navigate(['/admin/supportemployee']);
+      }
+
+      listar(){
+        console.log('Listar Empresa');
+        let enterprise = (<any>window).user._id;
+        this.employeeService.listaEmpresas(enterprise)
+        .subscribe(data => {
+          console.log('Listar Empresa: ',data);
+           this.empresas = data;
+        }, err => {
+          this.toastr.error('Problemas ao consultar a lista de empresa. '  + err.error.msg);
+      });
       }
     }

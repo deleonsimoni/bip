@@ -31,6 +31,12 @@
                         name="secundary">
                 </mat-form-field>
             </div>
+            <div class="col-md-3">
+                    <label for="empresa" class="control-label">Empresa</label>
+                    <select class="form-control"  formControlName="fullnamecompany" name="fullnamecompany">
+                        <option *ngFor="let empresa of empresas" [value]="empresa._id">{{empresa.fullnamecompany}}</option>
+                    </select>
+            </div>
             <hr />
             <button (click)="register()" [disabled]="employeeForm.invalid" class="btn btn-primary btn-user btn-block">
                 <span *ngIf="!employeeSelected">Cadastrar Funcionário</span>

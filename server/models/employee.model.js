@@ -21,6 +21,10 @@ const EmployeeSchema = new mongoose.Schema({
     main: { type: String },
     secundary: { type: String }
   },
+  fullnamecompany:{
+    type: String,
+    required: true
+  },
   address: {
     street: String,
     complement: String,

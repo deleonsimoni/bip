@@ -21,16 +21,17 @@ router.delete('/branch/:id', passport.authenticate('jwt', { session: false }), d
 //GETS
 async function getCompanysByEnterprise(req, res) {
   let company = await companyCtrl.getCompanysByEnterprise(req.params.idEnterprise);
+  console.log("getCompanysByEnterprise: ",company.body);
   res.json(company);
 }
 
 async function getCompanyByUserID(req, res) {
   let company = await companyCtrl.getCompanyByUserID(req.user._id);
   res.json(company);
+  console.log("getCompanyByUserID: ",company);
 }
 
 async function getCompanyBranchByID(req, res) {
-  let company = await companyCtrl.getCompanyBranchByID(req.params.id);
   let company = await companyCtrl.getCompanyBranchByID(req.params.id);
   res.json(company);
 }

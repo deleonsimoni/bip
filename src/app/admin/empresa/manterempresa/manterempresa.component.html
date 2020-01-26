@@ -19,7 +19,7 @@
           <tbody>
             <tr *ngFor="let empresa of empresas">
               <td>{{ empresa._id }}</td>
-              <td>{{ empresa.fullname }}</td>
+              <td>{{ empresa.fullnamecompany }}</td>
               <td>{{ empresa.cnpj | mask: '00.000.000/0000-00' }}</td>
               <td>{{ empresa.phones.main | mask: '(00) 00000-0000'}}</td>
               <td>{{ empresa.phones.secundary | mask: '(00) 00000-0000'}}</td>

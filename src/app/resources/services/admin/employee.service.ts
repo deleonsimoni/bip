@@ -35,14 +35,17 @@ export class EmployeeService {
 
   
   register(employee: any, enterprise) : Observable <any> {
+    console.log('Lista do empregados ',employee);
     return Observable.create(observer => {
       this.http.post('/api/employee/', {
         employee
         /*,
         enterprise*/
       }).subscribe((data : any) => {
+        console.log('Lista do data ',employee);
         observer.next(data) ;
       }, err => {
+        console.log('erro',err.error.msg);
         observer.error(err.error.msg);
       })
     });
@@ -54,6 +57,21 @@ export class EmployeeService {
       }).subscribe((data : any) => {
         observer.next(data) ;
       }, err => {
+        observer.error(err.error.msg);
+      })
+    });
+  }
+
+  
+  listaEmpresas(enterprise) : Observable <any> {
+    console.log('Entrada no metodo listaEmpresas');
+    return Observable.create(observer => {
+      this.http.get('/api/company/', {
+      }).subscribe((data : any) => {
+        observer.next(data) ;
+        console.log('Sucesso ao listar as empresas',data);
+      }, err => {
+        console.log('Erro ao listar as empresas',err.error.msg);
         observer.error(err.error.msg);
       })
     });

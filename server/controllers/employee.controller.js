@@ -1,4 +1,4 @@
-const Company = require('../models/employee.model');
+const Employee = require('../models/employee.model');
 
 module.exports = {
   getEmployeeByUserID,
@@ -13,18 +13,21 @@ async function getEmployeeByUserID(id) {
 }
 
 async function insertEmployee(employee, userId) {
-  let functionary = employee.functionary;
+  console.log('Codigo do Usuário 16: ',userId);
+  console.log('Lista de Funcionário',employee.employee);
+  //let functionary = employee.functionary;
+  let functionary = employee.employee
   functionary.userId = userId;
   delete functionary._id;
-  console.log(functionary)
+  console.log('Codigo do Usuário 20: ',functionary)
   return await new Employee(functionary).save();
 }
 
 
 async function updateEmployee(employee) {
   
-  let functionary = employee.functionary;
-  console.log(employee.functionary);
+  let functionary = employee.employee;
+  console.log(employee.employee);
   return await Employee.findOneAndUpdate(
     { _id: functionary._id},
     {'$set': 

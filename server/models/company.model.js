@@ -5,7 +5,7 @@ const CompanySchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
-  fullname: {
+  fullnamecompany: {
     type: String,
     required: true
   },
@@ -38,5 +38,6 @@ const CompanySchema = new mongoose.Schema({
 }, {
   versionKey: false
 });
+
 
 module.exports = mongoose.model('Company', CompanySchema);

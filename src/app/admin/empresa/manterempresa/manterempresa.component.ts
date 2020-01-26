@@ -32,11 +32,14 @@ export class ManterempresaComponent implements OnInit {
   }
 
   listar(){
+
     let enterprise = (<any>window).user._id;
     this.empresaService.listaEmpresas(enterprise)
     .subscribe(data => {
        this.empresas = data;
-    });
+    }, err => {
+          this.toastr.error(''  + err.error.msg, 'Erro: ');
+      });
   }
 
 }

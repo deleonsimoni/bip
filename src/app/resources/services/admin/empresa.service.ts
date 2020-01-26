@@ -47,11 +47,14 @@ export class EmpresaService {
   }
 
   listaEmpresas(enterprise) : Observable <any> {
+    console.log('Entrada no metodo listaEmpresas');
     return Observable.create(observer => {
       this.http.get('/api/company/', {
       }).subscribe((data : any) => {
         observer.next(data) ;
+        console.log('Sucesso ao listar as empresas',data);
       }, err => {
+        console.log('Erro ao listar as empresas',err.error.msg);
         observer.error(err.error.msg);
       })
     });

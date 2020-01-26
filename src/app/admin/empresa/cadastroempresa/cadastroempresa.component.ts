@@ -22,7 +22,7 @@ export class CadastroempresaComponent implements OnInit {
 
     ngOnInit() {
       this.empresaForm = this.fb.group({
-        fullname: ['', [Validators.required]],
+        fullnamecompany: ['', [Validators.required]],
         _id: [''],
         email: ['', [Validators.email, Validators.required]],
         cnpj: ['', [CustomValidator.isValidCnpj]],

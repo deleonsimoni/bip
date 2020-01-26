@@ -13,6 +13,7 @@ async function getCompanyByUserID(id) {
 }
 
 async function insertCompany(company, userId) {
+  console.log('Lista de Empresa',company);
   let empresa = company.empresa;
   empresa.userId = userId;
   delete empresa._id;
