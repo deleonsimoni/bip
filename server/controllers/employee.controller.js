@@ -1,4 +1,5 @@
 const Employee = require('../models/employee.model');
+const Address = require('../models/address.model');
 
 module.exports = {
   getEmployeeByUserID,
@@ -20,7 +21,10 @@ async function insertEmployee(employee, userId) {
   functionary.userId = userId;
   delete functionary._id;
   console.log('Codigo do Usuário 20: ',functionary)
+  const address = await new Address(functionary.address).save();
+  functionary.idaddress = address._id;
   return await new Employee(functionary).save();
+
 }
 
 

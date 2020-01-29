@@ -34,7 +34,7 @@ export class RegisteremployeeComponent implements OnInit {
             secundary: [''],
           }),
 
-          fullnamecompany: [''],
+          idcompany: [''],
           address: this.fb.group({
             main: [''],
             secundary: [''],
@@ -78,7 +78,7 @@ export class RegisteremployeeComponent implements OnInit {
             this.toastr.success('Funcionário cadastrada com sucesso');
             this.router.navigate(['/admin/supportemployee']);
           }, err => {
-              this.toastr.error('Email já cadastrado '  + err.keyValue.email, 'Erro: ');
+              this.toastr.error('Email já cadastrado ', 'Erro: ');
           });
         }
       }
@@ -89,8 +89,8 @@ export class RegisteremployeeComponent implements OnInit {
 
       listar(){
         console.log('Listar Empresa');
-        let enterprise = (<any>window).user._id;
-        this.employeeService.listaEmpresas(enterprise)
+        let userId = (<any>window).user._id;
+        this.employeeService.listaEmpresas(userId)
         .subscribe(data => {
           console.log('Listar Empresa: ',data);
            this.empresas = data;

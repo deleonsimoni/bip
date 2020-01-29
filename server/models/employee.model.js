@@ -21,19 +21,9 @@ const EmployeeSchema = new mongoose.Schema({
     main: { type: String },
     secundary: { type: String }
   },
-  fullnamecompany:{
-    type: String,
-    required: true
-  },
-  address: {
-    street: String,
-    complement: String,
-    num: String,
-    zip: String,
-    city: String,
-    district: String,
-    country: String,
-    state: String
+  idaddress:{
+    type: mongoose.Schema.Types.ObjectId,
+    //required: true
   },
   createdAt: {
     type: Date,

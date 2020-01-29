@@ -31,10 +31,15 @@
                         name="secundary">
                 </mat-form-field>
             </div>
+            <div class="form-group row" formArrayName="address">
+                <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
+                    <input matInput type="zip" mask="00000-000" placeholder="CEP" formControlName="zip" name="zip">
+                </mat-form-field>
+            </div>
             <div class="col-md-3">
                     <label for="empresa" class="control-label">Empresa</label>
-                    <select class="form-control"  formControlName="fullnamecompany" name="fullnamecompany">
-                        <option *ngFor="let empresa of empresas" [value]="empresa._id">{{empresa.fullnamecompany}}</option>
+                    <select class="form-control"  formControlName="idcompany" name="fullnamecompany">
+                        <option *ngFor="let empresa of empresas" [value]="empresa.?_id">{{empresa.fullnamecompany}}</option>
                     </select>
             </div>
             <hr />
