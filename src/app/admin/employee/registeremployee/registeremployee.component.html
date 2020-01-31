@@ -24,23 +24,57 @@
             </div>
             <div class="form-group row" formArrayName="phones">
                 <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
-                    <input matInput type="tel" mask="(00) 00009-0000" placeholder="Telefone Principal" formControlName="main" name="main">
+                    <input matInput type="tel" mask="(00) 00009-0000" placeholder="Telefone Principal" formControlName="main"
+                        name="main">
                 </mat-form-field>
                 <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
                     <input matInput type="tel" mask="(00) 00009-0000" placeholder="Telefone Secundário" formControlName="secundary"
                         name="secundary">
                 </mat-form-field>
             </div>
-            <div class="form-group row" formArrayName="address">
-                <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
-                    <input matInput type="zip" mask="00000-000" placeholder="CEP" formControlName="zip" name="zip">
-                </mat-form-field>
+            <div formArrayName="address">
+                <div class="form-group row">
+                    <mat-form-field class="col-sm-12 mb-3 mb-sm-0">
+                        <input matInput type="street" placeholder="Rua" formControlName="street" name="street">
+                    </mat-form-field>
+                </div>
+                <div class="form-group row">
+                    <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
+                        <input matInput type="number" placeholder="Número" formControlName="number" name="number">
+                    </mat-form-field>
+                    <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
+                        <input matInput type="complement" placeholder="Complemento" formControlName="complement" name="complement">
+                    </mat-form-field>
+
+                </div>
+                <div class="form-group row">
+                    <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
+                        <input matInput type="zip" mask="00000-000" placeholder="CEP" formControlName="zip" name="zip">
+                    </mat-form-field>
+                    <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
+                        <input matInput type="district" placeholder="Bairro" formControlName="district" name="district">
+                    </mat-form-field>
+                </div>
+                <div class="form-group row">
+                    <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
+                        <input matInput type="city" placeholder="Cidade" formControlName="city" name="city">
+                    </mat-form-field>
+                </div>
+                <div class="form-group row">
+                    <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
+                        <input matInput type="state" placeholder="Estado" formControlName="state" name="state">
+                    </mat-form-field>
+                    <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
+                        <input matInput type="country" placeholder="País" formControlName="country" name="country">
+                    </mat-form-field>
+                </div>
+
             </div>
-            <div class="col-md-3">
-                    <label for="empresa" class="control-label">Empresa</label>
-                    <select class="form-control"  formControlName="idcompany" name="fullnamecompany">
-                        <option *ngFor="let empresa of empresas" [value]="empresa.?_id">{{empresa.fullnamecompany}}</option>
-                    </select>
+            <div class="col-md-12">
+                <label for="empresa" class="control-label">Empresa</label>
+                <select class="form-control" formControlName="idcompany" name="fullnamecompany">
+                    <option *ngFor="let empresa of empresas" [value]="empresa._id">{{empresa.fullnamecompany}}</option>
+                </select>
             </div>
             <hr />
             <button (click)="register()" [disabled]="employeeForm.invalid" class="btn btn-primary btn-user btn-block">
@@ -48,9 +82,9 @@
                 <span *ngIf="employeeSelected">Alterar Funcionário</span>
             </button>
             <button (click)="return()" class="btn btn-primary btn-user btn-block">
-                    <span>Voltar</span>
+                <span>Voltar</span>
             </button>
-            
+
         </form>
     </div>
 </div>

@@ -9,11 +9,11 @@ module.exports = {
 
 
 async function getCompanyByUserID(id) {
-  return await Company.find({userId: id});
+  return await Company.find({ userId: id }).populate('idaddress');
 }
 
 async function insertCompany(company, userId) {
-  console.log('Lista de Empresa',company);
+  console.log('Lista de Empresa', company);
   let empresa = company.empresa;
   empresa.userId = userId;
   delete empresa._id;
@@ -23,13 +23,14 @@ async function insertCompany(company, userId) {
 
 
 async function updateCompany(company) {
-  
+
   let empresa = company.empresa;
   console.log(company.empresa);
   return await Company.findOneAndUpdate(
-    { _id: empresa._id},
-    {'$set': 
-      empresa
+    { _id: empresa._id },
+    {
+      '$set':
+        empresa
     }
   );
 }

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const EmployeeSchema = new mongoose.Schema({
-  userId:{
+  userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
@@ -21,8 +21,9 @@ const EmployeeSchema = new mongoose.Schema({
     main: { type: String },
     secundary: { type: String }
   },
-  idaddress:{
+  idaddress: {
     type: mongoose.Schema.Types.ObjectId,
+    ref: 'Address'
     //required: true
   },
   createdAt: {
@@ -30,7 +31,7 @@ const EmployeeSchema = new mongoose.Schema({
     default: Date.now
   }
 }, {
-  versionKey: false
-});
+    versionKey: false
+  });
 
 module.exports = mongoose.model('Employee', EmployeeSchema);
