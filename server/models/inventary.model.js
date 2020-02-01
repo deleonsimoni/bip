@@ -2,9 +2,16 @@ const mongoose = require('mongoose');
 
 const InventarySchema = new mongoose.Schema({
 
+  fullname: {
+    type: String,
+    required: true
+  },
+  observation: {
+    type: String
+  },
   // Inicio Chaves
   //Usuario criado
-  userCreate: {
+  userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
@@ -48,12 +55,10 @@ const InventarySchema = new mongoose.Schema({
   }],
 
   begin: {
-    type: Date,
-    required: true
+    type: Date
   },
   end: {
-    type: Date,
-    required: true
+    type: Date
   },
   createdAt: {
     type: Date,

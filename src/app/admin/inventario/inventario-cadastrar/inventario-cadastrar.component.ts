@@ -12,24 +12,66 @@ import { InventarioService } from '../../../resources/services/admin/inventario.
 })
 export class InventarioCadastrarComponent implements OnInit {
 
-  inventarioForm: FormGroup;
-  clienteSelecionado: any;
-  inventarioSelecionado: any;
+  inventaryForm: FormGroup;
+  inventarySelected: any;
+
 
   constructor(private fb: FormBuilder, private inventarioService: InventarioService, private toastr: ToastrService,
     private router: Router) {
-      this.inventarioSelecionado = this.router.getCurrentNavigation().extras.state;
+    this.inventarySelected = this.router.getCurrentNavigation().extras.state;
   }
 
   ngOnInit() {
-    this.inventarioForm = this.fb.group({
-      userCreate: [(<any>window).user._id],
-      cliente: ['', [Validators.required]],
-      collectors: this.fb.group({
-        user: ['', [Validators.required]],
-        collector: ['', [Validators.required]]
-      }),
-      
+
+    this.inventaryForm = this.fb.group({
+      fullname: ['', [Validators.required]],
+      _id: [''],
+      observation: [''],
     });
+
+
+    if (this.inventarySelected) {
+      this.inventaryForm.patchValue(
+        this.inventarySelected
+      );
+    }
   }
+
+  register() {
+    event.preventDefault();
+
+    if (!this.inventaryForm.valid) return;
+
+    if (this.inventarySelected) {
+      this.inventarioService.update(this.inventaryForm.value)
+        .subscribe(() => {
+          this.toastr.success('Inventário atualizado com sucesso');
+          this.router.navigate(['/admin/inventariolista']);
+        }, err => {
+          this.toastr.error('' + err, 'Erro: ');
+        });
+    } else {
+      let userId = (<any>window).user._id;
+      this.inventarioService.register(this.inventaryForm.value, userId)
+        .subscribe(() => {
+          this.toastr.success('Inventário criado com sucesso. Agora você pode complementar com as informações');
+          this.router.navigate(['/admin/inventariolista']);
+        }, err => {
+          this.toastr.error('Email já cadastrado ', 'Erro: ');
+        });
+    }
+  }
+
+  return() {
+    this.router.navigate(['/admin/inventariolista']);
+  }
+
+
+
+
+
+
+
+
+
 }
