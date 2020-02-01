@@ -29,8 +29,6 @@ export class DashboardComponent implements OnInit {
     this.authService.me().subscribe(data => {
       this.listar(data.user);
     });
-
-
   }
 
   listar(user) {

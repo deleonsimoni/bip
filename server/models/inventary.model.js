@@ -6,7 +6,7 @@ const InventarySchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  observation: {
+  observations: {
     type: String
   },
   // Inicio Chaves

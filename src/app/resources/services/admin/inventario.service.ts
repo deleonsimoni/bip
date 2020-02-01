@@ -35,7 +35,7 @@ export class InventarioService {
 
   register(inventary: any, userId): Observable<any> {
     return Observable.create(observer => {
-      this.http.post('/api/employee/', {
+      this.http.post('/api/inventary/', {
         inventary
       }).subscribe((data: any) => {
         observer.next(data);
