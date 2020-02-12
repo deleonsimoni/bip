@@ -25,22 +25,17 @@ const ClientSchema = new mongoose.Schema({
     main: { type: String },
     secundary: { type: String }
   },
-  address: {
-    street: String,
-    complement: String,
-    num: String,
-    zip: String,
-    city: String,
-    district: String,
-    country: String,
-    state: String
+  idaddress: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Address'
+    //required: true
   },
   createdAt: {
     type: Date,
     default: Date.now
   }
 }, {
-  versionKey: false
-});
+    versionKey: false
+  });
 
 module.exports = mongoose.model('Client', ClientSchema);

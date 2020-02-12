@@ -20,25 +20,25 @@ export class ManterempresaComponent implements OnInit {
 
   deletarEmpresa(idEmpresa) {
     this.modalConfirm.confirm('Deletar', 'Confirma a deleção?')
-    .then(() => 
-      this.empresaService.deletarEmpresa(idEmpresa)
-      .subscribe(data => {
-        this.listar();
-        this.toastr.success('Empresa excluída com sucesso');
-      }, err => {
-          this.toastr.error(''  + err, 'Erro: ');
-      })
-    )
+      .then(() =>
+        this.empresaService.deletarEmpresa(idEmpresa)
+          .subscribe(data => {
+            this.listar();
+            this.toastr.success('Empresa excluída com sucesso');
+          }, err => {
+            this.toastr.error('Problema ao excluir a empresa. ' + err, 'Erro: ');
+          })
+      )
   }
 
-  listar(){
+  listar() {
 
     let enterprise = (<any>window).user._id;
     this.empresaService.listaEmpresas(enterprise)
-    .subscribe(data => {
-       this.empresas = data;
-    }, err => {
-          this.toastr.error(''  + err.error.msg, 'Erro: ');
+      .subscribe(data => {
+        this.empresas = data;
+      }, err => {
+        this.toastr.error('Problema ao consultar a empresa. ' + err.error.msg, 'Erro: ');
       });
   }
 

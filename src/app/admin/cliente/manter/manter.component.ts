@@ -20,22 +20,22 @@ export class ManterComponent implements OnInit {
 
   deletarCliente(idCliente) {
     this.modalConfirm.confirm('Deletar', 'Confirma a deleção?')
-    .then(() => 
-      this.clienteService.deletarCliente(idCliente)
-      .subscribe(data => {
-        this.listar();
-        this.toastr.success('Cliente deletado com sucesso');
-      }, err => {
-          this.toastr.error(''  + err, 'Erro: ');
-      })
-    )
+      .then(() =>
+        this.clienteService.deletarCliente(idCliente)
+          .subscribe(data => {
+            this.listar();
+            this.toastr.success('Cliente deletado com sucesso.');
+          }, err => {
+            this.toastr.error('Problema ao excluir o cliente. ' + err.keyValue.msg, 'Erro: ');
+          })
+      )
   }
 
-  listar(){
+  listar() {
     let enterprise = (<any>window).user._id;
     this.clienteService.listaClientes(enterprise)
-    .subscribe(data => {
-       this.clientes = data;
-    });
+      .subscribe(data => {
+        this.clientes = data;
+      });
   }
 }

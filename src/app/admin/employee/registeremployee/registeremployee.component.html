@@ -5,11 +5,13 @@
 <div class="card shadow mb-4">
     <div class="card-body">
         <form class="user" [formGroup]="employeeForm">
+            <!--input type="hidden" formControlName="idaddress" name="idaddress" /-->
             <div class="form-group row">
                 <mat-form-field class="col-sm-12 mb-3 mb-sm-0">
                     <input matInput placeholder="Nome Completo" formControlName="fullname" name="fullname" required>
                 </mat-form-field>
             </div>
+
             <div class="form-group row">
                 <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
                     <input matInput placeholder="CPF" formControlName="cpf" name="cpf" mask="000.000.000-00">
@@ -32,7 +34,32 @@
                         name="secundary">
                 </mat-form-field>
             </div>
+            <li *ngFor="let item of address; let i = index">
+                {{i}} {{item.street}}
+                {{i}} {{item.complement}}
+                {{i}} {{item.number}}
+                {{i}} {{item.zip}}
+                {{i}} {{item.city}}
+                {{i}} {{item.district}}
+                {{i}} {{item.state}}
+                {{i}} {{item.country}}
+            </li>
+            <!--div formArrayName="teams">
+                <div class="teams" *ngFor="let team of employeeForm.get('teams').controls;
+                             let teamIndex = index"
+                    [formGroupName]="teamIndex">
+                    <mat-form-field class="col-sm-12 mb-3 mb-sm-0">
+                        <input matInput type="street" placeholder="Rua" formControlName="street" name="street">
+                    </mat-form-field>
+                </div>
+            </div-->
+            <div *ngFor="let ingredient of address; let in = index;">
+                <div class="form-group row">
+                    <input placeholder="Rua" [(ngModel)]="ingredient.street" [ngModelOptions]="{standalone: true}">
+                </div>
+            </div>
             <div formArrayName="address">
+                <!--div *ngFor="let item of address; let i = index"-->
                 <div class="form-group row">
                     <mat-form-field class="col-sm-12 mb-3 mb-sm-0">
                         <input matInput type="street" placeholder="Rua" formControlName="street" name="street">
@@ -45,7 +72,6 @@
                     <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
                         <input matInput type="complement" placeholder="Complemento" formControlName="complement" name="complement">
                     </mat-form-field>
-
                 </div>
                 <div class="form-group row">
                     <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
@@ -70,7 +96,7 @@
                 </div>
 
             </div>
-            <div class="col-md-12">
+            <div class="col-sm-12 mb-3 mb-sm-0">
                 <label for="empresa" class="control-label">Empresa</label>
                 <select class="form-control" formControlName="idcompany" name="fullnamecompany">
                     <option *ngFor="let empresa of empresas" [value]="empresa._id">{{empresa.fullnamecompany}}</option>

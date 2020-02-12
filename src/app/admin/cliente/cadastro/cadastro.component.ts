@@ -17,8 +17,8 @@ export class CadastroComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private clienteService: ClienteService, private toastr: ToastrService,
     private router: Router) {
-      this.clienteSelecionado = this.router.getCurrentNavigation().extras.state
-    }
+    this.clienteSelecionado = this.router.getCurrentNavigation().extras.state
+  }
 
   ngOnInit() {
     this.clienteForm = this.fb.group({
@@ -32,11 +32,9 @@ export class CadastroComponent implements OnInit {
         secundary: [''],
       }),
       address: this.fb.group({
-        main: [''],
-        secundary: [''],
         street: [''],
         complement: [''],
-        num: [''],
+        number: [''],
         zip: [''],
         city: [''],
         district: [''],
@@ -45,7 +43,7 @@ export class CadastroComponent implements OnInit {
       })
     });
 
-    if (this.clienteSelecionado){
+    if (this.clienteSelecionado) {
       this.clienteForm.patchValue(
         this.clienteSelecionado
       );
@@ -55,28 +53,28 @@ export class CadastroComponent implements OnInit {
   cadastrar() {
     event.preventDefault();
 
-    if(!this.clienteForm.valid) return;
+    if (!this.clienteForm.valid) return;
 
-    if (this.clienteSelecionado){
+    if (this.clienteSelecionado) {
       this.clienteService.update(this.clienteForm.value)
-      .subscribe(() => {
-        this.toastr.success('Cliente atualizado com sucesso');
-        this.router.navigate(['/admin/clientemanter']);
-      }, err => {
-          this.toastr.error(''  + err, 'Erro: ');
-      });
+        .subscribe(() => {
+          this.toastr.success('Cliente atualizado com sucesso.');
+          this.router.navigate(['/admin/clientemanter']);
+        }, err => {
+          this.toastr.error('Problema ao atualizar o cliente. ' + err.keyValue.msg, 'Erro: ');
+        });
     } else {
       let enterprise = (<any>window).user._id;
       this.clienteService.register(this.clienteForm.value, enterprise)
-      .subscribe(() => {
-        this.toastr.success('Cliente cadastrado com sucesso');
-        this.router.navigate(['/admin/clientemanter']);
-      }, err => {
-          this.toastr.error('Email já cadastrado '  + err.keyValue.email, 'Erro: ');
-      });
+        .subscribe(() => {
+          this.toastr.success('Cliente cadastrado com sucesso.');
+          this.router.navigate(['/admin/clientemanter']);
+        }, err => {
+          this.toastr.error('Problema ao cadastrar o cliente. ' + err.keyValue.msg, 'Erro: ');
+        });
     }
   }
-  voltar(){
+  voltar() {
     this.router.navigate(['/admin/clientemanter']);
   }
 }

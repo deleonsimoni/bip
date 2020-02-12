@@ -11,32 +11,34 @@ import { ToastrService } from 'ngx-toastr';
 export class SupportemployeeComponent implements OnInit {
 
   employees: [any];
-  
+
   constructor(private employeeService: EmployeeService, private modalConfirm: ConfirmDialogService, private toastr: ToastrService) { }
 
-    ngOnInit() {
-      this.list();
-    }
-  
-    deletarEmployee(idEmployee) {
-      this.modalConfirm.confirm('Deletar', 'Confirma a deleção?')
-      .then(() => 
+  ngOnInit() {
+    this.list();
+  }
+
+  deletarEmployee(idEmployee) {
+    this.modalConfirm.confirm('Deletar', 'Confirma a deleção?')
+      .then(() =>
         this.employeeService.deleteEmployee(idEmployee)
-        .subscribe(data => {
-          this.list();
-          this.toastr.success('Funcionário excluída com sucesso');
-        }, err => {
-            this.toastr.error(''  + err, 'Erro: ');
-        })
+          .subscribe(data => {
+            this.list();
+            this.toastr.success('Funcionário excluído com sucesso');
+          }, err => {
+            this.toastr.error('Problema ao excluir o funcionário. ' + err.keyValue.msg, 'Erro: ');
+          })
       )
-    }
-  
-    list(){
-      let enterprise = (<any>window).user._id;
-      this.employeeService.listEmployees(enterprise)
+  }
+
+  list() {
+    let enterprise = (<any>window).user._id;
+    this.employeeService.listEmployees(enterprise)
       .subscribe(data => {
-         this.employees = data;
+        this.employees = data;
+      }, err => {
+        this.toastr.error('Problema ao consultar o funcionário. ' + err.error.msg, 'Erro: ');
       });
-    }
-  
+  }
+
 }

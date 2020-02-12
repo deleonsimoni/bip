@@ -1,27 +1,20 @@
-const Employee = require('../models/employee.model');
 const Address = require('../models/address.model');
 
 module.exports = {
-  getEmployeeByUserID,
-  insertEmployee,
-  updateEmployee,
-  deleteEmployee,
+  getAddressByAddresID,
+  insertAddress,
+  updateAddress,
+  deleteAddress,
 }
 
 
-async function getEmployeeByUserID(id) {
-  let lstEmployee = await Employee.find({ userId: id });
+async function getAddressByAddresID(id) {
 
-  lstEmployee = await lstEmployee.forEach(async (element) => {
-    console.log('element.idaddress ' + element.idaddress);
-    element.address = await Address.find({ _id: element.idaddress });
-    console.log('Address' + element.address);
-  });
-  console.log('passei');
-  return await lstEmployee;
+  console.log('getAddressByAddresID controller ' + id)
+  return await Address.find({ _id: id });
 }
 
-async function insertEmployee(employee, userId) {
+async function insertAddress(address, userId) {
   console.log('Codigo do Usuário 16: ', userId);
   console.log('Lista de Funcionário', employee.employee);
   //let functionary = employee.functionary;
@@ -36,7 +29,7 @@ async function insertEmployee(employee, userId) {
 }
 
 
-async function updateEmployee(employee) {
+async function updateAddress(address) {
 
   let functionary = employee.employee;
   console.log(employee.employee);
@@ -49,7 +42,7 @@ async function updateEmployee(employee) {
   );
 }
 
-async function deleteEmployee(id) {
-  return await EmployeeindOneAndRemove({ _id: id });
+async function deleteAddress(id) {
+  return await AddressindOneAndRemove({ _id: id });
 }
 
