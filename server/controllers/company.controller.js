@@ -5,6 +5,8 @@ module.exports = {
   insertCompany,
   updateCompany,
   deleteCompany,
+  getTotalCompany,
+
 }
 
 
@@ -37,5 +39,9 @@ async function updateCompany(company) {
 
 async function deleteCompany(id) {
   return await Company.findOneAndRemove({ _id: id });
+}
+
+async function getTotalCompany(idUser) {
+  return await Company.find({ userId: idUser }).count();
 }
 

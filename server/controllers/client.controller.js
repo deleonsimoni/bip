@@ -9,12 +9,17 @@ module.exports = {
   insertBranch,
   updateClient,
   deleteClient,
-  deleteClientBranch
+  deleteClientBranch,
+  getTotalClients
 }
 
 async function getClientsByEnterprise(id) {
   return await Client.find({ enterprise: id })
     .sort({ createAt: -1 });
+}
+
+async function getTotalClients(idUser) {
+  return await Client.find({ enterprise: idUser }).count();
 }
 
 async function getClientByID(id) {
@@ -39,9 +44,10 @@ async function insertBranch(branch) {
 async function updateClient(client) {
   let cliente = client.cliente;
   return await Client.findOneAndUpdate(
-    { _id: cliente._id},
-    {'$set': 
-      cliente
+    { _id: cliente._id },
+    {
+      '$set':
+        cliente
     }
   );
 }

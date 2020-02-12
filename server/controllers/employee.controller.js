@@ -6,6 +6,8 @@ module.exports = {
   insertEmployee,
   updateEmployee,
   deleteEmployee,
+  getTotalEmployee,
+
 }
 
 
@@ -50,6 +52,11 @@ async function updateEmployee(employee) {
 }
 
 async function deleteEmployee(id) {
-  return await EmployeeindOneAndRemove({ _id: id });
+  return await Employee.findOneAndRemove({ _id: id });
+}
+
+
+async function getTotalEmployee(idUser) {
+  return await Employee.find({ userId: idUser }).count();
 }
 

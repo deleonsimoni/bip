@@ -93,4 +93,16 @@ export class EmployeeService {
       })
     });
   }
+
+  totalEmployees(userId): Observable<any> {
+    return Observable.create(observer => {
+      this.http.get('/api/dashboard/totalEmployees/' + userId, {
+      }).subscribe((data: any) => {
+        observer.next(data);
+      }, err => {
+        observer.error(err.error.msg);
+      })
+    });
+  }
+
 }

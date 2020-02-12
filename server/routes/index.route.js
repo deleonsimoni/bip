@@ -7,6 +7,8 @@ const companyRoutes = require('./company.route');
 const employeeRoutes = require('./employee.route');
 const addressRoutes = require('./address.route');
 
+const dashboardRoutes = require('./dashboard.route');
+const inventaryRoutes = require('./inventary.route');
 
 const router = express.Router(); // eslint-disable-line new-cap
 
@@ -23,6 +25,8 @@ router.use('/collector', collectorRoutes);
 router.use('/client', clientRoutes);
 router.use('/employee', employeeRoutes)
 router.use('/address', addressRoutes)
+router.use('/dashboard', dashboardRoutes)
+router.use('/inventary', inventaryRoutes)
 
 
 module.exports = router;
