@@ -12,15 +12,15 @@ module.exports = {
 
 
 async function getEmployeeByUserID(id) {
-  let lstEmployee = await Employee.find({ userId: id });
 
-  lstEmployee = await lstEmployee.forEach(async (element) => {
-    console.log('element.idaddress ' + element.idaddress);
-    element.address = await Address.find({ _id: element.idaddress });
-    console.log('Address' + element.address);
-  });
-  console.log('passei');
-  return await lstEmployee;
+  let lstEmployee = await Employee.find({ userId: id });
+  let lista = JSON.parse(JSON.stringify(lstEmployee));
+
+  for (const element of lista) {
+    element.address = await Address.findOne({ _id: element.idaddress });
+  }
+
+  return lista;
 }
 
 async function insertEmployee(employee, userId) {
