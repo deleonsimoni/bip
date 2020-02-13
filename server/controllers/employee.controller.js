@@ -12,15 +12,19 @@ module.exports = {
 
 
 async function getEmployeeByUserID(id) {
-  let lstEmployee = await Employee.find({ userId: id });
-
-  lstEmployee = await lstEmployee.forEach(async (element) => {
-    console.log('element.idaddress ' + element.idaddress);
-    element.address = await Address.find({ _id: element.idaddress });
-    console.log('Address' + element.address);
-  });
+  let retorno;
+  try {
+    let lstEmployee = await Employee.find({ userId: id });
+    retorno = await lstEmployee.forEach(async (element) => {
+      console.log('element.idaddress ' + element.idaddress);
+      element.address = await Address.find({ _id: element.idaddress });
+      console.log('Address' + element.address);
+    });
+  } catch {
+    console.log('Erro ao lista endereços.');
+  }
   console.log('passei');
-  return await lstEmployee;
+  return retorno;
 }
 
 async function insertEmployee(employee, userId) {
