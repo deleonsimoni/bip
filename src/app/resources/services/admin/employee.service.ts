@@ -35,17 +35,17 @@ export class EmployeeService {
 
 
   register(employee: any, enterprise): Observable<any> {
-    console.log('Lista do empregados ', employee);
+    console.log('Listar os empregados ', employee);
     return Observable.create(observer => {
       this.http.post('/api/employee/', {
         employee
         /*,
         enterprise*/
       }).subscribe((data: any) => {
-        console.log('Lista do data ', employee);
+        console.log('Listar do data ', employee);
         observer.next(data);
       }, err => {
-        console.log('erro', err.error.msg);
+        console.log('erro ', err.error.msg);
         observer.error(err.error.msg);
       })
     });

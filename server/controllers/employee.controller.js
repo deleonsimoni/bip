@@ -12,19 +12,17 @@ module.exports = {
 
 
 async function getEmployeeByUserID(id) {
-  let retorno;
+
+  let lstEmployee = await Employee.find({ userId: id });
+  let lista = JSON.parse(JSON.stringify(lstEmployee));
   try {
-    let lstEmployee = await Employee.find({ userId: id });
-    retorno = await lstEmployee.forEach(async (element) => {
-      console.log('element.idaddress ' + element.idaddress);
-      element.address = await Address.find({ _id: element.idaddress });
-      console.log('Address' + element.address);
-    });
+    for (const element of lista) {
+      element.address = await Address.findOne({ _id: element.idaddress });
+    }
   } catch {
-    console.log('Erro ao lista endereços.');
+    console.log('Erro ao lista os empregados e seus endereços.');
   }
-  console.log('passei');
-  return retorno;
+  return lista;
 }
 
 async function insertEmployee(employee, userId) {
@@ -45,13 +43,11 @@ async function insertEmployee(employee, userId) {
 async function updateEmployee(employee) {
 
   let functionary = employee.employee;
-  console.log(employee.employee);
+  console.log('updateEmployee ' + employee.employee);
+  const address = await Address.findOneAndUpdate({ _id: functionary.idaddress }, { '$set': functionary.address });
   return await Employee.findOneAndUpdate(
-    { _id: functionary._id },
-    {
-      '$set':
-        functionary
-    }
+    { _id: functionary._id }, { '$set': functionary }
+
   );
 }
 

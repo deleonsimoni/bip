@@ -34,7 +34,7 @@
                         name="secundary">
                 </mat-form-field>
             </div>
-            <li *ngFor="let item of address; let i = index">
+            <!--li *ngFor="let item of address; let i = index">
                 {{i}} {{item.street}}
                 {{i}} {{item.complement}}
                 {{i}} {{item.number}}
@@ -44,7 +44,7 @@
                 {{i}} {{item.state}}
                 {{i}} {{item.country}}
             </li>
-            <!--div formArrayName="teams">
+            <div formArrayName="teams">
                 <div class="teams" *ngFor="let team of employeeForm.get('teams').controls;
                              let teamIndex = index"
                     [formGroupName]="teamIndex">
@@ -52,12 +52,12 @@
                         <input matInput type="street" placeholder="Rua" formControlName="street" name="street">
                     </mat-form-field>
                 </div>
-            </div-->
+            </div>
             <div *ngFor="let ingredient of address; let in = index;">
                 <div class="form-group row">
                     <input placeholder="Rua" [(ngModel)]="ingredient.street" [ngModelOptions]="{standalone: true}">
                 </div>
-            </div>
+            </div-->
             <div formArrayName="address">
                 <!--div *ngFor="let item of address; let i = index"-->
                 <div class="form-group row">
