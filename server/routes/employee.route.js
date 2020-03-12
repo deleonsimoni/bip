@@ -41,9 +41,8 @@ async function updateEmployee(req, res) {
 
 //POST
 async function insertEmployee(req, res) {
-
+  console.log('inside the method');
   let employee = await employeeCtrl.insertEmployee(req.body, req.user._id).catch(
-
     err => {
       res.json(400, {
         error: 1,

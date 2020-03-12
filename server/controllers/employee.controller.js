@@ -12,7 +12,7 @@ module.exports = {
 
 
 async function getEmployeeByUserID(id) {
-
+  console.log('This is the method  getEmployeeByUserID', id);
   let lstEmployee = await Employee.find({ userId: id });
   let lista = JSON.parse(JSON.stringify(lstEmployee));
   try {
@@ -20,7 +20,7 @@ async function getEmployeeByUserID(id) {
       element.address = await Address.findOne({ _id: element.idaddress });
     }
   } catch {
-    console.log('Erro ao lista os empregados e seus endereços.');
+    console.log('Erro ao listar os empregados e seus endereços.');
   }
   return lista;
 }
@@ -44,7 +44,8 @@ async function updateEmployee(employee) {
 
   let functionary = employee.employee;
   console.log('updateEmployee ' + employee.employee);
-  const address = await Address.findOneAndUpdate({ _id: functionary.idaddress }, { '$set': functionary.address });
+  //const address = 
+  await Address.findOneAndUpdate({ _id: functionary.idaddress }, { '$set': functionary.address });
   return await Employee.findOneAndUpdate(
     { _id: functionary._id }, { '$set': functionary }
 

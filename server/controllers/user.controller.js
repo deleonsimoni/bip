@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const Joi = require('joi');
 const User = require('../models/user.model');
+const Address = require('../models/address.model');
 /*
 const userSchema = Joi.object({
   fullname: Joi.string().required(),
@@ -17,7 +18,15 @@ module.exports = {
 
 async function insert(user) {
   //user = await Joi.validate(user, userSchema, { abortEarly: false });
-  user.hashedPassword = bcrypt.hashSync(user.password, 10);
-  delete user.password;
-  return await new User(user).save();
+  console.log('Code of the user: ', user);
+  let objUser = user.user
+  console.log("This is the method Insert 1. ");
+  objUser.hashedPassword = bcrypt.hashSync(objUser.password, 10);
+  delete objUser._id;
+  const address = await new Address(objUser.address).save();
+  objUser.idaddress = address._id;
+  console.log("This is the method Insert 2. ");
+  //delete user.password;
+  console.log("This is the method Insert 3. ");
+  return await new User(objUser).save();
 }

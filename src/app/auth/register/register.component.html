@@ -1,57 +1,99 @@
-<mat-card class="example-card">
-  <mat-card-header>
-    <mat-card-title>Register</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <form class="example-form">
-      <table cellspacing="0" [formGroup]="userForm">
-        <tr>
-          <td>
-            <mat-form-field>
-              <input matInput placeholder="Nome completo" formControlName="fullname" name="fullname" required>
-            </mat-form-field>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <mat-form-field>
-              <input matInput placeholder="Email" formControlName="email" name="email" required>
-              <mat-error *ngIf="email.invalid && email.errors.email">Email inválido</mat-error>
-            </mat-form-field>
-          </td>
-        </tr>
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <form class="user" [formGroup]="userForm">
+        <br>
+        <br>
+        <br>
+        <br>
+            <div class="form-group row">
+                <mat-form-field class="col-sm-12 mb-3 mb-sm-0">
+                    <input matInput placeholder="Nome Completo" formControlName="fullname" name="fullname" required>
+                </mat-form-field>
+            </div>
+            <div class="form-group row">
+                    <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
+                        <input matInput placeholder="CPF" formControlName="cpf" name="cpf" mask="000.000.000-00">
+                        <mat-error *ngIf="userForm.get('cpf').getError('cpfNotValid')">O CPF é inválido</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
+                        <input matInput placeholder="Email" formControlName="email" name="email" required>
+                        <mat-error *ngIf="userForm.get('email').errors">Email inválido</mat-error>
+                    </mat-form-field>
+            </div>
+            <div class="form-group row" formArrayName="phones">
+                <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
+                    <input matInput type="tel" mask="(00) 00009-0000" placeholder="Telefone Principal" formControlName="main"
+                        name="main">
+                </mat-form-field>
+                <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
+                    <input matInput type="tel" mask="(00) 00009-0000" placeholder="Telefone Secundário" formControlName="secundary"
+                        name="secundary">
+                </mat-form-field>
+            </div>
+            
+            <div formArrayName="address">
+                <div class="form-group row">
+                    <mat-form-field class="col-sm-12 mb-3 mb-sm-0">
+                        <input matInput type="street" placeholder="Rua" formControlName="street" name="street">
+                    </mat-form-field>
+                </div>
 
-        <tr>
-          <td>
-            <mat-form-field>
-              <input matInput placeholder="CPF" mask="000.000.000-00" formControlName="cpf" name="cpf" required>
-            </mat-form-field>
-          </td>
-        </tr>
-
-        <tr>
-          <td>
-            <mat-form-field>
-              <input matInput placeholder="Senha" formControlName="password" type="password" name="password" required>
-            </mat-form-field>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <mat-form-field>
-              <input matInput placeholder="Repita sua senha" formControlName="repeatPassword" type="password"
-                name="repeatPassword" required>
-              <mat-error *ngIf="repeatPassword.invalid && repeatPassword.errors.passwordMatch">Senha diferente
-              </mat-error>
-            </mat-form-field>
-          </td>
-        </tr>
-      </table>
-    </form>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-raised-button (click)="register()" color="primary" [disabled]="userForm.invalid">Registrar</button>
-    <br /><br />
-    <span>Já possui conta? <a [routerLink]="['/auth/login']">clique aqui</a></span>
-  </mat-card-actions>
-</mat-card>
+                <div class="form-group row">
+                    <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
+                        <input matInput type="number" placeholder="Número" [(ngModel)]="numberAddress" name="numberAddress" [ngModelOptions]="{standalone: true}">
+                    </mat-form-field>
+                    <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
+                        <input matInput type="complement" placeholder="Complemento" [(ngModel)]="complementAddress" name="complementAddress" [ngModelOptions]="{standalone: true}">
+                    </mat-form-field>
+                </div>
+                <div class="form-group row">
+                    <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
+                        <input matInput type="zip" mask="00000-000" placeholder="CEP" formControlName="zip" name="zip">
+                    </mat-form-field>
+                    <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
+                        <input matInput type="district" placeholder="Bairro" formControlName="district" name="district">
+                    </mat-form-field>
+                </div>
+                <div class="form-group row">
+                    <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
+                        <input matInput type="city" placeholder="Cidade" formControlName="city" name="city">
+                    </mat-form-field>
+                    <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
+                        <input matInput type="state" placeholder="Estado" formControlName="state" name="state">
+                    </mat-form-field>
+                </div>
+                <div class="form-group row">
+                    <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
+                        <input matInput type="country" placeholder="País" formControlName="country" name="country">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="form-group row">
+                <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
+                    <input matInput placeholder="Senha" formControlName="password" type="password" name="password" required>
+                    <!--mat-error *ngIf="employeeForm.get('cpf').getError('cpfNotValid')">O CPF é inválido</mat-error-->
+                </mat-form-field>
+                <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
+                    <input matInput placeholder="Repita sua senha" formControlName="repeatPassword" type="password"
+                    name="repeatPassword" required>
+                  <mat-error *ngIf="repeatPassword.invalid && repeatPassword.errors.passwordMatch">Senha diferente
+                  </mat-error>
+                </mat-form-field>
+            </div>
+            <hr />
+            <!--button (click)="register()" [disabled]="employeeForm.invalid" class="btn btn-primary btn-user btn-block">
+                <span *ngIf="!employeeSelected">Cadastrar Funcionário</span>
+                <span *ngIf="employeeSelected">Alterar Funcionário</span>
+            </button>
+            <button (click)="return()" class="btn btn-primary btn-user btn-block">
+                <span>Voltar</span>
+            </button-->
+            <mat-card-actions>
+                <button mat-raised-button (click)="register()" color="primary" [disabled]="userForm.invalid">Registrar</button>
+                <br /><br />
+                <span>Já possui conta? <a [routerLink]="['/auth/login']">clique aqui</a></span>
+            </mat-card-actions>
+    
+        </form>
+    </div>
+</div>

@@ -39,12 +39,43 @@ export class AuthService {
     });
   }
 
-  register(fullname: string, email: string, cpf: string, password: string, repeatPassword: string): Observable<any> {
+  register(user: any): Observable<any> {
+    console.log('List the user ', user);
+    return Observable.create(observer => {
+      this.http.post('/api/auth/register/', {
+        user
+      }).subscribe((data: any) => {
+        console.log('List in the data ', user);
+        observer.next({ user: data.user });
+        this.setUser(data.user);
+        this.token.saveToken(data.token);
+        observer.complete();
+      }, err => {
+        console.log('message of error  ', err.error.msg);
+        observer.error(err.error.msg);
+      })
+    });
+  }
+
+  register_old(fullname: string, email: string, cpf: string, main: string,
+    secundary: string, street: string, complement: string, number: string,
+    zip: string, city: string, district: string, state: string,
+    country: string, password: string, repeatPassword: string): Observable<any> {
     return Observable.create(observer => {
       this.http.post('/api/auth/register', {
         fullname,
         email,
         cpf,
+        main,
+        secundary,
+        street,
+        complement,
+        number,
+        zip,
+        city,
+        district,
+        state,
+        country,
         password,
         repeatPassword
       }).subscribe((data: any) => {

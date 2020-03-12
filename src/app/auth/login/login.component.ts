@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
+    console.log("This is the method login in class LoginComponent. ");
     this.authService.login(this.email, this.password)
       .subscribe(data => {
         this.router.navigate(['/admin']);

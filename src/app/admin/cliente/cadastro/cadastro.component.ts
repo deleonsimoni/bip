@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ClienteService } from '../../../resources/services/admin/cliente.service';
+import { EmployeeService } from '../../../resources/services/admin/employee.service';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { CustomValidator } from '../../../resources/custom-validator';
 import { ToastrService } from 'ngx-toastr';
@@ -14,8 +15,9 @@ export class CadastroComponent implements OnInit {
 
   clienteForm: FormGroup;
   clienteSelecionado: any;
+  address: any[];
 
-  constructor(private fb: FormBuilder, private clienteService: ClienteService, private toastr: ToastrService,
+  constructor(private fb: FormBuilder, private employeeService: EmployeeService, private clienteService: ClienteService, private toastr: ToastrService,
     private router: Router) {
     this.clienteSelecionado = this.router.getCurrentNavigation().extras.state
   }
@@ -27,6 +29,7 @@ export class CadastroComponent implements OnInit {
       email: ['', [Validators.email, Validators.required]],
       cnpj: ['', [CustomValidator.isValidCnpj]],
       cpf: ['', [CustomValidator.isValidCpf]],
+      idaddress: [''],
       phones: this.fb.group({
         main: ['', [Validators.required]],
         secundary: [''],
@@ -47,6 +50,8 @@ export class CadastroComponent implements OnInit {
       this.clienteForm.patchValue(
         this.clienteSelecionado
       );
+      console.log('List all the address.');
+      this.listAddress();
     }
   }
 
@@ -74,6 +79,20 @@ export class CadastroComponent implements OnInit {
         });
     }
   }
+
+  listAddress() {
+    console.log('It list address. It entrance in the method. ');
+    let Address: any = this.clienteForm.get('idaddress').value;
+    console.log('Value of the field. ' + Address);
+    this.employeeService.listAddress(Address)
+      .subscribe(data => {
+        console.log('It list address: ', data);
+        this.address = data;
+      }, err => {
+        this.toastr.error('Problemas ao consultar a lista de endereço. ', 'Erro: ');
+      });
+  }
+
   voltar() {
     this.router.navigate(['/admin/clientemanter']);
   }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EmpresaService } from '../../../resources/services/admin/empresa.service';
+import { EmployeeService } from '../../../resources/services/admin/employee.service';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { CustomValidator } from '../../../resources/custom-validator';
 import { ToastrService } from 'ngx-toastr';
@@ -14,8 +15,9 @@ export class CadastroempresaComponent implements OnInit {
 
   empresaForm: FormGroup;
   empresaSelecionado: any;
+  address: any[];
 
-  constructor(private fb: FormBuilder, private empresaService: EmpresaService, private toastr: ToastrService,
+  constructor(private fb: FormBuilder, private employeeService: EmployeeService, private empresaService: EmpresaService, private toastr: ToastrService,
     private router: Router) {
     this.empresaSelecionado = this.router.getCurrentNavigation().extras.state
   }
@@ -27,6 +29,7 @@ export class CadastroempresaComponent implements OnInit {
       _id: [''],
       email: ['', [Validators.email, Validators.required]],
       cnpj: ['', [CustomValidator.isValidCnpj]],
+      idaddress: [''],
       phones: this.fb.group({
         main: ['', [Validators.required]],
         secundary: [''],
@@ -47,7 +50,9 @@ export class CadastroempresaComponent implements OnInit {
       this.empresaForm.patchValue(
         this.empresaSelecionado
       );
+      this.listAddress();
     }
+
   }
 
   cadastrar() {
@@ -73,6 +78,20 @@ export class CadastroempresaComponent implements OnInit {
           this.toastr.error('Problema ao cadastrar a empresa. ' + err.keyValue.msg, 'Erro: ');
         });
     }
+  }
+
+
+  listAddress() {
+    console.log('It list address. It entrance in the method. ');
+    let Address: any = this.empresaForm.get('idaddress').value;
+    console.log('Value of the field. ' + Address);
+    this.employeeService.listAddress(Address)
+      .subscribe(data => {
+        console.log('It list address: ', data);
+        this.address = data;
+      }, err => {
+        this.toastr.error('Problemas ao consultar a lista de endereço. ', 'Erro: ');
+      });
   }
 
   voltar() {

@@ -23,6 +23,17 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+    cpf: {
+    type: String,
+    required: true
+  },
+  numberAddress: {
+    type: String,
+    required: true
+  },
+  complementAddress: {
+    type: String
+  },
   email: {
     type: String,
     required: true,
@@ -34,27 +45,20 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  cpf: {
-    type: String,
-    required: true
-  },
-  birthday: {
-    type: Date
-  },
+
   phones: {
     main: { type: String },
     secundary: { type: String }
   },
-
-  address: {
-    street: String,
-    complement: String,
-    num: String,
-    zip: String,
-    city: String,
-    district: String,
-    country: String,
-    state: String
+  idcompany: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Company'
+    //required: true
+  },
+  idaddress: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Address'
+    //required: true
   },
   createdAt: {
     type: Date,

@@ -34,13 +34,16 @@ export class ClienteService {
   }
 
   register(cliente: any, enterprise): Observable<any> {
+    console.log('Show the register.');
     return Observable.create(observer => {
       this.http.post('/api/client/', {
         cliente,
         enterprise
       }).subscribe((data: any) => {
+        console.log('List in the data ', cliente);
         observer.next(data);
       }, err => {
+        console.log('message of error ', err.error.msg);
         observer.error(err.error.msg);
       })
     });

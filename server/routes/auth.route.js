@@ -14,6 +14,7 @@ router.get('/me', passport.authenticate('jwt', { session: false }), login);
 
 
 async function register(req, res, next) {
+  console.log("This is method register in the auth.route.js ");
   let user = await userCtrl.insert(req.body);
   user = user.toObject();
   delete user.hashedPassword;

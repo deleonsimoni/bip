@@ -58,7 +58,7 @@ export class RegisteremployeeComponent implements OnInit {
       this.employeeForm.patchValue(
         this.employeeSelected
       );
-      this.listAddress(this.employeeForm);
+      this.listAddress();
     }
     this.listar();
 
@@ -125,7 +125,7 @@ export class RegisteremployeeComponent implements OnInit {
           this.toastr.success('Funcionário cadastrado com sucesso.');
           this.router.navigate(['/admin/supportemployee']);
         }, err => {
-          this.toastr.error('Problema ao cadastrar o funcionário. ' + err.error.msg, 'Erro: ');
+          this.toastr.error('Problema ao cadastrar o funcionário. ', 'Erro: ');
         });
     }
   }
@@ -146,7 +146,7 @@ export class RegisteremployeeComponent implements OnInit {
       });
   }
 
-  listAddress(employeeForm: FormGroup) {
+  listAddress() {
     console.log('It list address. It entrance in the method. ');
     let Address: any = this.employeeForm.get('idaddress').value;
     console.log('Value of the field. ' + Address);

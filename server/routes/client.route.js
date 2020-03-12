@@ -37,20 +37,26 @@ async function getClientBranchByID(req, res) {
 
 async function updateClient(req, res) {
   let client = await clientCtrl.updateClient(req.body).catch(
-    err => { res.json(400, {
-      error: 1,
-      msg: err
-   })})
+    err => {
+      res.json(400, {
+        error: 1,
+        msg: err
+      })
+    })
   res.json(client);
 }
 
 //POST
 async function insertClient(req, res) {
+  console.log('inside the method');
   let client = await clientCtrl.insertClient(req.body, req.user.enterprise).catch(
-    err => { res.json(400, {
-      error: 1,
-      msg: err
-   })})
+    err => {
+      res.json(400, {
+        error: 1,
+        msg: err
+      })
+    })
+  console.log('client ');
   res.json(client);
 }
 
@@ -63,10 +69,12 @@ async function insertClientBranch(req, res) {
 //DELETE
 async function deleteClient(req, res) {
   let client = await clientCtrl.deleteClient(req.params.id).catch(
-    err => { res.json(400, {
-      error: 1,
-      msg: err
-   })});
+    err => {
+      res.json(400, {
+        error: 1,
+        msg: err
+      })
+    });
   res.json(client);
 }
 
