@@ -5,7 +5,11 @@ const ClientSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  fullname: {
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  fullnameclient: {
     type: String,
     required: true
   },

@@ -19,6 +19,10 @@ const UserSchema = new mongoose.Schema({
   }],
 //
   //Fim chaves
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
   fullname: {
     type: String,
     required: true

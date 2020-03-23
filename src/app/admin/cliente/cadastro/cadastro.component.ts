@@ -15,6 +15,8 @@ export class CadastroComponent implements OnInit {
 
   clienteForm: FormGroup;
   clienteSelecionado: any;
+  empresas: any[];
+  clients: any[];
   address: any[];
 
   constructor(private fb: FormBuilder, private employeeService: EmployeeService, private clienteService: ClienteService, private toastr: ToastrService,
@@ -24,23 +26,24 @@ export class CadastroComponent implements OnInit {
 
   ngOnInit() {
     this.clienteForm = this.fb.group({
-      fullname: ['', [Validators.required]],
-      _id: ['', []],
-      email: ['', [Validators.email, Validators.required]],
+      fullnameclient: ['', [Validators.required]],
       cnpj: ['', [CustomValidator.isValidCnpj]],
       cpf: ['', [CustomValidator.isValidCpf]],
+      email: ['', [Validators.email]],
+      _id: ['', []],
       idaddress: [''],
+      idcompany: [''],
       phones: this.fb.group({
         main: ['', [Validators.required]],
         secundary: [''],
       }),
       address: this.fb.group({
         street: [''],
-        complement: [''],
         number: [''],
+        complement: [''],
         zip: [''],
-        city: [''],
         district: [''],
+        city: [''],
         state: [''],
         country: [''],
       })
@@ -53,6 +56,7 @@ export class CadastroComponent implements OnInit {
       console.log('List all the address.');
       this.listAddress();
     }
+    this.listar();
   }
 
   cadastrar() {
@@ -92,6 +96,19 @@ export class CadastroComponent implements OnInit {
         this.toastr.error('Problemas ao consultar a lista de endereço. ', 'Erro: ');
       });
   }
+
+  listar() {
+    console.log('Listar Empresa');
+    let userId = (<any>window).user._id;
+    this.employeeService.listaEmpresas(userId)
+      .subscribe(data => {
+        console.log('Listar Empresa: ', data);
+        this.empresas = data;
+      }, err => {
+        this.toastr.error('Problemas ao consultar a lista de empresa. ' + err.error.msg, 'Erro: ');
+      });
+  }
+
 
   voltar() {
     this.router.navigate(['/admin/clientemanter']);

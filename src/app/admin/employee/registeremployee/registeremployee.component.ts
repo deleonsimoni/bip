@@ -17,6 +17,7 @@ export class RegisteremployeeComponent implements OnInit {
   employeeSelected: any;
   empresas: [any];
   address: any[];
+  clients: any[];
 
   private innerValue: FormGroup;
   private changed = new Array<(value: FormGroup) => void>();
@@ -33,9 +34,10 @@ export class RegisteremployeeComponent implements OnInit {
     this.employeeForm = this.fb.group({
       fullname: ['', [Validators.required]],
       _id: [''],
-      email: ['', [Validators.email, Validators.required]],
+      email: ['', [Validators.email]],
       cpf: ['', [CustomValidator.isValidCpf]],
       idcompany: [''],
+      idclient: [''],
       idaddress: [''],
       phones: this.fb.group({
         main: ['', [Validators.required]],
@@ -61,6 +63,7 @@ export class RegisteremployeeComponent implements OnInit {
       this.listAddress();
     }
     this.listar();
+    this.listClients();
 
 
   }
@@ -141,6 +144,19 @@ export class RegisteremployeeComponent implements OnInit {
       .subscribe(data => {
         console.log('Listar Empresa: ', data);
         this.empresas = data;
+      }, err => {
+        this.toastr.error('Problemas ao consultar a lista de empresa. ' + err.error.msg, 'Erro: ');
+      });
+  }
+
+  listClients() {
+    console.log('This is method List clients. ');
+    let userId = (<any>window).user._id;
+    console.log('This is value of the user. ' + userId);
+    this.employeeService.listClients(userId)
+      .subscribe(data => {
+        console.log('It list Clients: ', data);
+        this.clients = data;
       }, err => {
         this.toastr.error('Problemas ao consultar a lista de empresa. ' + err.error.msg, 'Erro: ');
       });

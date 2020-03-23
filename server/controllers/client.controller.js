@@ -3,6 +3,7 @@ const Address = require('../models/address.model');
 const clientBranch = require('../models/clientBranch.model');
 
 module.exports = {
+  getClientsByUser,
   getClientsByEnterprise,
   getClientByID,
   getClientBranchByID,
@@ -12,6 +13,20 @@ module.exports = {
   deleteClient,
   deleteClientBranch,
   getTotalClients
+}
+
+async function getClientsByUser(id) {
+  console.log('This is the method getClientsByUser ' + id);
+  let lstClient = await Client.find({ userId: id });
+  console.log('This is the object lstClient ' + lstClient);
+  let lista = JSON.parse(JSON.stringify(lstClient));
+  try {
+    console.log('It list all clients.');
+
+  } catch {
+    console.log('Erro ao listar os empregados e seus endereços.');
+  }
+  return lista;
 }
 
 async function getClientsByEnterprise(id) {
@@ -59,10 +74,11 @@ async function getClientBranchByID(id) {
 }
 
 async function insertClient(client) {
-  console.log('List of costumer.', client);
+  console.log('It list of costumer.', client);
   let costumer = client.cliente;
   delete costumer._id;
   costumer.enterprise = client.enterprise;
+  costumer.userId = client.userId;
   console.log('Create of address int the costumer. ' + costumer.address);
   const address = await new Address(costumer.address).save();
   costumer.idaddress = address._id;

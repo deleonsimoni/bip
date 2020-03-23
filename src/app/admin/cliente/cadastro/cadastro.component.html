@@ -7,7 +7,8 @@
         <form class="user" [formGroup]="clienteForm">
             <div class="form-group row">
                 <mat-form-field class="col-sm-12 mb-3 mb-sm-0">
-                    <input matInput placeholder="Nome completo" formControlName="fullname" name="fullname" required>
+                    <input matInput placeholder="Nome completo" formControlName="fullnameclient" name="fullnameclient"
+                        required>
                 </mat-form-field>
             </div>
             <div class="form-group row">
@@ -74,6 +75,12 @@
                     </mat-form-field>
                 </div>
 
+            </div>
+            <div class="col-sm-12 mb-3 mb-sm-0">
+                <label for="empresa" class="control-label">Empresa</label>
+                <select class="form-control" formControlName="idcompany" name="idcompany">
+                    <option *ngFor="let empresa of empresas" [value]="empresa._id">{{empresa.fullnamecompany}}</option>
+                </select>
             </div>
             <hr />
             <button (click)="cadastrar()" [disabled]="clienteForm.invalid" class="btn btn-primary btn-user btn-block">

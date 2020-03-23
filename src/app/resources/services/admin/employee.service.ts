@@ -78,6 +78,20 @@ export class EmployeeService {
     });
   }
 
+  listClients(userId): Observable<any> {
+    console.log('Entrada no metodo listaClientes. ' + userId);
+    return Observable.create(observer => {
+      this.http.get('/api/client/user/' + userId, {
+      }).subscribe((data: any) => {
+        observer.next(data);
+        console.log('Sucesso ao listar os clientes', data);
+      }, err => {
+        console.log('Erro ao listar os clientes', err.error.msg);
+        observer.error(err.error.msg);
+      })
+    });
+  }
+
 
   listAddress(idAddress): Observable<any> {
     console.log('Entrance in the method listAddress.' + idAddress);

@@ -98,8 +98,14 @@
             </div>
             <div class="col-sm-12 mb-3 mb-sm-0">
                 <label for="empresa" class="control-label">Empresa</label>
-                <select class="form-control" formControlName="idcompany" name="fullnamecompany">
+                <select class="form-control" formControlName="idcompany" name="idcompany">
                     <option *ngFor="let empresa of empresas" [value]="empresa._id">{{empresa.fullnamecompany}}</option>
+                </select>
+            </div>
+            <div class="col-sm-12 mb-3 mb-sm-0">
+                <label for="client" class="control-label">Cliente</label>
+                <select class="form-control" formControlName="idclient" name="idclient">
+                    <option *ngFor="let client of clients" [value]="client._id">{{client.fullnameclient}}</option>
                 </select>
             </div>
             <hr />

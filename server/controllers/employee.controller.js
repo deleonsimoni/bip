@@ -1,4 +1,5 @@
-const Employee = require('../models/employee.model');
+//const Employee = require('../models/employee.model');
+const Employee = require('../models/user.model');
 const Address = require('../models/address.model');
 
 module.exports = {
