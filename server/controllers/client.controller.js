@@ -1,4 +1,5 @@
 const Client = require('../models/client.model');
+const Company = require('../models/company.model');
 const Address = require('../models/address.model');
 const clientBranch = require('../models/clientBranch.model');
 
@@ -17,7 +18,9 @@ module.exports = {
 
 async function getClientsByUser(id) {
   console.log('This is the method getClientsByUser ' + id);
-  let lstClient = await Client.find({ userId: id });
+  let lstClient = await Client.find({
+    userId: id
+  });
   console.log('This is the object lstClient ' + lstClient);
   let lista = JSON.parse(JSON.stringify(lstClient));
   try {
@@ -30,14 +33,23 @@ async function getClientsByUser(id) {
 }
 
 async function getClientsByEnterprise(id) {
+
+  let company = await Company.find({
+    userId: id
+  });
+
   console.log('This is the method getClientsByEnterprise ');
-  let lstClient = await Client.find({ enterprise: id });
+  let lstClient = await Client.find({
+    enterprise: id
+  });
   console.log('This is the object lstClient ' + lstClient);
   let lista = JSON.parse(JSON.stringify(lstClient));
   try {
     for (const element of lista) {
       console.log('element.idaddress ' + element.idaddress);
-      element.address = await Address.findOne({ _id: element.idaddress });
+      element.address = await Address.findOne({
+        _id: element.idaddress
+      });
     }
   } catch {
     console.log('Erro ao listar os empregados e seus endereços.');
@@ -49,7 +61,9 @@ async function getClientsByEnterprise(id) {
 
 async function getTotalClients(idUser) {
   console.log('This is the method getTotalClients ');
-  return await Client.find({ enterprise: idUser }).count();
+  return await Client.find({
+    enterprise: idUser
+  }).count();
 }
 
 async function getClientByID(id) {
@@ -61,7 +75,9 @@ async function getClientByID(id) {
   try {
     for (const element of lista) {
       console.log('element.idaddress ' + element.idaddress);
-      element.address = await Address.findOne({ _id: element.idaddress });
+      element.address = await Address.findOne({
+        _id: element.idaddress
+      });
     }
   } catch {
     console.log('Erro ao listar os empregados e seus endereços.');
@@ -73,17 +89,16 @@ async function getClientBranchByID(id) {
   return await clientBranch.findById(id);
 }
 
-async function insertClient(client) {
-  console.log('It list of costumer.', client);
+async function insertClient(client, userId) {
   let costumer = client.cliente;
+
   delete costumer._id;
-  costumer.enterprise = client.enterprise;
-  costumer.userId = client.userId;
-  console.log('Create of address int the costumer. ' + costumer.address);
+  costumer.enterprise = costumer.idcompany;
+  costumer.userId = userId;
   const address = await new Address(costumer.address).save();
   costumer.idaddress = address._id;
-  console.log('It save the cosntumer. ' + costumer.idaddress);
   return await new Client(costumer).save();
+
 }
 
 async function insertBranch(branch) {
@@ -92,14 +107,27 @@ async function insertBranch(branch) {
 
 async function updateClient(client) {
   let costumer = client.cliente;
-  await Address.findOneAndUpdate({ _id: costumer.idaddress }, { '$set': costumer.address });
-  return await Client.findOneAndUpdate({ _id: costumer._id }, { '$set': costumer });
+  await Address.findOneAndUpdate({
+    _id: costumer.idaddress
+  }, {
+    '$set': costumer.address
+  });
+  return await Client.findOneAndUpdate({
+    _id: costumer._id
+  }, {
+    '$set': costumer
+  });
+
 }
 
 async function deleteClient(id) {
-  return await Client.findOneAndRemove({ _id: id });
+  return await Client.findOneAndRemove({
+    _id: id
+  });
 }
 
 async function deleteClientBranch(id) {
-  return await clientBranch.findOneAndRemove({ _id: id });
+  return await clientBranch.findOneAndRemove({
+    _id: id
+  });
 }

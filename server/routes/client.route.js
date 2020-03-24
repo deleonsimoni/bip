@@ -1,22 +1,47 @@
 const express = require('express');
 const passport = require('passport');
 const clientCtrl = require('../controllers/client.controller');
+const asyncHandler = require('express-async-handler');
 
 const router = express.Router();
 module.exports = router;
 
-router.get('/user/:userId', passport.authenticate('jwt', { session: false }), getClientsByUser);
-router.get('/enterprise/:idEnterprise', passport.authenticate('jwt', { session: false }), getClientsByEnterprise);
-router.get('/:id', passport.authenticate('jwt', { session: false }), getClientByID);
-router.get('/branch/:id', passport.authenticate('jwt', { session: false }), getClientBranchByID);
+/* GET */
+router.get('/user/:userId', passport.authenticate('jwt', {
+  session: false
+}), asyncHandler(getClientsByUser));
+router.get('/enterprise/:idEnterprise', passport.authenticate('jwt', {
+  session: false
+}), asyncHandler(getClientsByEnterprise));
+router.get('/:id', passport.authenticate('jwt', {
+  session: false
+}), asyncHandler(getClientByID));
+router.get('/branch/:id', passport.authenticate('jwt', {
+  session: false
+}), asyncHandler(getClientBranchByID));
 
-router.post('/', passport.authenticate('jwt', { session: false }), insertClient);
-router.post('/branch', passport.authenticate('jwt', { session: false }), insertClientBranch);
+/* POSTS */
+router.post('/', passport.authenticate('jwt', {
+  session: false
+}), asyncHandler(insertClient));
+router.post('/branch', passport.authenticate('jwt', {
+  session: false
+}), asyncHandler(insertClientBranch));
 
-router.put('/', passport.authenticate('jwt', { session: false }), updateClient);
+router.put('/', passport.authenticate('jwt', {
+  session: false
+}), asyncHandler(updateClient));
 
-router.delete('/:id', passport.authenticate('jwt', { session: false }), deleteClient);
-router.delete('/branch/:id', passport.authenticate('jwt', { session: false }), deleteClientBranch);
+/* DELETES */
+router.delete('/:id', passport.authenticate('jwt', {
+  session: false
+}), asyncHandler(deleteClient));
+router.delete('/branch/:id', passport.authenticate('jwt', {
+  session: false
+}), asyncHandler(deleteClientBranch));
+
+
+/* METOOOOOOOOOOOOOOOOOOODOS */
 
 //GETS
 async function getClientsByUser(req, res) {
@@ -25,7 +50,7 @@ async function getClientsByUser(req, res) {
 }
 
 async function getClientsByEnterprise(req, res) {
-  let client = await clientCtrl.getClientsByEnterprise(req.params.idEnterprise);
+  let client = await clientCtrl.getClientsByEnterprise(req.user._id);
   res.json(client);
 }
 
@@ -57,7 +82,7 @@ async function insertClient(req, res) {
   req.body.userId = req.user._id;
   console.log('Value ' + req.body.idcompany);
   req.body.enterprise = req.body.idcompany;
-  let client = await clientCtrl.insertClient(req.body, req.user.enterprise).catch(
+  let client = await clientCtrl.insertClient(req.body, req.user._id).catch(
     err => {
       res.json(400, {
         error: 1,
