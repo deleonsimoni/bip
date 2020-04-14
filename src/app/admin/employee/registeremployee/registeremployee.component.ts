@@ -18,6 +18,8 @@ export class RegisteremployeeComponent implements OnInit {
   empresas: [any];
   address: any[];
   clients: any[];
+  exibirComboEmpresa = false;
+  exibirComboCliente = false;
 
   private innerValue: FormGroup;
   private changed = new Array<(value: FormGroup) => void>();
@@ -208,4 +210,6 @@ export class RegisteremployeeComponent implements OnInit {
         this.toastr.error('Problemas ao consultar a lista de endereço. ', 'Erro: ');
       });
   }
+
+
 }
