@@ -7,6 +7,11 @@ const CollectorSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Enterprise'
   },
+
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
   //Fim chaves
 
   serial: {

@@ -15,7 +15,8 @@ import { ManterfuncionarioComponent } from './funcionario/manterfuncionario/mant
 import { CadastrofuncionarioComponent } from './funcionario/cadastrofuncionario/cadastrofuncionario.component';
 import { SupportemployeeComponent } from './employee/supportemployee/supportemployee.component';
 import { RegisteremployeeComponent } from './employee/registeremployee/registeremployee.component';
-  import { from } from 'rxjs';
+import { from } from 'rxjs';
+import { ManterCollectorComponent } from './collector/manter-collector/manter-collector.component';
 
 const routes: Routes = [{
   path: 'admin',
@@ -35,8 +36,9 @@ const routes: Routes = [{
     , { path: 'inventariolista', component: ListarInventarioComponent }
     , { path: 'empresacadastro', component: CadastroempresaComponent }
     , { path: 'empresamanter', component: ManterempresaComponent }
-    , { path: 'registeremployee', component: RegisteremployeeComponent}
-    , { path: 'supportemployee', component: SupportemployeeComponent}
+    , { path: 'registeremployee', component: RegisteremployeeComponent }
+    , { path: 'supportemployee', component: SupportemployeeComponent }
+    , { path: 'collector', component: ManterCollectorComponent }
 
   ]
 }];

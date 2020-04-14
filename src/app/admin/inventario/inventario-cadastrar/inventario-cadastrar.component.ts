@@ -26,7 +26,7 @@ export class InventarioCadastrarComponent implements OnInit {
     this.inventaryForm = this.fb.group({
       fullname: ['', [Validators.required]],
       _id: [''],
-      observation: [''],
+      observations: [''],
     });
 
 
@@ -51,8 +51,7 @@ export class InventarioCadastrarComponent implements OnInit {
           this.toastr.error('' + err, 'Erro: ');
         });
     } else {
-      let userId = (<any>window).user._id;
-      this.inventarioService.register(this.inventaryForm.value, userId)
+      this.inventarioService.register(this.inventaryForm.value)
         .subscribe(() => {
           this.toastr.success('Inventário criado com sucesso. Agora você pode complementar com as informações');
           this.router.navigate(['/admin/inventariolista']);

@@ -21,6 +21,7 @@ import { HomeComponent } from './home/home.component';
 import { ConfirmDialogComponent } from './resources/modal/confirm/confirm-dialog/confirm-dialog.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MAT_DATE_LOCALE } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -52,8 +53,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     provide: HTTP_INTERCEPTORS,
     useClass: CatchErrorInterceptor,
     multi: true,
-  }],
-  entryComponents: [ ConfirmDialogComponent ],
+  },
+  { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }],
+  entryComponents: [ConfirmDialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

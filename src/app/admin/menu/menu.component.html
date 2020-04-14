@@ -1,4 +1,5 @@
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" style="cursor: pointer;"
+  id="accordionSidebar">
 
   <div class="sidebar-brand d-flex align-items-center justify-content-center">
     <div style="background-color: white; border-radius: 30px; padding: 10px;" class="scrollto">
@@ -68,6 +69,13 @@
     <a class="nav-link" [routerLink]="['/admin/clientemanter']">
       <i class="fas fa-users"></i>
       <span>Clientes</span>
+    </a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" [routerLink]="['/admin/collector']">
+      <i class="fas  fa-mobile-alt"></i>
+      <span>Coletor</span>
     </a>
   </li>
 

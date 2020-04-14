@@ -7,17 +7,7 @@ const UserSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Enterprise'
   },
-  collectors: [{
-    inventory: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Inventory'
-    },
-    collector: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Collector'
-    }
-  }],
-//
+
   //Fim chaves
   fullname: {
     type: String,
@@ -42,8 +32,12 @@ const UserSchema = new mongoose.Schema({
     type: Date
   },
   phones: {
-    main: { type: String },
-    secundary: { type: String }
+    main: {
+      type: String
+    },
+    secundary: {
+      type: String
+    }
   },
 
   address: {
@@ -64,7 +58,9 @@ const UserSchema = new mongoose.Schema({
     type: Number
   },
   accessLog: [{
-    date: { type: Date }
+    date: {
+      type: Date
+    }
   }]
 }, {
   versionKey: false

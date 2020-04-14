@@ -28,8 +28,8 @@ import { ManterfuncionarioComponent } from './funcionario/manterfuncionario/mant
 import { CadastrofuncionarioComponent } from './funcionario/cadastrofuncionario/cadastrofuncionario.component';
 import { ManterempresaComponent } from './empresa/manterempresa/manterempresa.component';
 import { CadastroempresaComponent } from './empresa/cadastroempresa/cadastroempresa.component';
-import {SupportemployeeComponent} from './employee/supportemployee/supportemployee.component';
-import {RegisteremployeeComponent} from './employee/registeremployee/registeremployee.component';
+import { SupportemployeeComponent } from './employee/supportemployee/supportemployee.component';
+import { RegisteremployeeComponent } from './employee/registeremployee/registeremployee.component';
 
 import {
   MatButtonModule,
@@ -43,6 +43,7 @@ import {
   MatTableModule
 } from "@angular/material";
 import { from } from 'rxjs';
+import { ManterCollectorComponent } from './collector/manter-collector/manter-collector.component';
 
 export let options: Partial<IConfig> | (() => Partial<IConfig>);
 
@@ -61,7 +62,9 @@ export let options: Partial<IConfig> | (() => Partial<IConfig>);
     ManterempresaComponent,
     CadastroempresaComponent,
     RegisteremployeeComponent,
-    SupportemployeeComponent
+    SupportemployeeComponent,
+    ManterCollectorComponent,
+
   ],
   imports: [
     CommonModule,
