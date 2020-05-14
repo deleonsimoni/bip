@@ -1,65 +1,68 @@
-import { Component, OnInit } from '@angular/core';
-import { ClienteService } from '../../../resources/services/admin/cliente.service';
-import { EmployeeService } from '../../../resources/services/admin/employee.service';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { CustomValidator } from '../../../resources/custom-validator';
-import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
-import { any } from 'joi';
-import { UtilService } from '../../../services/util.service';
+import { Component, OnInit } from "@angular/core";
+import { ClienteService } from "../../../resources/services/admin/cliente.service";
+import { EmployeeService } from "../../../resources/services/admin/employee.service";
+import { FormBuilder, Validators, FormGroup } from "@angular/forms";
+import { CustomValidator } from "../../../resources/custom-validator";
+import { ToastrService } from "ngx-toastr";
+import { Router } from "@angular/router";
+import { any } from "joi";
+import { UtilService } from "../../../services/util.service";
 
 @Component({
-  selector: 'app-cadastro',
-  templateUrl: './cadastro.component.html',
-  styleUrls: ['./cadastro.component.scss']
+  selector: "app-cadastro",
+  templateUrl: "./cadastro.component.html",
+  styleUrls: ["./cadastro.component.scss"],
 })
 export class CadastroComponent implements OnInit {
-
   clienteForm: FormGroup;
   clienteSelecionado: any;
   empresas: any[];
   clients: any[];
   address: any[];
   typeClient: any[];
-  Type: any = ['Matriz', 'Filial', 'Coligada', 'Conglomerado']
+  Type: any = ["Matriz", "Filial", "Coligada", "Conglomerado"];
 
-  constructor(private fb: FormBuilder, private utilService: UtilService, private employeeService: EmployeeService, private clienteService: ClienteService, private toastr: ToastrService,
-    private router: Router) {
-    this.clienteSelecionado = this.router.getCurrentNavigation().extras.state
+  constructor(
+    private fb: FormBuilder,
+    private utilService: UtilService,
+    private employeeService: EmployeeService,
+    private clienteService: ClienteService,
+    private toastr: ToastrService,
+    private router: Router
+  ) {
+    this.clienteSelecionado = this.router.getCurrentNavigation().extras.state;
   }
 
   ngOnInit() {
     this.clienteForm = this.fb.group({
-      fullnameclient: ['', [Validators.required]],
-      cnpj: ['', [CustomValidator.isValidCnpj]],
-      cpf: ['', [CustomValidator.isValidCpf]],
-      email: ['', [Validators.email]],
-      typeName: ['', [Validators.required]],
-      _id: ['', []],
-      idaddress: [''],
-      matrixEnterprise: [''],
-      idcompany: [''],
+      fullnameclient: ["", [Validators.required]],
+      cnpj: ["", [CustomValidator.isValidCnpj]],
+      cpf: ["", [CustomValidator.isValidCpf]],
+      email: ["", [Validators.email]],
+      typeName: ["", [Validators.required]],
+      _id: ["", []],
+      idaddress: [""],
+      matrixEnterprise: [""],
+      idcompany: [""],
       phones: this.fb.group({
-        main: ['', [Validators.required]],
-        secundary: [''],
+        main: ["", [Validators.required]],
+        secundary: [""],
       }),
       address: this.fb.group({
-        street: [''],
-        number: [''],
-        complement: [''],
-        zip: [''],
-        district: [''],
-        city: [''],
-        state: [''],
-        country: [''],
-      })
+        street: [""],
+        number: [""],
+        complement: [""],
+        zip: [""],
+        district: [""],
+        city: [""],
+        state: [""],
+        country: [""],
+      }),
     });
 
     if (this.clienteSelecionado) {
-      this.clienteForm.patchValue(
-        this.clienteSelecionado
-      );
-      console.log('List all the address.');
+      this.clienteForm.patchValue(this.clienteSelecionado);
+      console.log("List all the address.");
       this.listAddress();
     }
     this.listar();
@@ -68,57 +71,58 @@ export class CadastroComponent implements OnInit {
 
   changeType(typeBranch) {
     let objLimparComobo: any[];
-    console.log(' Value of the variable ', typeBranch);
-    if (typeBranch.target.value == '2: Filial') {
-      this.clienteForm.get('matrixEnterprise').enable();
+    console.log(" Value of the variable ", typeBranch);
+    if (typeBranch.target.value == "2: Filial") {
+      this.clienteForm.get("matrixEnterprise").enable();
       this.listarClientesMatriz();
-    }
-    else {
+    } else {
       //this.typeClient = objLimparComobo;
-      this.clienteForm.get('matrixEnterprise').reset();
-      this.clienteForm.get('matrixEnterprise').disable();
+      this.clienteForm.get("matrixEnterprise").reset();
+      this.clienteForm.get("matrixEnterprise").disable();
     }
   }
 
   onChanges() {
-    this.clienteForm.get('typeName').valueChanges
-      .subscribe(selectedCountry => {
-        if (selectedCountry != '2: Filial') {
-          // this.clienteForm.get('state').reset();
-          this.clienteForm.get('matrixEnterprise').disable();
-        }
-        else {
-          this.clienteForm.get('state').enable();
-        }
-      });
+    this.clienteForm.get("typeName").valueChanges.subscribe((selectedCountry) => {
+      if (selectedCountry != "2: Filial") {
+        // this.clienteForm.get('state').reset();
+        this.clienteForm.get("matrixEnterprise").disable();
+      } else {
+        this.clienteForm.get("state").enable();
+      }
+    });
   }
 
   listarClientesMatriz() {
-    console.log('It list the matrix client');
-    this.clienteService.listarClientesMatriz()
-      .subscribe(data => {
-        console.log('It list the matrix client: ', data);
+    console.log("It list the matrix client");
+    this.clienteService.listarClientesMatriz().subscribe(
+      (data) => {
+        console.log("It list the matrix client: ", data);
         this.typeClient = data;
-      }, err => {
-        this.toastr.error('Problemas ao consultar a lista de empresa. ' + err.error.msg, 'Erro: ');
-      });
+      },
+      (err) => {
+        this.toastr.error("Problemas ao consultar a lista de empresa. " + err.error.msg, "Erro: ");
+      }
+    );
   }
 
   changeMatrix(matrixEnterprise) {
-
-    console.log(' Value of the variable ', matrixEnterprise);
-
+    console.log(" Value of the variable ", matrixEnterprise);
   }
 
-  changeFindCEP(cep) {
-    const cepReturn: any = this.utilService.findCep(cep.target.value);
-    this.clienteForm.controls.street.setValue(cepReturn.street);
-    this.clienteForm.controls.zip.setValue(cepReturn.cep);
-    this.clienteForm.controls.district.setValue(cepReturn.neighborhood);
-    this.clienteForm.controls.city.setValue(cepReturn.city);
-    this.clienteForm.controls.state.setValue(cepReturn.state);
-    this.clienteForm.controls.country.setValue('Brasil');
-
+  async changeFindCEP(cep) {
+    this.utilService.findCep(cep.target.value).subscribe((cepReturn) => {
+      this.clienteForm.patchValue({
+        address: {
+          street: cepReturn.street,
+          zip: cepReturn.cep,
+          district: cepReturn.neighborhood,
+          city: cepReturn.city,
+          state: cepReturn.state,
+          country: "BR",
+        },
+      });
+    });
   }
 
   cadastrar() {
@@ -127,54 +131,59 @@ export class CadastroComponent implements OnInit {
     if (!this.clienteForm.valid) return;
 
     if (this.clienteSelecionado) {
-      this.clienteService.update(this.clienteForm.value)
-        .subscribe(() => {
-          this.toastr.success('Cliente atualizado com sucesso.');
-          this.router.navigate(['/admin/clientemanter']);
-        }, err => {
-          this.toastr.error('Problema ao atualizar o cliente. ' + err.keyValue.msg, 'Erro: ');
-        });
+      this.clienteService.update(this.clienteForm.value).subscribe(
+        () => {
+          this.toastr.success("Cliente atualizado com sucesso.");
+          this.router.navigate(["/admin/clientemanter"]);
+        },
+        (err) => {
+          this.toastr.error("Problema ao atualizar o cliente. " + err.keyValue.msg, "Erro: ");
+        }
+      );
     } else {
       let enterprise = (<any>window).user._id;
-      this.clienteService.register(this.clienteForm.value, enterprise)
-        .subscribe(() => {
-          this.toastr.success('Cliente cadastrado com sucesso.');
-          this.router.navigate(['/admin/clientemanter']);
-        }, err => {
-          this.toastr.error('Problema ao cadastrar o cliente. ' + err.keyValue.msg, 'Erro: ');
-        });
+      this.clienteService.register(this.clienteForm.value, enterprise).subscribe(
+        () => {
+          this.toastr.success("Cliente cadastrado com sucesso.");
+          this.router.navigate(["/admin/clientemanter"]);
+        },
+        (err) => {
+          this.toastr.error("Problema ao cadastrar o cliente. " + err.keyValue.msg, "Erro: ");
+        }
+      );
     }
   }
 
   listAddress() {
-    console.log('It list address. It entrance in the method. ');
-    let Address: any = this.clienteForm.get('idaddress').value;
-    console.log('Value of the field. ' + Address);
-    this.employeeService.listAddress(Address)
-      .subscribe(data => {
-        console.log('It list address: ', data);
+    console.log("It list address. It entrance in the method. ");
+    let Address: any = this.clienteForm.get("idaddress").value;
+    console.log("Value of the field. " + Address);
+    this.employeeService.listAddress(Address).subscribe(
+      (data) => {
+        console.log("It list address: ", data);
         this.address = data;
-      }, err => {
-        this.toastr.error('Problemas ao consultar a lista de endereço. ', 'Erro: ');
-      });
+      },
+      (err) => {
+        this.toastr.error("Problemas ao consultar a lista de endereço. ", "Erro: ");
+      }
+    );
   }
-
 
   listar() {
-    console.log('Listar Empresa');
+    console.log("Listar Empresa");
     let userId = (<any>window).user._id;
-    this.employeeService.listaEmpresas(userId)
-      .subscribe(data => {
-        console.log('Listar Empresa: ', data);
+    this.employeeService.listaEmpresas(userId).subscribe(
+      (data) => {
+        console.log("Listar Empresa: ", data);
         this.empresas = data;
-      }, err => {
-        this.toastr.error('Problemas ao consultar a lista de empresa. ' + err.error.msg, 'Erro: ');
-      });
+      },
+      (err) => {
+        this.toastr.error("Problemas ao consultar a lista de empresa. " + err.error.msg, "Erro: ");
+      }
+    );
   }
 
-
-
   voltar() {
-    this.router.navigate(['/admin/clientemanter']);
+    this.router.navigate(["/admin/clientemanter"]);
   }
 }
