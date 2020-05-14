@@ -13,7 +13,8 @@ module.exports = {
   updateClient,
   deleteClient,
   deleteClientBranch,
-  getTotalClients
+  getTotalClients,
+  getClientTypeEnterprise
 }
 
 async function getClientsByUser(id) {
@@ -32,6 +33,11 @@ async function getClientsByUser(id) {
   return lista;
 }
 
+async function getClientTypeEnterprise(id) {
+
+  return await Client.find({ userId: id, typeName: 'Matriz' });
+
+}
 async function getClientsByEnterprise(id) {
 
   let company = await Company.find({
@@ -110,13 +116,13 @@ async function updateClient(client) {
   await Address.findOneAndUpdate({
     _id: costumer.idaddress
   }, {
-    '$set': costumer.address
-  });
+      '$set': costumer.address
+    });
   return await Client.findOneAndUpdate({
     _id: costumer._id
   }, {
-    '$set': costumer
-  });
+      '$set': costumer
+    });
 
 }
 

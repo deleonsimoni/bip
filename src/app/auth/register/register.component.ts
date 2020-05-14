@@ -20,16 +20,16 @@ export class RegisterComponent implements OnInit {
   constructor(private fb: FormBuilder, private authService: AuthService, private toastr: ToastrService, private router: Router) { }
 
   ngOnInit() {
-    console.log('It list the data of the employee. ');
+    console.log('It list the data of the user 1. ');
 
     this.userForm = this.fb.group({
-      fullname: ['', [Validators.required]],
       cpf: ['', [CustomValidator.isValidCpf]],
       email: ['', [Validators.email, Validators.required]],
       password: new FormControl('', [Validators.required]),
       repeatPassword: new FormControl('', [Validators.required, this.passwordsMatchValidator]),
-      complementAddress: [''],
-      numberAddress: [''],
+      master: this.fb.group({
+        fullname: ['', [Validators.required]]
+      }),
       phones: this.fb.group({
         main: ['', [Validators.required]],
         secundary: [''],
@@ -43,6 +43,7 @@ export class RegisterComponent implements OnInit {
         country: [''],
       })
     });
+    console.log('It list the data of the user 2. ');
   }
 
   passwordsMatchValidator(control: FormControl): ValidationErrors {
@@ -52,23 +53,23 @@ export class RegisterComponent implements OnInit {
     } : null;
   }
 
-/*  userForm = new FormGroup({
-    fullname: new FormControl('', [Validators.required]),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    cpf: new FormControl('', [Validators.required]),
-    main: new FormControl('', [Validators.required]),
-    secundary: new FormControl(''),
-    street: new FormControl(''),
-    complement: new FormControl(''),
-    number: new FormControl(''),
-    zip: new FormControl(''),
-    city: new FormControl(''),
-    district: new FormControl(''),
-    state: new FormControl(''),
-    country: new FormControl(''),
-    password: new FormControl('', [Validators.required]),
-    repeatPassword: new FormControl('', [Validators.required, this.passwordsMatchValidator])
-  }) */
+  /*  userForm = new FormGroup({
+      fullname: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      cpf: new FormControl('', [Validators.required]),
+      main: new FormControl('', [Validators.required]),
+      secundary: new FormControl(''),
+      street: new FormControl(''),
+      complement: new FormControl(''),
+      number: new FormControl(''),
+      zip: new FormControl(''),
+      city: new FormControl(''),
+      district: new FormControl(''),
+      state: new FormControl(''),
+      country: new FormControl(''),
+      password: new FormControl('', [Validators.required]),
+      repeatPassword: new FormControl('', [Validators.required, this.passwordsMatchValidator])
+    }) */
 
   get fullname(): any { return this.userForm.get('fullname'); }
   get email(): any { return this.userForm.get('email'); }
@@ -80,16 +81,16 @@ export class RegisterComponent implements OnInit {
     event.preventDefault();
     if (!this.userForm.valid) return;
     console.log("This method is register 2 ");
-    this.userForm.controls['numberAddress'].setValue(this.numberAddress);
-    this.userForm.controls['complementAddress'].setValue(this.complementAddress);
+    // this.userForm.controls['numberAddress'].setValue(this.numberAddress);
+    // this.userForm.controls['complementAddress'].setValue(this.complementAddress);
     //let enterprise = (<any>window).user._id;
     this.authService.register(this.userForm.value)
-        .subscribe(() => {
-          console.log("This method is register 3 ");
-          this.toastr.success('Funcionário cadastrado com sucesso.');
-          this.router.navigate(['/admin/supportemployee']);
-        }, err => {
-          this.toastr.error('Problema ao cadastrar o funcionário. ', 'Erro: ');
-        });
+      .subscribe(() => {
+        console.log("This method is register 3 ");
+        this.toastr.success('Funcionário cadastrado com sucesso.');
+        this.router.navigate(['/admin/supportemployee']);
+      }, err => {
+        this.toastr.error('Problema ao cadastrar o funcionário. ', 'Erro: ');
+      });
   }
 }

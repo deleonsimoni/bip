@@ -7,18 +7,13 @@ const router = express.Router();
 module.exports = router;
 
 /* GET */
-router.get('/user/:userId', passport.authenticate('jwt', {
-  session: false
-}), asyncHandler(getClientsByUser));
-router.get('/enterprise/:idEnterprise', passport.authenticate('jwt', {
-  session: false
-}), asyncHandler(getClientsByEnterprise));
-router.get('/:id', passport.authenticate('jwt', {
-  session: false
-}), asyncHandler(getClientByID));
-router.get('/branch/:id', passport.authenticate('jwt', {
-  session: false
-}), asyncHandler(getClientBranchByID));
+
+router.get('/user/:userId', passport.authenticate('jwt', { session: false }), asyncHandler(getClientsByUser));
+router.get('/typeClient', passport.authenticate('jwt', { session: false }), asyncHandler(getClientTypeEnterprise));
+router.get('/enterprise/:idEnterprise', passport.authenticate('jwt', { session: false }), asyncHandler(getClientsByEnterprise));
+router.get('/', passport.authenticate('jwt', { session: false }), asyncHandler(getClientByID));
+//router.get('/:id', passport.authenticate('jwt', { session: false }), asyncHandler(getClientByID));
+router.get('/branch/:id', passport.authenticate('jwt', { session: false }), asyncHandler(getClientBranchByID));
 
 /* POSTS */
 router.post('/', passport.authenticate('jwt', {
@@ -49,6 +44,12 @@ async function getClientsByUser(req, res) {
   res.json(client);
 }
 
+
+async function getClientTypeEnterprise(req, res) {
+  let client = await clientCtrl.getClientTypeEnterprise(req.user._id);
+  res.json(client);
+}
+
 async function getClientsByEnterprise(req, res) {
   let client = await clientCtrl.getClientsByEnterprise(req.user._id);
   res.json(client);
@@ -57,6 +58,7 @@ async function getClientsByEnterprise(req, res) {
 async function getClientByID(req, res) {
   let client = await clientCtrl.getClientByID(req.params.id);
   res.json(client);
+  console.log("getClientByID: ", client);
 }
 
 async function getClientBranchByID(req, res) {

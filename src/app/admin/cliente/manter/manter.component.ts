@@ -36,6 +36,8 @@ export class ManterComponent implements OnInit {
     this.clienteService.listaClientes(enterprise)
       .subscribe(data => {
         this.clientes = data;
+      }, err => {
+        this.toastr.error('Problema ao consultar a cliente. ' + err.error.msg, 'Erro: ');
       });
   }
 }

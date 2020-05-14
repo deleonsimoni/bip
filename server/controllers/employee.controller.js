@@ -1,5 +1,5 @@
-//const Employee = require('../models/employee.model');
-const Employee = require('../models/user.model');
+const Employee = require('../models/employee.model');
+//const Employee = require('../models/user.model');
 const Address = require('../models/address.model');
 
 module.exports = {
@@ -27,17 +27,19 @@ async function getEmployeeByUserID(id) {
 }
 
 async function insertEmployee(employee, userId) {
-  console.log('Codigo do Usuário 16: ', userId);
-  console.log('Lista de Funcionário', employee.employee);
+  console.log('Codigo do Usuário Logado: ', userId);
+  console.log('Lista dos Dados do Funcionário: ', employee.employee);
   //let functionary = employee.functionary;
   let functionary = employee.employee
   functionary.userId = userId;
   delete functionary._id;
-  console.log('Codigo do Usuário 20: ', functionary)
+  console.log('Lista dos Dados do Funcionário: ', functionary)
   const address = await new Address(functionary.address).save();
+  console.log('Lista dos Dados do Endereço: ', address)
   functionary.idaddress = address._id;
+  console.log('Código do Endereço: ', functionary.idaddress);
+  console.log('Lista dos Dados do Funcionário com ID do Endereço: ', functionary)
   return await new Employee(functionary).save();
-
 }
 
 

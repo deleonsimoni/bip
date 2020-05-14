@@ -3,41 +3,41 @@ const mongoose = require('mongoose');
 const UserSchema = new mongoose.Schema({
 
   // Inicio Chaves
-  enterprise: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Enterprise'
-  },
-  collectors: [{
-    inventory: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Inventory'
-    },
-    collector: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Collector'
-    }
-  }],
-//
+  // enterprise: {
+  // type: mongoose.Schema.Types.ObjectId,
+  // ref: 'Enterprise'
+  //},
+  //collectors: [{
+  // inventory: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: 'Inventory'
+  //},
+  //collector: {
+  // type: mongoose.Schema.Types.ObjectId,
+  // ref: 'Collector'
+  // }
+  //}],
+  //
   //Fim chaves
-  userId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  },
-  fullname: {
-    type: String,
-    required: true
-  },
-    cpf: {
-    type: String,
-    required: true
-  },
-  numberAddress: {
-    type: String,
-    required: true
-  },
-  complementAddress: {
-    type: String
-  },
+  // userId: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: 'User'
+  // },
+  //fullname: {
+  //  type: String,
+  //  required: true
+  //},
+  // cpf: {
+  //   type: String,
+  //   required: true
+  // },
+  // numberAddress: {
+  //   type: String,
+  //   required: true
+  // },
+  // complementAddress: {
+  //   type: String
+  // },
   email: {
     type: String,
     required: true,
@@ -50,20 +50,30 @@ const UserSchema = new mongoose.Schema({
     required: true
   },
 
-  phones: {
-    main: { type: String },
-    secundary: { type: String }
-  },
-  idcompany: {
+  //phones: {
+  //  main: { type: String },
+  //  secundary: { type: String }
+  //},
+  //idcompany: {
+  // type: mongoose.Schema.Types.ObjectId,
+  // ref: 'Company'
+  //required: true
+  //},
+  // idclient: {
+  // type: mongoose.Schema.Types.ObjectId,
+  //ref: 'Client'
+  //required: true
+  //},
+  idmaster: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Company'
+    ref: 'Master'
     //required: true
   },
-  idaddress: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Address'
-    //required: true
-  },
+  //idaddress: {
+  //  type: mongoose.Schema.Types.ObjectId,
+  //  ref: 'Address'
+  //required: true
+  // },
   createdAt: {
     type: Date,
     default: Date.now
@@ -75,8 +85,8 @@ const UserSchema = new mongoose.Schema({
     date: { type: Date }
   }]
 }, {
-  versionKey: false
-});
+    versionKey: false
+  });
 
 
 module.exports = mongoose.model('User', UserSchema);

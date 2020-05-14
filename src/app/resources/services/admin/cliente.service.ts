@@ -51,10 +51,27 @@ export class ClienteService {
 
   listaClientes(enterprise): Observable<any> {
     return Observable.create(observer => {
-      this.http.get('/api/client/enterprise/' + enterprise, {
+      //this.http.get('/api/client/enterprise/' + enterprise, {
+      this.http.get('/api/client/', {
       }).subscribe((data: any) => {
         observer.next(data);
+        console.log('Sucesso ao listar as clientes', data);
       }, err => {
+        console.log('Erro ao listar as clientes', err.error.msg);
+        observer.error(err.error.msg);
+      })
+    });
+  }
+
+  listarClientesMatriz(): Observable<any> {
+    return Observable.create(observer => {
+      //this.http.get('/api/client/enterprise/' + enterprise, {
+      this.http.get('/api/client/typeClient/', {
+      }).subscribe((data: any) => {
+        observer.next(data);
+        console.log('Sucesso ao listar as matrizes dos clientes', data);
+      }, err => {
+        console.log('Erro ao listar as matrizes dos clientes', err.error.msg);
         observer.error(err.error.msg);
       })
     });

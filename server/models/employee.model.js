@@ -17,19 +17,26 @@ const EmployeeSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  phones: {
-    main: { type: String },
-    secundary: { type: String }
-  },
   idcompany: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Company'
+    type: String,
+    //mongoose.Schema.Types.ObjectId,
+    //ref: 'Company'
+    //required: true
+  },
+  idclient: {
+    type: String,
+    //mongoose.Schema.Types.ObjectId,
+    //ref: 'Client'
     //required: true
   },
   idaddress: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Address'
     //required: true
+  },
+  phones: {
+    main: { type: String },
+    secundary: { type: String }
   },
   createdAt: {
     type: Date,

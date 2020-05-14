@@ -5,6 +5,8 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { CustomValidator } from '../../../resources/custom-validator';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { any } from 'joi';
+import { UtilService } from '../../../services/util.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -18,8 +20,10 @@ export class CadastroComponent implements OnInit {
   empresas: any[];
   clients: any[];
   address: any[];
+  typeClient: any[];
+  Type: any = ['Matriz', 'Filial', 'Coligada', 'Conglomerado']
 
-  constructor(private fb: FormBuilder, private employeeService: EmployeeService, private clienteService: ClienteService, private toastr: ToastrService,
+  constructor(private fb: FormBuilder, private utilService: UtilService, private employeeService: EmployeeService, private clienteService: ClienteService, private toastr: ToastrService,
     private router: Router) {
     this.clienteSelecionado = this.router.getCurrentNavigation().extras.state
   }
@@ -30,8 +34,10 @@ export class CadastroComponent implements OnInit {
       cnpj: ['', [CustomValidator.isValidCnpj]],
       cpf: ['', [CustomValidator.isValidCpf]],
       email: ['', [Validators.email]],
+      typeName: ['', [Validators.required]],
       _id: ['', []],
       idaddress: [''],
+      matrixEnterprise: [''],
       idcompany: [''],
       phones: this.fb.group({
         main: ['', [Validators.required]],
@@ -57,6 +63,62 @@ export class CadastroComponent implements OnInit {
       this.listAddress();
     }
     this.listar();
+    this.listarClientesMatriz();
+  }
+
+  changeType(typeBranch) {
+    let objLimparComobo: any[];
+    console.log(' Value of the variable ', typeBranch);
+    if (typeBranch.target.value == '2: Filial') {
+      this.clienteForm.get('matrixEnterprise').enable();
+      this.listarClientesMatriz();
+    }
+    else {
+      //this.typeClient = objLimparComobo;
+      this.clienteForm.get('matrixEnterprise').reset();
+      this.clienteForm.get('matrixEnterprise').disable();
+    }
+  }
+
+  onChanges() {
+    this.clienteForm.get('typeName').valueChanges
+      .subscribe(selectedCountry => {
+        if (selectedCountry != '2: Filial') {
+          // this.clienteForm.get('state').reset();
+          this.clienteForm.get('matrixEnterprise').disable();
+        }
+        else {
+          this.clienteForm.get('state').enable();
+        }
+      });
+  }
+
+  listarClientesMatriz() {
+    console.log('It list the matrix client');
+    this.clienteService.listarClientesMatriz()
+      .subscribe(data => {
+        console.log('It list the matrix client: ', data);
+        this.typeClient = data;
+      }, err => {
+        this.toastr.error('Problemas ao consultar a lista de empresa. ' + err.error.msg, 'Erro: ');
+      });
+  }
+
+  changeMatrix(matrixEnterprise) {
+
+    console.log(' Value of the variable ', matrixEnterprise);
+
+  }
+
+  changeFindCEP(cep) {
+    const cepReturn: any = this.utilService.findCep(cep.target.value);
+    this.clienteForm.controls.street.setValue(cepReturn.street);
+    this.clienteForm.controls.zip.setValue(cepReturn.cep);
+    this.clienteForm.controls.district.setValue(cepReturn.neighborhood);
+    this.clienteForm.controls.city.setValue(cepReturn.city);
+    this.clienteForm.controls.state.setValue(cepReturn.state);
+    this.clienteForm.controls.country.setValue('Brasil');
+
   }
 
   cadastrar() {
@@ -97,6 +159,7 @@ export class CadastroComponent implements OnInit {
       });
   }
 
+
   listar() {
     console.log('Listar Empresa');
     let userId = (<any>window).user._id;
@@ -108,6 +171,7 @@ export class CadastroComponent implements OnInit {
         this.toastr.error('Problemas ao consultar a lista de empresa. ' + err.error.msg, 'Erro: ');
       });
   }
+
 
 
   voltar() {

@@ -13,6 +13,18 @@ const ClientSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  typeName: {
+    type: String,
+    required: true
+  },
+  matrixEnterprise: {
+    type: String,
+    required: true
+  },
+  Idclient: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Client'
+  },
   email: {
     type: String,
     unique: true,
@@ -29,9 +41,13 @@ const ClientSchema = new mongoose.Schema({
     main: { type: String },
     secundary: { type: String }
   },
+  idcompany: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Company',
+  },
   idaddress: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Address'
+    ref: 'Address',
     //required: true
   },
   createdAt: {

@@ -2,12 +2,19 @@ const mongoose = require('mongoose');
 
 const ClientBranchSchema = new mongoose.Schema({
 
-  client: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Client'
+  enterprise: {
+    type: String,
+    required: true
   },
-
-  fullname: {
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  fullnamebranch: {
+    type: String,
+    required: true
+  },
+  typeName: {
     type: String,
     required: true
   },
@@ -29,15 +36,15 @@ const ClientBranchSchema = new mongoose.Schema({
     main: { type: String },
     secundary: { type: String }
   },
-  address: {
-    street: String,
-    complement: String,
-    num: String,
-    zip: String,
-    city: String,
-    district: String,
-    country: String,
-    state: String
+  idcompany: {
+    type: String,
+    //ref: 'Company'
+  },
+  idaddress: {
+    type: String,
+    //mongoose.Schema.Types.ObjectId,
+    //ref: 'Address'
+    //required: true
   },
   createdAt: {
     type: Date,
@@ -45,8 +52,8 @@ const ClientBranchSchema = new mongoose.Schema({
   },
 
 }, {
-  versionKey: false
-});
+    versionKey: false
+  });
 
 
 module.exports = mongoose.model('ClientBranch', ClientBranchSchema);

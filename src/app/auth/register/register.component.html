@@ -1,24 +1,24 @@
 <div class="card shadow mb-4">
     <div class="card-body">
         <form class="user" [formGroup]="userForm">
-        <br>
-        <br>
-        <br>
-        <br>
-            <div class="form-group row">
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="form-group row" formArrayName="master">
                 <mat-form-field class="col-sm-12 mb-3 mb-sm-0">
                     <input matInput placeholder="Nome Completo" formControlName="fullname" name="fullname" required>
                 </mat-form-field>
             </div>
             <div class="form-group row">
-                    <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
-                        <input matInput placeholder="CPF" formControlName="cpf" name="cpf" mask="000.000.000-00">
-                        <mat-error *ngIf="userForm.get('cpf').getError('cpfNotValid')">O CPF é inválido</mat-error>
-                    </mat-form-field>
-                    <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
-                        <input matInput placeholder="Email" formControlName="email" name="email" required>
-                        <mat-error *ngIf="userForm.get('email').errors">Email inválido</mat-error>
-                    </mat-form-field>
+                <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
+                    <input matInput placeholder="CPF" formControlName="cpf" name="cpf" mask="000.000.000-00">
+                    <mat-error *ngIf="userForm.get('cpf').getError('cpfNotValid')">O CPF é inválido</mat-error>
+                </mat-form-field>
+                <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
+                    <input matInput placeholder="Email" formControlName="email" name="email" required>
+                    <mat-error *ngIf="userForm.get('email').errors">Email inválido</mat-error>
+                </mat-form-field>
             </div>
             <div class="form-group row" formArrayName="phones">
                 <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
@@ -30,7 +30,7 @@
                         name="secundary">
                 </mat-form-field>
             </div>
-            
+
             <div formArrayName="address">
                 <div class="form-group row">
                     <mat-form-field class="col-sm-12 mb-3 mb-sm-0">
@@ -40,10 +40,12 @@
 
                 <div class="form-group row">
                     <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
-                        <input matInput type="number" placeholder="Número" [(ngModel)]="numberAddress" name="numberAddress" [ngModelOptions]="{standalone: true}">
+                        <input matInput type="number" placeholder="Número" [(ngModel)]="numberAddress" name="numberAddress"
+                            [ngModelOptions]="{standalone: true}">
                     </mat-form-field>
                     <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
-                        <input matInput type="complement" placeholder="Complemento" [(ngModel)]="complementAddress" name="complementAddress" [ngModelOptions]="{standalone: true}">
+                        <input matInput type="complement" placeholder="Complemento" [(ngModel)]="complementAddress"
+                            name="complementAddress" [ngModelOptions]="{standalone: true}">
                     </mat-form-field>
                 </div>
                 <div class="form-group row">
@@ -70,14 +72,15 @@
             </div>
             <div class="form-group row">
                 <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
-                    <input matInput placeholder="Senha" formControlName="password" type="password" name="password" required>
+                    <input matInput placeholder="Senha" formControlName="password" type="password" name="password"
+                        required>
                     <!--mat-error *ngIf="employeeForm.get('cpf').getError('cpfNotValid')">O CPF é inválido</mat-error-->
                 </mat-form-field>
                 <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
                     <input matInput placeholder="Repita sua senha" formControlName="repeatPassword" type="password"
-                    name="repeatPassword" required>
-                  <mat-error *ngIf="repeatPassword.invalid && repeatPassword.errors.passwordMatch">Senha diferente
-                  </mat-error>
+                        name="repeatPassword" required>
+                    <mat-error *ngIf="repeatPassword.invalid && repeatPassword.errors.passwordMatch">Senha diferente
+                    </mat-error>
                 </mat-form-field>
             </div>
             <hr />
@@ -93,7 +96,7 @@
                 <br /><br />
                 <span>Já possui conta? <a [routerLink]="['/auth/login']">clique aqui</a></span>
             </mat-card-actions>
-    
+
         </form>
     </div>
 </div>

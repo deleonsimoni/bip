@@ -54,8 +54,8 @@ export class RegisteremployeeComponent implements OnInit {
         district: [''],
         state: [''],
         country: [''],
-      }),
-      teams: this.fb.array([this.teams])
+      })
+
     });
 
     if (this.employeeSelected) {
@@ -64,10 +64,15 @@ export class RegisteremployeeComponent implements OnInit {
       );
       this.listAddress();
     }
-    this.listar();
+    this.listarEmpresa();
     this.listClients();
-
-
+    if (this.employeeForm.get('idcompany').value.trim() != '') {
+      this.exibirComboEmpresa = true;
+      
+    }
+    else if (this.employeeForm.get('idclient').value.trim() != '') {
+      this.exibirComboCliente = true;
+    }
   }
 
   get teams(): FormGroup {
@@ -139,7 +144,7 @@ export class RegisteremployeeComponent implements OnInit {
     this.router.navigate(['/admin/supportemployee']);
   }
 
-  listar() {
+  listarEmpresa() {
     console.log('Listar Empresa');
     let userId = (<any>window).user._id;
     this.employeeService.listaEmpresas(userId)
