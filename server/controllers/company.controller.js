@@ -3,13 +3,13 @@ const Address = require('../models/address.model');
 
 module.exports = {
   getCompanyByUserID,
+  getAddressByAddresCEP,
   insertCompany,
   updateCompany,
   deleteCompany,
   getTotalCompany,
 
 }
-
 
 async function getCompanyByUserID(id) {
   //return await Company.find({ userId: id }).populate('idaddress');
@@ -26,14 +26,29 @@ async function getCompanyByUserID(id) {
 
 }
 
+async function getAddressByAddresCEP(idCEP) {
+  let lstZIP = await Address.findOne({ zip: idCEP }).select('_id');
+  console.log('Informatiom Id of the ZIP ', lstZIP);
+  return lstZIP;
+}
+
 async function insertCompany(company, userId) {
   console.log('Lista de Empresa', company);
   let empresa = company.empresa;
   empresa.userId = userId;
   delete empresa._id;
-  console.log(empresa);
-  const address = await new Address(empresa.address).save();
-  empresa.idaddress = address._id;
+  console.log('Information of the company ',empresa);
+  let lstAddress = await this.getAddressByAddresCEP(empresa.address.zip);
+  console.log('Id of the address ',lstAddress);  
+  if (lstAddress != null){
+     console.log('List address empty. ');
+     empresa.idaddress = lstAddress._id;
+  }
+  else {
+      console.log('List address exist. ');
+      const address = await new Address(empresa.address).save();
+      empresa.idaddress = address._id;
+  }
   return await new Company(empresa).save();
 }
 

@@ -5,6 +5,7 @@ import { CustomValidator } from '../../../resources/custom-validator';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { NgModel } from '@angular/forms';
+import { UtilService } from "../../../services/util.service";
 
 
 @Component({
@@ -24,7 +25,7 @@ export class RegisteremployeeComponent implements OnInit {
   private innerValue: FormGroup;
   private changed = new Array<(value: FormGroup) => void>();
 
-  constructor(private fb: FormBuilder, private employeeService: EmployeeService, private toastr: ToastrService,
+  constructor(private fb: FormBuilder, private utilService: UtilService, private employeeService: EmployeeService, private toastr: ToastrService,
     private router: Router) {
     this.employeeSelected = this.router.getCurrentNavigation().extras.state;
   }
@@ -41,6 +42,8 @@ export class RegisteremployeeComponent implements OnInit {
       idcompany: [''],
       idclient: [''],
       idaddress: [''],
+      numberAddress: ['', [Validators.required]],
+      complementAddress: [''],
       phones: this.fb.group({
         main: ['', [Validators.required]],
         secundary: [''],
@@ -113,6 +116,34 @@ export class RegisteremployeeComponent implements OnInit {
       state: "",
       country: ""
     });
+  }
+  
+  async changeFindCEP(cep) {
+    this.utilService.findCep(cep.target.value).subscribe(
+      (cepReturn) => {
+          this.employeeForm.patchValue({
+            address: {
+              street: cepReturn.street,
+              zip: cepReturn.cep,
+              district: cepReturn.neighborhood,
+              city: cepReturn.city,
+              state: cepReturn.state,
+              country: "Brasil",
+            },
+          });
+      },
+      () => {
+        this.employeeForm.patchValue({
+          address: {
+            street: '',
+            zip: '',
+            district: '',
+            city: '',
+            state: '',
+            country: '',
+          },
+        });
+      });
   }
 
   register() {

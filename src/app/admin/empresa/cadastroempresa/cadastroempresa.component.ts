@@ -5,6 +5,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { CustomValidator } from '../../../resources/custom-validator';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { UtilService } from "../../../services/util.service";
 
 @Component({
   selector: 'app-cadastroempresa',
@@ -17,7 +18,7 @@ export class CadastroempresaComponent implements OnInit {
   empresaSelecionado: any;
   address: any[];
 
-  constructor(private fb: FormBuilder, private employeeService: EmployeeService, private empresaService: EmpresaService, private toastr: ToastrService,
+  constructor(private fb: FormBuilder, private utilService: UtilService, private employeeService: EmployeeService, private empresaService: EmpresaService, private toastr: ToastrService,
     private router: Router) {
     this.empresaSelecionado = this.router.getCurrentNavigation().extras.state
   }
@@ -30,6 +31,8 @@ export class CadastroempresaComponent implements OnInit {
       email: ['', [Validators.email, Validators.required]],
       cnpj: ['', [CustomValidator.isValidCnpj]],
       idaddress: [''],
+      numberAddress: ['', [Validators.required]],
+      complementAddress: [''],
       phones: this.fb.group({
         main: ['', [Validators.required]],
         secundary: [''],
@@ -53,6 +56,34 @@ export class CadastroempresaComponent implements OnInit {
       this.listAddress();
     }
 
+  }
+
+  async changeFindCEP(cep) {
+    this.utilService.findCep(cep.target.value).subscribe(
+      (cepReturn) => {
+          this.empresaForm.patchValue({
+            address: {
+              street: cepReturn.street,
+              zip: cepReturn.cep,
+              district: cepReturn.neighborhood,
+              city: cepReturn.city,
+              state: cepReturn.state,
+              country: "Brasil",
+            },
+          });
+      },
+      () => {
+        this.empresaForm.patchValue({
+          address: {
+            street: '',
+            zip: '',
+            district: '',
+            city: '',
+            state: '',
+            country: '',
+          },
+        });
+      });
   }
 
   cadastrar() {

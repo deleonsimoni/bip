@@ -11,7 +11,7 @@ module.exports = router;
 router.get('/user/:userId', passport.authenticate('jwt', { session: false }), asyncHandler(getClientsByUser));
 router.get('/typeClient', passport.authenticate('jwt', { session: false }), asyncHandler(getClientTypeEnterprise));
 router.get('/enterprise/:idEnterprise', passport.authenticate('jwt', { session: false }), asyncHandler(getClientsByEnterprise));
-router.get('/', passport.authenticate('jwt', { session: false }), asyncHandler(getClientByID));
+router.get('/:id', passport.authenticate('jwt', { session: false }), asyncHandler(getClientByID));
 //router.get('/:id', passport.authenticate('jwt', { session: false }), asyncHandler(getClientByID));
 router.get('/branch/:id', passport.authenticate('jwt', { session: false }), asyncHandler(getClientBranchByID));
 

@@ -2,14 +2,21 @@ const Address = require("../models/address.model");
 
 module.exports = {
   getAddressByAddresID,
+  getAddressByAddresCEP,
   insertAddress,
   updateAddress,
   deleteAddress,
 };
 
+
 async function getAddressByAddresID(id) {
   console.log("getAddressByAddresID controller " + id);
   return await Address.find({ _id: id });
+}
+
+async function getAddressByAddresCEP(cep) {
+  console.log("getAddressByAddresCEP controller " + cep);
+  return await Address.find({zip: cep });
 }
 
 async function insertAddress(address, userId) {

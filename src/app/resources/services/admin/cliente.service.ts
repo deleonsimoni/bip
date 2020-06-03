@@ -52,7 +52,7 @@ export class ClienteService {
   listaClientes(enterprise): Observable<any> {
     return Observable.create(observer => {
       //this.http.get('/api/client/enterprise/' + enterprise, {
-      this.http.get('/api/client/', {
+      this.http.get('/api/client/' + enterprise, {
       }).subscribe((data: any) => {
         observer.next(data);
         console.log('Sucesso ao listar as clientes', data);

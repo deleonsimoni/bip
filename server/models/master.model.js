@@ -19,10 +19,10 @@ const MasterSchema = new mongoose.Schema({
   }],
   //
   //Fim chaves
-  //userId: {
-  //  type: mongoose.Schema.Types.ObjectId,
-  //  ref: 'Master'
-  //},
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
   fullname: {
     type: String,
     required: true
@@ -38,6 +38,13 @@ const MasterSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+ numberAddress: {
+    type: String,
+    required: true
+  },
+  complementAddress: {
+    type: String,
+  },
   idcompany: {
     type: String,
     //mongoose.Schema.Types.ObjectId,
@@ -45,10 +52,9 @@ const MasterSchema = new mongoose.Schema({
     //required: true
   },
   idaddress: {
-    type: String,
-    //mongoose.Schema.Types.ObjectId,
-    //ref: 'Address'
-    required: true
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Address'
+    //required: true
   },
   phones: {
     main: { type: String },

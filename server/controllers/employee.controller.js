@@ -4,6 +4,7 @@ const Address = require('../models/address.model');
 
 module.exports = {
   getEmployeeByUserID,
+  getAddressByAddresCEP,
   insertEmployee,
   updateEmployee,
   deleteEmployee,
@@ -26,17 +27,30 @@ async function getEmployeeByUserID(id) {
   return lista;
 }
 
+async function getAddressByAddresCEP(idCEP) {
+  let lstZIP = await Address.findOne({ zip: idCEP }).select('_id');
+  console.log('Informatiom Id of the ZIP ', lstZIP);
+  return lstZIP;
+}
+
 async function insertEmployee(employee, userId) {
   console.log('Codigo do Usuário Logado: ', userId);
   console.log('Lista dos Dados do Funcionário: ', employee.employee);
-  //let functionary = employee.functionary;
+  
   let functionary = employee.employee
   functionary.userId = userId;
   delete functionary._id;
   console.log('Lista dos Dados do Funcionário: ', functionary)
-  const address = await new Address(functionary.address).save();
+  let lstAddress = await this.getAddressByAddresCEP(functionary.address.zip);
+  console.log('List of the address: ', lstAddress)
+  if (lstAddress != null){
+    functionary.idaddress = lstAddress._id;
+  }
+  else {
+    address = await new Address(functionary.address).save();
+    functionary.idaddress = address._id;
+  }
   console.log('Lista dos Dados do Endereço: ', address)
-  functionary.idaddress = address._id;
   console.log('Código do Endereço: ', functionary.idaddress);
   console.log('Lista dos Dados do Funcionário com ID do Endereço: ', functionary)
   return await new Employee(functionary).save();

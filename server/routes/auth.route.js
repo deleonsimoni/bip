@@ -11,10 +11,17 @@ module.exports = router;
 router.post('/register', asyncHandler(register), login);
 router.post('/login', passport.authenticate('local', { session: false }), login);
 router.get('/me', passport.authenticate('jwt', { session: false }), login);
+router.get('/findEmail/:idEmail', asyncHandler(findEmail), login);
 
+async function findEmail(req, res) {
+  console.log("This is method findEmail in the auth.route.js ",req.params.idEmail);
+  let objUser = await userCtrl.getFindByEmail(req.params.idEmail);
+  console.log("This is method with result of the data. ", objUser);
+  res.json({objUser});
+}
 
 async function register(req, res, next) {
-  console.log("This is method register in the auth.route.js ");
+  console.log("This is method register in the auth.route.js 111 ");
   let user = await userCtrl.insert(req.body);
   user = user.toObject();
   delete user.hashedPassword;

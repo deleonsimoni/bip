@@ -15,6 +15,8 @@ export class UtilService {
     return Observable.create((observer) => {
       cep(cependreco.replace("-", "")).then((value) => {
         observer.next(value);
+      }, err => {
+        observer.error("Este CEP não foi localizado na base do correio.");
       });
     });
   }

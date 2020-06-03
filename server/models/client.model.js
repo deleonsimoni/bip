@@ -19,7 +19,6 @@ const ClientSchema = new mongoose.Schema({
   },
   matrixEnterprise: {
     type: String,
-    required: true
   },
   Idclient: {
     type: mongoose.Schema.Types.ObjectId,
@@ -36,6 +35,13 @@ const ClientSchema = new mongoose.Schema({
   cpf: {
     type: String,
     //required: true
+  },
+  numberAddress: {
+    type: String,
+    required: true
+  },
+  complementAddress: {
+    type: String,
   },
   phones: {
     main: { type: String },

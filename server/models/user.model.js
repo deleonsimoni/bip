@@ -64,11 +64,11 @@ const UserSchema = new mongoose.Schema({
   //ref: 'Client'
   //required: true
   //},
-  idmaster: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Master'
+  //idmaster: {
+   // type: mongoose.Schema.Types.ObjectId,
+   // ref: 'Master'
     //required: true
-  },
+  //},
   //idaddress: {
   //  type: mongoose.Schema.Types.ObjectId,
   //  ref: 'Address'

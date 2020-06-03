@@ -44,14 +44,14 @@ export class CadastroComponent implements OnInit {
       idaddress: [""],
       matrixEnterprise: [""],
       idcompany: [""],
+      numberAddress: ['', [Validators.required]],
+      complementAddress: [''],
       phones: this.fb.group({
         main: ["", [Validators.required]],
         secundary: [""],
       }),
       address: this.fb.group({
         street: [""],
-        number: [""],
-        complement: [""],
         zip: [""],
         district: [""],
         city: [""],
@@ -70,7 +70,7 @@ export class CadastroComponent implements OnInit {
   }
 
   changeType(typeBranch) {
-    let objLimparComobo: any[];
+    //let objLimparComobo: any[];
     console.log(" Value of the variable ", typeBranch);
     if (typeBranch.target.value == "2: Filial") {
       this.clienteForm.get("matrixEnterprise").enable();
@@ -88,7 +88,7 @@ export class CadastroComponent implements OnInit {
         // this.clienteForm.get('state').reset();
         this.clienteForm.get("matrixEnterprise").disable();
       } else {
-        this.clienteForm.get("state").enable();
+        this.clienteForm.get("matrixEnterprise").enable();
       }
     });
   }
@@ -111,18 +111,31 @@ export class CadastroComponent implements OnInit {
   }
 
   async changeFindCEP(cep) {
-    this.utilService.findCep(cep.target.value).subscribe((cepReturn) => {
-      this.clienteForm.patchValue({
-        address: {
-          street: cepReturn.street,
-          zip: cepReturn.cep,
-          district: cepReturn.neighborhood,
-          city: cepReturn.city,
-          state: cepReturn.state,
-          country: "BR",
-        },
+    this.utilService.findCep(cep.target.value).subscribe(
+      (cepReturn) => {
+          this.clienteForm.patchValue({
+            address: {
+              street: cepReturn.street,
+              zip: cepReturn.cep,
+              district: cepReturn.neighborhood,
+              city: cepReturn.city,
+              state: cepReturn.state,
+              country: "Brasil",
+            },
+          });
+      },
+      () => {
+        this.clienteForm.patchValue({
+          address: {
+            street: '',
+            zip: '',
+            district: '',
+            city: '',
+            state: '',
+            country: '',
+          },
+        });
       });
-    });
   }
 
   cadastrar() {

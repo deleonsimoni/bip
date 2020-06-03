@@ -14,28 +14,57 @@ const userSchema = Joi.object({
 */
 
 module.exports = {
-  insert
+  insert,
+  getAddressByAddresCEP,
+  getFindByEmail
+}
+
+async function getFindByEmail(idEmail) {
+  console.log('Informatiom name of the e-mail in the method getFindByEmail ', idEmail);
+  let objUser = await User.findOne({ email: idEmail });
+  console.log('Informatiom name of the e-mail 1234 ', objUser);
+  return objUser;
+}
+
+async function getAddressByAddresCEP(idCEP) {
+  let lstZIP = await Address.findOne({ zip: idCEP }).select('_id');
+  console.log('Informatiom Id of the ZIP ', lstZIP);
+  return lstZIP;
 }
 
 async function insert(user) {
   //user = await Joi.validate(user, userSchema, { abortEarly: false });
-  console.log('Code of the user: ', user);
   let objUser = user.user
   console.log("This is the method Insert 1. ");
   objUser.hashedPassword = bcrypt.hashSync(objUser.password, 10);
   delete objUser._id;
-  const address = await new Address(objUser.address).save();
-  //objUser.idaddress = address._id;
-  console.log("This is the method Insert 2. ", address);
-  //objUser.master.insert('idaddress', address._id);
-  objUser.master.phones = objUser.phones;
-  console.log("This is the value on the my phone. ", objUser.phones.main);
-  objUser.master.idaddress = address._id;
-  objUser.master.cpf = objUser.cpf;
-  const master = await new Master(objUser.master).save();
-  //delete user.password;~
-  console.log("This is the method Insert 3. ", master);
-  return await new User(objUser).save();
+  let objReturnUser =  await new User(objUser).save();
+  if (objReturnUser._id) {
+      let lstAddress = await this.getAddressByAddresCEP(objUser.address.zip);
+      //console.log('Id of the address ',lstAddress._id);  
+      if (lstAddress != null){
+        console.log('List address not empty. ');
+        objUser.master.idaddress = lstAddress._id;
+      }
+      else {
+          console.log('List address exist. ');
+          address = await new Address(objUser.address).save();
+          objUser.master.idaddress = address._id;
+      }
+      objUser.master.phones = objUser.phones;
+      console.log("This is the value on the my phone. ", objUser.phones.main);
+      objUser.master.cpf = objUser.cpf;
+      objUser.master.userId = objReturnUser._id;
+      objUser.master.complementAddress = objUser.complementAddress;
+      objUser.master.numberAddress = objUser.numberAddress;
+      const master = await new Master(objUser.master).save();
+      }
+
+      return await objReturnUser;
+      //delete user.password;~
+      //console.log("This is the method Insert 3. ", master);
+      //return await new User(objUser).save();
+
 }
 
 /*$ db.mycol.insert({

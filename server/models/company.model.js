@@ -17,6 +17,13 @@ const CompanySchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  numberAddress: {
+    type: String,
+    required: true
+  },
+  complementAddress: {
+    type: String,
+  },
   phones: {
     main: { type: String },
     secundary: { type: String }

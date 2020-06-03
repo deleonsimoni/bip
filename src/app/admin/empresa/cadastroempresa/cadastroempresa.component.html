@@ -34,30 +34,27 @@
                         name="secundary">
                 </mat-form-field>
             </div>
+            <div class="form-group row" formArrayName="address">
+                <mat-form-field class="col-sm-3 mb-3 mb-sm-0">
+                    <input matInput type="zip" mask="00000-000" (change)="changeFindCEP($event)" placeholder="CEP" formControlName="zip" name="zip">
+                </mat-form-field>
+                <mat-form-field class="col-sm-9 mb-3 mb-sm-0">
+                    <input matInput type="street" placeholder="Rua" formControlName="street" name="street">
+                </mat-form-field>
+            </div>
+            <div class="form-group row">
+                <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
+                        <input matInput type="number" placeholder="Número" formControlName="numberAddress" name="numberAddress">
+                </mat-form-field>
+                <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
+                        <input matInput type="complement" placeholder="Complemento" formControlName="complementAddress" name="complementAddress">
+                </mat-form-field>
+            </div>
             <div formArrayName="address">
                 <div class="form-group row">
-                    <mat-form-field class="col-sm-12 mb-3 mb-sm-0">
-                        <input matInput type="street" placeholder="Rua" formControlName="street" name="street">
-                    </mat-form-field>
-                </div>
-                <div class="form-group row">
-                    <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
-                        <input matInput type="number" placeholder="Número" formControlName="number" name="number">
-                    </mat-form-field>
-                    <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
-                        <input matInput type="complement" placeholder="Complemento" formControlName="complement" name="complement">
-                    </mat-form-field>
-
-                </div>
-                <div class="form-group row">
-                    <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
-                        <input matInput type="zip" mask="00000-000" placeholder="CEP" formControlName="zip" name="zip">
-                    </mat-form-field>
                     <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
                         <input matInput type="district" placeholder="Bairro" formControlName="district" name="district">
                     </mat-form-field>
-                </div>
-                <div class="form-group row">
                     <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
                         <input matInput type="city" placeholder="Cidade" formControlName="city" name="city">
                     </mat-form-field>
@@ -70,7 +67,6 @@
                         <input matInput type="country" placeholder="País" formControlName="country" name="country">
                     </mat-form-field>
                 </div>
-
             </div>
             <hr />
             <button (click)="cadastrar()" [disabled]="empresaForm.invalid" class="btn btn-primary btn-user btn-block">

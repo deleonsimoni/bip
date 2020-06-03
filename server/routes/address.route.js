@@ -5,6 +5,9 @@ const addressCtrl = require("../controllers/address.controller");
 const router = express.Router();
 module.exports = router;
 
+
+
+router.get("/address/:idCEP", passport.authenticate("jwt", { session: false }), getAddressByAddresCEP);
 router.get("/address/:idAddress", passport.authenticate("jwt", { session: false }), getAddressByAddresID);
 router.get("/", passport.authenticate("jwt", { session: false }), getAddressByUserID);
 
@@ -21,6 +24,11 @@ async function getAddressByAddresID(req, res) {
   console.log("getAddressByAddresID " + req.params.idAddress);
   let address = await addressCtrl.getAddressByAddresID(req.params.idAddress);
   console.log("address " + address);
+  res.json(address);
+}
+
+async function getAddressByAddresCEP(req, res) {
+  let address = await addressCtrl.getAddressByAddresCEP(req.user._id);
   res.json(address);
 }
 

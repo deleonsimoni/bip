@@ -17,6 +17,13 @@ const EmployeeSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  numberAddress: {
+    type: String,
+    required: true
+  },
+  complementAddress: {
+    type: String,
+  },
   idcompany: {
     type: String,
     //mongoose.Schema.Types.ObjectId,

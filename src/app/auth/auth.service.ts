@@ -39,6 +39,20 @@ export class AuthService {
     });
   }
 
+  findEmail(idEmail: String): Observable<any> {
+    console.log('This is method findEmail in the file auth.service.  ');
+    return Observable.create(observer => {
+       this.http.get('/api/auth/findEmail/'  + idEmail)
+        .subscribe((data: any) => {
+        observer.next(data);
+        console.log('Sucesso ao consultar e-mail. ', data);
+      }, err => {
+        console.log('Erro ao consultar e-mail. ', err.error.msg);
+        observer.error(err.error.msg);
+      })
+    });
+  }
+
   register(user: any): Observable<any> {
     console.log('List the user ', user);
     return Observable.create(observer => {

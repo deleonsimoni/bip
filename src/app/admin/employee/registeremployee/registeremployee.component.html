@@ -81,24 +81,23 @@
                     <input placeholder="Rua" [(ngModel)]="ingredient.street" [ngModelOptions]="{standalone: true}">
                 </div>
             </div-->
+            <div class="form-group row" formArrayName="address">
+                <mat-form-field class="col-sm-3 mb-3 mb-sm-0">
+                       <input matInput type="zip" mask="00000-000" (change)="changeFindCEP($event)" placeholder="CEP" formControlName="zip" name="zip">
+                </mat-form-field>
+                <mat-form-field class="col-sm-9 mb-3 mb-sm-0">
+                      <input matInput type="street" placeholder="Rua" formControlName="street" name="street">
+                </mat-form-field>
+            </div>
+            <div class="form-group row">
+                <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
+                        <input matInput type="number" placeholder="Número" formControlName="numberAddress" name="numberAddress">
+                </mat-form-field>
+                <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
+                        <input matInput type="complement" placeholder="Complemento" formControlName="complementAddress" name="complementAddress">
+                </mat-form-field>
+            </div>
             <div formArrayName="address">
-                <!--div *ngFor="let item of address; let i = index"-->
-                <div class="form-group row">
-                    <mat-form-field class="col-sm-12 mb-3 mb-sm-0">
-                        <input matInput type="street" placeholder="Rua" formControlName="street" name="street">
-                    </mat-form-field>
-                </div>
-                <div class="form-group row">
-                    <mat-form-field class="col-sm-4 mb-3 mb-sm-0">
-                        <input matInput type="number" placeholder="Número" formControlName="number" name="number">
-                    </mat-form-field>
-                    <mat-form-field class="col-sm-4 mb-3 mb-sm-0">
-                        <input matInput type="complement" placeholder="Complemento" formControlName="complement" name="complement">
-                    </mat-form-field>
-                    <mat-form-field class="col-sm-4 mb-3 mb-sm-0">
-                        <input matInput type="zip" mask="00000-000" placeholder="CEP" formControlName="zip" name="zip">
-                    </mat-form-field>
-                </div>
                 <div class="form-group row">
                     <mat-form-field class="col-sm-6 mb-3 mb-sm-0">
                         <input matInput type="district" placeholder="Bairro" formControlName="district" name="district">

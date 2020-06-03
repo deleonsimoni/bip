@@ -7,6 +7,7 @@ module.exports = {
   getClientsByUser,
   getClientsByEnterprise,
   getClientByID,
+  getAddressByAddresCEP,
   getClientBranchByID,
   insertClient,
   insertBranch,
@@ -74,8 +75,8 @@ async function getTotalClients(idUser) {
 
 async function getClientByID(id) {
   // return await Client.findById(id);
-  console.log('This is the method getClientByID ');
-  let lstClient = await Client.find(id);
+  console.log('This is the method getClientByID ' + id);
+  let lstClient = await Client.find({ userId: id });
   console.log('This is the object lstClient ' + lstClient);
   let lista = JSON.parse(JSON.stringify(lstClient));
   try {
@@ -95,14 +96,29 @@ async function getClientBranchByID(id) {
   return await clientBranch.findById(id);
 }
 
+async function getAddressByAddresCEP(idCEP) {
+  let lstZIP = await Address.findOne({ zip: idCEP }).select('_id');
+  console.log('Informatiom Id of the ZIP ', lstZIP);
+  return lstZIP;
+}
+
 async function insertClient(client, userId) {
   let costumer = client.cliente;
-
   delete costumer._id;
   costumer.enterprise = costumer.idcompany;
   costumer.userId = userId;
-  const address = await new Address(costumer.address).save();
-  costumer.idaddress = address._id;
+  let lstAddress = await this.getAddressByAddresCEP(costumer.address.zip);
+  console.log('Id of the address ',lstAddress);  
+  if (lstAddress != null){
+     console.log('List address empty. ');
+     costumer.idaddress = lstAddress._id;
+  }
+  else {
+      console.log('List address exist. ');
+      address = await new Address(costumer.address).save();
+      costumer.idaddress = address._id;
+  }
+ 
   return await new Client(costumer).save();
 
 }
