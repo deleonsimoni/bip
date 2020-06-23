@@ -16,6 +16,7 @@ import { CadastrofuncionarioComponent } from './funcionario/cadastrofuncionario/
 import { SupportemployeeComponent } from './employee/supportemployee/supportemployee.component';
 import { RegisteremployeeComponent } from './employee/registeremployee/registeremployee.component';
   import { from } from 'rxjs';
+import { ListarCollectorComponent } from './collector/listar-collector/listar-collector.component';
 
 const routes: Routes = [{
   path: 'admin',
@@ -37,6 +38,7 @@ const routes: Routes = [{
     , { path: 'empresamanter', component: ManterempresaComponent }
     , { path: 'registeremployee', component: RegisteremployeeComponent}
     , { path: 'supportemployee', component: SupportemployeeComponent}
+    , { path: 'collector', component: ListarCollectorComponent }
 
   ]
 }];

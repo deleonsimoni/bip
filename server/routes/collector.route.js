@@ -5,10 +5,21 @@ const collectorCtrl = require('../controllers/collector.controller');
 const router = express.Router();
 module.exports = router;
 
+/* GET */
+router.get('/', getCollectorByEnterprise);
+/* FIM GET*/
 
-router.get('/enterprise/:idEnterprise', getCollectorByEnterprise);
-router.post('/', passport.authenticate('jwt', { session: false }), insertCollector);
-router.delete('/:id', passport.authenticate('jwt', { session: false }), deleteCollector);
+/* POST */
+router.post('/', passport.authenticate('jwt', {
+  session: false
+}), insertCollector);
+/* FIM POST */
+
+/* DELETE */
+router.delete('/:id', passport.authenticate('jwt', {
+  session: false
+}), deleteCollector);
+/* FIM DELETE */
 
 async function getCollectorByEnterprise(req, res) {
   let collector = await collectorCtrl.getCollectors(req.params.id);
@@ -16,7 +27,7 @@ async function getCollectorByEnterprise(req, res) {
 }
 
 async function insertCollector(req, res) {
-  let collector = await collectorCtrl.insertCollector(req.body, req.user.enterprise);
+  let collector = await collectorCtrl.insertCollector(req.body, req.user._id);
   res.json(collector);
 }
 

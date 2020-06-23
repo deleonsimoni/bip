@@ -43,6 +43,8 @@ import {
   MatTableModule
 } from "@angular/material";
 import { from } from 'rxjs';
+import { ListarCollectorComponent } from './collector/listar-collector/listar-collector.component';
+import { ManterCollectorComponent } from './collector/manter-collector/manter-collector.component';
 
 export let options: Partial<IConfig> | (() => Partial<IConfig>);
 
@@ -61,7 +63,9 @@ export let options: Partial<IConfig> | (() => Partial<IConfig>);
     ManterempresaComponent,
     CadastroempresaComponent,
     RegisteremployeeComponent,
-    SupportemployeeComponent
+    SupportemployeeComponent,
+    ListarCollectorComponent,
+    ManterCollectorComponent
   ],
   imports: [
     CommonModule,

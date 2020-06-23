@@ -1,74 +1,161 @@
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Manter Inventário</h1>
-</div>
-
-
-<div class="card-inventary">
-
+  </div>
+  
+  <button [routerLink]="['/admin/inventariocadastro']" class="btn btn-primary btn-user btn-block">
+    Novo inventário
+  </button>
+  <hr>
+  
+  <div *ngIf="inventaries.length != 0" class="card-inventary">
+  
     <div class="row" *ngFor="let inventary of inventaries">
-
-        <!-- Inicio cabeçalho da lista-->
-        <div class="col-lg-5 col-sm-3 border-right">
-            <small>Nome</small>
-            <h4> {{ inventary.fullname.toLowerCase() }}</h4>
+  
+      <!-- Inicio cabeçalho da lista-->
+      <div class="col-lg-5 col-sm-3 border-right mt-2">
+        <small>Nome</small>
+        <h4> {{ inventary.fullname.toLowerCase() }}</h4>
+      </div>
+      <div class="col-lg-5 col-sm-3 border-right">
+        <small>Observações</small>
+        <h4> {{ inventary?.observations?.toLowerCase() }}</h4>
+      </div>
+      <div style="cursor: pointer;" class="col-lg-2 col-sm-1 text-center align-self-center pointer"
+        (click)="selectInventary(inventary);">
+        <small>Configurações</small>
+        <i class="fa fa-chevron-down"></i>
+      </div>
+      <!-- CABEÇALHO DA LISTA -->
+  
+  
+      <!--CORPO DOS DADOS-->
+      <div class="inventary-content" *ngIf="inventary && inventary._id == inventarySelected">
+        <div class="section first">
+          <h6>Configurações do inventário</h6>
         </div>
-        <div class="col-lg-5 col-sm-3 border-right">
-            <small>Observações</small>
-            <h4> {{ inventary?.observations?.toLowerCase() }}</h4>
+  
+  
+        <div class="row align-items-center">
+          <div class="col-sm-4 mb-2">
+            <mat-form-field>
+              <input matInput [(ngModel)]="inventary.begin" [matDatepicker]="dtInicio" placeholder="Data Inicio" disabled>
+              <mat-datepicker-toggle matSuffix [for]="dtInicio"></mat-datepicker-toggle>
+              <mat-datepicker #dtInicio disabled="false"></mat-datepicker>
+            </mat-form-field>
+          </div>
+  
+          <div class="col-sm-4 mb-2">
+            <mat-form-field>
+              <input matInput [(ngModel)]="inventary.end" [matDatepicker]="dtFim" placeholder="Data Fim" disabled>
+              <mat-datepicker-toggle matSuffix [for]="dtFim"></mat-datepicker-toggle>
+              <mat-datepicker #dtFim disabled="false"></mat-datepicker>
+            </mat-form-field>
+          </div>
+  
         </div>
-        <div style="cursor: pointer;" class="col-lg-2 col-sm-1 text-center align-self-center pointer"
-            (click)="selectInventary(inventary);">
-            <small>Configurações</small>
-            <i class="fa fa-chevron-down"></i>
+  
+        <div class="section first">
+          <h6>Cliente</h6>
         </div>
-        <!-- CABEÇALHO DA LISTA -->
-
-
-        <!--CORPO DOS DADOS-->
-        <div class="inventary-content" *ngIf="inventary && inventary._id == inventarySelected">
-            <div class="section first">
-                <h6>Configurações do inventário</h6>
+  
+        <div class="row align-items-center">
+          <div class="col-md-12">
+            <select class="form-control" [(ngModel)]="inventary.clientId" name="fullname">
+              <option *ngFor="let client of clients" [value]="client._id">{{client.fullname}}</option>
+            </select>
+          </div>
+  
+          <div class="col-md-12 mt-2">
+            <div class="custom-file">
+              <input type="file" name="arquivoPDF" [(ngModel)]="inventary.fileClient" class="custom-file-input"
+                accept="text/plain" id="customPreReadFile" (change)="setFileName($event.target.files)" #fileInput />
+              <label class="custom-file-label" for="customPreReadFile">{{ getFileName() }}</label>
             </div>
-
-
-            <div class="row align-items-center">
-                <div class="col-sm-4 mb-2">
-                    <mat-form-field>
-                        <input matInput [matDatepicker]="dtInicio" placeholder="Data Inicio" disabled>
-                        <mat-datepicker-toggle matSuffix [for]="dtInicio"></mat-datepicker-toggle>
-                        <mat-datepicker #dtInicio disabled="false"></mat-datepicker>
-                    </mat-form-field>
-                </div>
-
-                <div class="col-sm-4 mb-2">
-                    <mat-form-field>
-                        <input matInput [matDatepicker]="dtFim" placeholder="Data Fim" disabled>
-                        <mat-datepicker-toggle matSuffix [for]="dtFim"></mat-datepicker-toggle>
-                        <mat-datepicker #dtFim disabled="false"></mat-datepicker>
-                    </mat-form-field>
-                </div>
-
-            </div>
-
-            <div class="section first">
-                <h6>Cliente</h6>
-            </div>
-
-            <div class="row align-items-center">
-                <div class="col-md-12">
-                    <select class="form-control" formControlName="idcompany" name="fullname">
-                        <option *ngFor="let client of clients" [value]="client._id">{{client.fullname}}</option>
-                    </select>
-                </div>
-            </div>
-
+          </div>
+  
+          <div class="col-sm-12 col-xs-4 mt-2">
+            <mat-form-field class="mr-4">
+              <input [(ngModel)]="inventary.campoReferencia" matInput placeholder="Campo REFERÊNCIA">
+            </mat-form-field>
+  
+            <mat-form-field class="mr-4">
+              <input [(ngModel)]="inventary.campoRefAnd" matInput placeholder="Campo REFER_ANT">
+            </mat-form-field>
+  
+            <mat-form-field class="mr-4">
+              <input [(ngModel)]="inventary.campoDescricao" matInput placeholder="Campo DESCRIÇÃO">
+            </mat-form-field>
+  
+  
+          </div>
+  
+          <div class="col-sm-12 col-xs-4">
+            <mat-form-field class="mr-4">
+              <input [(ngModel)]="inventary.campoPreco" matInput placeholder="Campo PREÇO">
+            </mat-form-field>
+  
+            <mat-form-field class="mr-4">
+              <input [(ngModel)]="inventary.campoSituacao" matInput placeholder="Campo SITUAÇÃO">
+            </mat-form-field>
+  
+            <mat-form-field class="mr-4">
+              <input [(ngModel)]="inventary.campoSetor" matInput placeholder="Campo SETOR">
+            </mat-form-field>
+  
+          </div>
+  
+  
         </div>
-        <!-- Fim do corpo de dados -->
-
-
+        <br />
+        <div class="section first">
+          <h6>Funcionário</h6>
+        </div>
+  
+        <div class="row align-items-center">
+          <div class="col-5">
+            <select class="form-control" name="fullname" [(ngModel)]="employeSelect">
+              <option *ngFor="let employe of employees" [ngValue]="employe">{{employe.fullname}}</option>
+            </select>
+          </div>
+  
+          <div class="col-5">
+            <select class="form-control" name="fullname" [(ngModel)]="collectorSelect">
+              <option *ngFor="let collector of collectors" [ngValue]="collector">{{collector.serial}}</option>
+            </select>
+          </div>
+          <div class="col-2">
+            <button type="button" class="btn btn-success" style="border: solid 1px;"
+              (click)="addEmployeColector()">Selecionar</button>
+          </div>
+        </div>
+  
+        <!-- Iteração -->
+        <div class="row align-items-center mt-2" *ngFor="let employeColector of employeColectors; let i = index;">
+          <div class="col-5">
+            {{employeColector.employe.fullname}}
+          </div>
+          <div class="col-5">
+            {{employeColector.collector.serial}}
+          </div>
+          <div class="col-2">
+            <button type="button" class="btn btn-danger" style="border: solid 1px;" (click)="removeEmployeColector(i)"><i
+                class="fas fa-close"></i></button>
+          </div>
+        </div>
+  
+        <br />
+  
+        <button (click)="saveInventary()" class="btn btn-success btn-user btn-block">
+          Salvar
+        </button>
+  
+      </div>
+      <!-- Fim do corpo de dados -->
+  
+  
     </div>
-</div>
-
-<div *ngIf="inventaries.length == 0">
+  </div>
+  
+  <div *ngIf="inventaries.length == 0">
     Você não possui inventários criados
-</div>
+  </div>

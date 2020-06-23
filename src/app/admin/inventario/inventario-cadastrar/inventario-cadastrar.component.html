@@ -21,8 +21,7 @@
 
       <hr />
       <button (click)="register()" [disabled]="inventaryForm.invalid" class="btn btn-primary btn-user btn-block">
-        <span *ngIf="!inventarySelected">Criar Inventário</span>
-        <span *ngIf="inventarySelected">Alterar Inventário</span>
+        <span>Criar Inventário</span>
       </button>
       <button (click)="return()" class="btn btn-primary btn-user btn-block">
         <span>Voltar</span>

@@ -33,7 +33,7 @@ export class InventarioService {
   }
 
 
-  register(inventary: any, userId): Observable<any> {
+  register(inventary: any): Observable<any> {
     return Observable.create(observer => {
       this.http.post('/api/inventary/', {
         inventary
@@ -46,7 +46,7 @@ export class InventarioService {
     });
   }
 
-  listInventaries(userId): Observable<any> {
+  listInventaries(): Observable<any> {
     return Observable.create(observer => {
       this.http.get('/api/inventary/', {
       }).subscribe((data: any) => {
