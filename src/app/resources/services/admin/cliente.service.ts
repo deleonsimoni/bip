@@ -3,10 +3,12 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { TokenStorage } from '../../../auth/token.storage';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class ClienteService {
+
 
   constructor(private http: HttpClient) { }
 
@@ -65,7 +67,6 @@ export class ClienteService {
 
   listarClientesMatriz(): Observable<any> {
     return Observable.create(observer => {
-      //this.http.get('/api/client/enterprise/' + enterprise, {
       this.http.get('/api/client/typeClient/', {
       }).subscribe((data: any) => {
         observer.next(data);
@@ -78,9 +79,11 @@ export class ClienteService {
   }
 
   totalClients(userId): Observable<any> {
+    console.log('inside the method totalClients. Name of teh user ', userId);
     return Observable.create(observer => {
       this.http.get('/api/dashboard/totalClients/' + userId, {
       }).subscribe((data: any) => {
+        console.log('inside the method totalClients. Return of the backend. ', data);
         observer.next(data);
       }, err => {
         observer.error(err.error.msg);

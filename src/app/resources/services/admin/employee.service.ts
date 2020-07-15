@@ -63,6 +63,19 @@ export class EmployeeService {
     });
   }
 
+  listMasterEmployee(enterprise): Observable<any> {
+    return Observable.create(observer => {
+      this.http.get('/api/employee/masteremployee/', {
+      }).subscribe((data: any) => {
+        console.log('List of the employee.', data);
+        observer.next(data);
+      }, err => {
+        observer.error(err.error.msg);
+      })
+    });
+  }
+
+  
 
   listaEmpresas(enterprise): Observable<any> {
     console.log('Entrada no metodo listaEmpresas');
@@ -109,6 +122,7 @@ export class EmployeeService {
   }
 
   totalEmployees(userId): Observable<any> {
+    console.log('inside method totalEmployees class employee.service. ');
     return Observable.create(observer => {
       this.http.get('/api/dashboard/totalEmployees/' + userId, {
       }).subscribe((data: any) => {

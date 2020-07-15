@@ -5,6 +5,10 @@ const EmployeeSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
+  loginId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
   fullname: {
     type: String,
     required: true
@@ -24,6 +28,10 @@ const EmployeeSchema = new mongoose.Schema({
   complementAddress: {
     type: String,
   },
+  userTypeAccess: {
+    type: Number,
+    required: true
+ },
   idcompany: {
     type: String,
     //mongoose.Schema.Types.ObjectId,

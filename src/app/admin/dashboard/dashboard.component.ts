@@ -11,9 +11,9 @@ import { EmployeeService } from '../../resources/services/admin/employee.service
 })
 export class DashboardComponent implements OnInit {
 
-  public totalClients;
-  public totalEmployees;
-  public totalCompany;
+  public totalClients = 0;
+  public totalEmployees = 0;
+  public totalCompany = 0;
   public totalDevices = 0;
   public totalInventary = 0;
 
@@ -36,16 +36,19 @@ export class DashboardComponent implements OnInit {
 
     this.clienteService.totalClients(userId)
       .subscribe(data => {
+        console.log('Total of the clients ', data);
         this.totalClients = data;
       });
 
     this.empresaService.totalCompany(userId)
       .subscribe(data => {
+        console.log('Total of the company ', data);
         this.totalCompany = data;
       });
 
     this.employeeService.totalEmployees(userId)
       .subscribe(data => {
+        console.log('Total of the employee ', data);
         this.totalEmployees = data;
       });
 

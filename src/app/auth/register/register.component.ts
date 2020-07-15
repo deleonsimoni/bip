@@ -30,6 +30,7 @@ export class RegisterComponent implements OnInit {
       numberAddress: ['', [Validators.required]],
       complementAddress: [''],
       email: ['', [Validators.email, Validators.required]],
+      userTypeAccess: [''],
       password: new FormControl('', [Validators.required]),
       repeatPassword: new FormControl('', [Validators.required, this.passwordsMatchValidator]),
       master: this.fb.group({

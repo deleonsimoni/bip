@@ -1,5 +1,6 @@
 const express = require('express');
 const passport = require('passport');
+const requireTypeMaster = require('../middleware/type-master');
 const companyCtrl = require('../controllers/company.controller');
 
 const router = express.Router();
@@ -7,7 +8,7 @@ module.exports = router;
 
 
 router.get('/enterprise/:idEnterprise', passport.authenticate('jwt', { session: false }), getCompanysByEnterprise);
-router.get('/', passport.authenticate('jwt', { session: false }), getCompanyByUserID);
+router.get('/', passport.authenticate('jwt', { session: false }), requireTypeMaster, getCompanyByUserID);
 //router.get('/branch/:id', passport.authenticate('jwt', { sessio                                                                         n: false }), getClientBranchByID);
 
 router.post('/', passport.authenticate('jwt', { session: false }), insertCompany);

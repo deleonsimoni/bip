@@ -19,17 +19,15 @@ import { OwlModule } from 'ngx-owl-carousel';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { InventarioCadastrarComponent } from './inventario/inventario-cadastrar/inventario-cadastrar.component';
 import { ListarInventarioComponent } from './inventario/listar-inventario/listar-inventario.component';
-
-
-
-
-
 import { ManterfuncionarioComponent } from './funcionario/manterfuncionario/manterfuncionario.component';
 import { CadastrofuncionarioComponent } from './funcionario/cadastrofuncionario/cadastrofuncionario.component';
 import { ManterempresaComponent } from './empresa/manterempresa/manterempresa.component';
 import { CadastroempresaComponent } from './empresa/cadastroempresa/cadastroempresa.component';
 import {SupportemployeeComponent} from './employee/supportemployee/supportemployee.component';
 import {RegisteremployeeComponent} from './employee/registeremployee/registeremployee.component';
+import {MasterEmployeeComponent} from './masteremployee/cadastro/masteremployee.component';
+import {ManterMasterEmployeeComponent} from './masteremployee/manter/manter-masteremployee.component';
+
 
 import {
   MatButtonModule,
@@ -45,6 +43,7 @@ import {
 import { from } from 'rxjs';
 import { ListarCollectorComponent } from './collector/listar-collector/listar-collector.component';
 import { ManterCollectorComponent } from './collector/manter-collector/manter-collector.component';
+import { PickListModule } from 'primeng/picklist';
 
 export let options: Partial<IConfig> | (() => Partial<IConfig>);
 
@@ -65,7 +64,9 @@ export let options: Partial<IConfig> | (() => Partial<IConfig>);
     RegisteremployeeComponent,
     SupportemployeeComponent,
     ListarCollectorComponent,
-    ManterCollectorComponent
+    ManterCollectorComponent,
+    MasterEmployeeComponent,
+    ManterMasterEmployeeComponent
   ],
   imports: [
     CommonModule,
@@ -78,7 +79,8 @@ export let options: Partial<IConfig> | (() => Partial<IConfig>);
     BrowserModule,
     BrowserAnimationsModule,
     MatCardModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    PickListModule
   ],
   providers: [
     OnlyAdminUsersGuard

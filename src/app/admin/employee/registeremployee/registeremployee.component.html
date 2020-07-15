@@ -31,11 +31,18 @@
                 </select>
             </div>
             <div class="form-group row">
-                <mat-form-field class="col-sm-12 mb-3 mb-sm-0">
+                <mat-form-field class="col-sm-8 mb-3 mb-sm-0">
                     <input matInput placeholder="Nome Completo" formControlName="fullname" name="fullname" required>
                 </mat-form-field>
+                <div class="col-sm-4 mb-3 mb-sm-0">
+                    <!--label for="users" class="control-label">Tipo de Usuário</label-->
+                    <select class="custom-select" (change)="changeType($event)" formControlName="userTypeAccess" name="userTypeAccess">
+                        <option value="">Escolha Tipo de Usuário</option>
+                        <option selected [value]="users.id" *ngFor="let users of userType">{{users.nome}}</option>
+                    </select>
+                </div>
             </div>
-
+           
             <div class="form-group row">
                 <mat-form-field class="col-sm-4 mb-3 mb-sm-0">
                     <input matInput placeholder="CPF" formControlName="cpf" name="cpf" mask="000.000.000-00">
@@ -114,9 +121,8 @@
                         <input matInput type="country" placeholder="País" formControlName="country" name="country">
                     </mat-form-field>
                 </div>
-
             </div>
-
+           
             <hr />
             <button (click)="register()" [disabled]="employeeForm.invalid" class="btn btn-primary btn-user btn-block">
                 <span *ngIf="!employeeSelected">Cadastrar Funcionário</span>

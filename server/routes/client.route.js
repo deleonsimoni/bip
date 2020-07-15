@@ -1,5 +1,7 @@
 const express = require('express');
 const passport = require('passport');
+const requireTypeEmployee = require('../middleware/type-employee');
+const requireTypeMaster  = require('../middleware/type-master');
 const clientCtrl = require('../controllers/client.controller');
 const asyncHandler = require('express-async-handler');
 
@@ -11,7 +13,8 @@ module.exports = router;
 router.get('/user/:userId', passport.authenticate('jwt', { session: false }), asyncHandler(getClientsByUser));
 router.get('/typeClient', passport.authenticate('jwt', { session: false }), asyncHandler(getClientTypeEnterprise));
 router.get('/enterprise/:idEnterprise', passport.authenticate('jwt', { session: false }), asyncHandler(getClientsByEnterprise));
-router.get('/:id', passport.authenticate('jwt', { session: false }), asyncHandler(getClientByID));
+//Observação caso o usuário tenha permissão colocar em todas as rotas. requireTypeEmployee
+router.get('/:id', passport.authenticate('jwt', { session: false }), requireTypeEmployee, requireTypeMaster, asyncHandler(getClientByID));
 //router.get('/:id', passport.authenticate('jwt', { session: false }), asyncHandler(getClientByID));
 router.get('/branch/:id', passport.authenticate('jwt', { session: false }), asyncHandler(getClientBranchByID));
 
@@ -56,7 +59,8 @@ async function getClientsByEnterprise(req, res) {
 }
 
 async function getClientByID(req, res) {
-  let client = await clientCtrl.getClientByID(req.params.id);
+  console.log('inside method getClientByID class client.route. ');
+  let client = await clientCtrl.getClientByID(req.user._id);
   res.json(client);
   console.log("getClientByID: ", client);
 }

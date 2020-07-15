@@ -6,7 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { NgModel } from '@angular/forms';
 import { UtilService } from "../../../services/util.service";
-
+import { UsersType } from "./userstype";
 
 @Component({
   selector: 'app-registeremployee',
@@ -19,6 +19,13 @@ export class RegisteremployeeComponent implements OnInit {
   empresas: [any];
   address: any[];
   clients: any[];
+
+  userType = [
+    new UsersType(2, 'Sócio' ),
+    new UsersType(3, 'Gerente' ),
+    new UsersType(4, 'Empregado')
+ ];
+  
   exibirComboEmpresa = false;
   exibirComboCliente = false;
 
@@ -42,6 +49,8 @@ export class RegisteremployeeComponent implements OnInit {
       idcompany: [''],
       idclient: [''],
       idaddress: [''],
+      loginId: [''],
+      userTypeAccess:[''],
       numberAddress: ['', [Validators.required]],
       complementAddress: [''],
       phones: this.fb.group({
@@ -80,17 +89,6 @@ export class RegisteremployeeComponent implements OnInit {
 
   get teams(): FormGroup {
     return this.innerValue;
-    /*this.fb.group({
-      street: "",
-      complement: "",
-      number: "",
-      zip: "",
-      city: "",
-      district: "",
-      state: "",
-      country: "",
-      players: this.fb.array([this.players])
-    });*/
   }
 
   set teams(address: FormGroup) {
@@ -118,6 +116,19 @@ export class RegisteremployeeComponent implements OnInit {
     });
   }
   
+  listUserType() {
+    console.log("It list the matrix client");
+   // this.clienteService.listarClientesMatriz().subscribe(
+  // (data) => {
+    //    console.log("It list the matrix client: ", data);
+      //  this.typeClient = data;
+     // },
+     // (err) => {
+      //  this.toastr.error("Problemas ao consultar a lista de empresa. " + err.error.msg, "Erro: ");
+     // }
+    //);
+  }
+
   async changeFindCEP(cep) {
     this.utilService.findCep(cep.target.value).subscribe(
       (cepReturn) => {
@@ -144,6 +155,11 @@ export class RegisteremployeeComponent implements OnInit {
           },
         });
       });
+  }
+
+
+  changeType(userType) {
+    console.log(" Value of the variable ", userType);
   }
 
   register() {

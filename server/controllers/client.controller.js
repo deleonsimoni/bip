@@ -67,10 +67,8 @@ async function getClientsByEnterprise(id) {
 }
 
 async function getTotalClients(idUser) {
-  console.log('This is the method getTotalClients ');
-  return await Client.find({
-    enterprise: idUser
-  }).count();
+  console.log('This is the method getTotalClients ', idUser);
+  return await Client.find({userId: idUser}).count();
 }
 
 async function getClientByID(id) {
@@ -82,9 +80,7 @@ async function getClientByID(id) {
   try {
     for (const element of lista) {
       console.log('element.idaddress ' + element.idaddress);
-      element.address = await Address.findOne({
-        _id: element.idaddress
-      });
+      element.address = await Address.findOne({_id: element.idaddress});
     }
   } catch {
     console.log('Erro ao listar os empregados e seus endereços.');

@@ -1,13 +1,17 @@
 const express = require('express');
 const passport = require('passport');
 const employeeCtrl = require('../controllers/employee.controller');
+const requireTypeEmployee = require('../middleware/type-employee');
+const requireTypeMaster  = require('../middleware/type-master');
 
 const router = express.Router();
 module.exports = router;
 
 
 router.get('/enterprise/:idEnterprise', passport.authenticate('jwt', { session: false }), getEmployeesByEnterprise);
-router.get('/', passport.authenticate('jwt', { session: false }), getEmployeeByUserID);
+router.get('/', passport.authenticate('jwt', { session: false }), requireTypeEmployee, requireTypeMaster, getEmployeeByUserID);
+
+router.get('/masteremployee', passport.authenticate('jwt', { session: false }), getMasterEmployeeUserList);
 
 router.post('/', passport.authenticate('jwt', { session: false }), insertEmployee);
 
@@ -17,14 +21,24 @@ router.delete('/:id', passport.authenticate('jwt', { session: false }), deleteEm
 
 //GETS
 async function getEmployeesByEnterprise(req, res) {
+  console.log('inside method getEmployeesByEnterprise class employee.route. ');
   let employee = await employeeCtrl.getEmployeesByEnterprise(req.params.idEnterprise);
   res.json(employee);
 }
 
 async function getEmployeeByUserID(req, res) {
+  console.log('inside method getEmployeeByUserID class employee.route. ');
   let employee = await employeeCtrl.getEmployeeByUserID(req.user._id);
   res.json(employee);
 }
+
+
+async function getMasterEmployeeUserList(req, res) {
+  console.log('inside method getMasterEmployeeUserList class employee.route. ');
+  let employee = await employeeCtrl.getMasterEmployeeUserList(req.user._id);
+  res.json(employee);
+}
+
 
 //FIM GET
 

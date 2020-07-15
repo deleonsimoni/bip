@@ -3,6 +3,7 @@ import { ClienteService } from '../../../resources/services/admin/cliente.servic
 import { ConfirmDialogService } from '../../../resources/modal/confirm/confirm-dialog.service';
 import { ToastrService } from 'ngx-toastr';
 
+
 @Component({
   selector: 'app-manter',
   templateUrl: './manter.component.html',

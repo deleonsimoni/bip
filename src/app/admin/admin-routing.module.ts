@@ -17,6 +17,9 @@ import { SupportemployeeComponent } from './employee/supportemployee/supportempl
 import { RegisteremployeeComponent } from './employee/registeremployee/registeremployee.component';
   import { from } from 'rxjs';
 import { ListarCollectorComponent } from './collector/listar-collector/listar-collector.component';
+import { MasterEmployeeComponent } from './masteremployee/cadastro/masteremployee.component';
+import {ManterMasterEmployeeComponent} from './masteremployee/manter/manter-masteremployee.component';
+
 
 const routes: Routes = [{
   path: 'admin',
@@ -39,6 +42,10 @@ const routes: Routes = [{
     , { path: 'registeremployee', component: RegisteremployeeComponent}
     , { path: 'supportemployee', component: SupportemployeeComponent}
     , { path: 'collector', component: ListarCollectorComponent }
+    , { path: 'usuarioselecionar', component: MasterEmployeeComponent }
+    , { path: 'manterusuarioselecionar', component: ManterMasterEmployeeComponent }
+    
+   
 
   ]
 }];

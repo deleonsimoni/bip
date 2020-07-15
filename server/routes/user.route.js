@@ -9,7 +9,8 @@ module.exports = router;
 router.use(passport.authenticate('jwt', { session: false }))
 
 router.route('/').post(asyncHandler(insert));
-router.get('/email/:idEmail', passport.authenticate('jwt', { session: false }), asyncHandler(getFindByEmail));
+//router.get('/email/:idEmail',[passport.authenticate('jwt', { session: false }), requireTypeEmployee], asyncHandler(getFindByEmail));
+router.get('/email/:idEmail',passport.authenticate('jwt', { session: false }), asyncHandler(getFindByEmail));
 
 
 //router.post('/', passport.authenticate('jwt', { session: false }), insertEmployee);

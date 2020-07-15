@@ -36,8 +36,11 @@ async function insert(user) {
   //user = await Joi.validate(user, userSchema, { abortEarly: false });
   let objUser = user.user
   console.log("This is the method Insert 1. ");
+  objUser.isActivated = true;
+  objUser.userTypeAccess = 1;
   objUser.hashedPassword = bcrypt.hashSync(objUser.password, 10);
   delete objUser._id;
+  console.log("This is the method Insert 2. ", objUser);
   let objReturnUser =  await new User(objUser).save();
   if (objReturnUser._id) {
       let lstAddress = await this.getAddressByAddresCEP(objUser.address.zip);
