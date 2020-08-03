@@ -43,7 +43,7 @@ export class InventarioCadastrarComponent implements OnInit {
     if (!this.inventaryForm.valid) return;
 
     if (this.inventarySelected) {
-      this.inventarioService.update(this.inventaryForm.value)
+      this.inventarioService.update(this.inventaryForm.value, "")
         .subscribe(() => {
           this.toastr.success('Inventário atualizado com sucesso');
           this.router.navigate(['/admin/inventariolista']);
@@ -56,7 +56,7 @@ export class InventarioCadastrarComponent implements OnInit {
           this.toastr.success('Inventário criado com sucesso. Agora você pode complementar com as informações');
           this.router.navigate(['/admin/inventariolista']);
         }, err => {
-          this.toastr.error('Email já cadastrado ', 'Erro: ');
+          this.toastr.error('O inventário está cadastrado ', 'Erro: ');
         });
     }
   }

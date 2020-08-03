@@ -13,7 +13,9 @@ module.exports = {
 
 async function getCompanyByUserID(id) {
   //return await Company.find({ userId: id }).populate('idaddress');
+  
   let lstCompany = await Company.find({ userId: id });
+  //let lstCompany = await Company.find({fullnamecompany: {$regex: /[A]/}}).pretty();
   let list = JSON.parse(JSON.stringify(lstCompany));
   try {
     for (const element of list) {

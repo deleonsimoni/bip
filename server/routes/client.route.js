@@ -62,7 +62,7 @@ async function getClientByID(req, res) {
   console.log('inside method getClientByID class client.route. ');
   let client = await clientCtrl.getClientByID(req.user._id);
   res.json(client);
-  console.log("getClientByID: ", client);
+  //console.log("getClientByID: ", client);
 }
 
 async function getClientBranchByID(req, res) {

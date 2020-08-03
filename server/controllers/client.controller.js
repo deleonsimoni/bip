@@ -23,7 +23,7 @@ async function getClientsByUser(id) {
   let lstClient = await Client.find({
     userId: id
   });
-  console.log('This is the object lstClient ' + lstClient);
+ // console.log('This is the object lstClient ' + lstClient);
   let lista = JSON.parse(JSON.stringify(lstClient));
   try {
     console.log('It list all clients.');
@@ -49,7 +49,7 @@ async function getClientsByEnterprise(id) {
   let lstClient = await Client.find({
     enterprise: id
   });
-  console.log('This is the object lstClient ' + lstClient);
+  //console.log('This is the object lstClient ' + lstClient);
   let lista = JSON.parse(JSON.stringify(lstClient));
   try {
     for (const element of lista) {
@@ -75,7 +75,7 @@ async function getClientByID(id) {
   // return await Client.findById(id);
   console.log('This is the method getClientByID ' + id);
   let lstClient = await Client.find({ userId: id });
-  console.log('This is the object lstClient ' + lstClient);
+  //console.log('This is the object lstClient ' + lstClient);
   let lista = JSON.parse(JSON.stringify(lstClient));
   try {
     for (const element of lista) {

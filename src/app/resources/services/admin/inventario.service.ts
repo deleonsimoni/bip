@@ -9,10 +9,11 @@ export class InventarioService {
 
   constructor(private http: HttpClient) { }
 
-  update(inventary: any) {
+  update(inventary: any, inventarySelected: any) {
     return Observable.create(observer => {
       this.http.put('/api/inventary/', {
-        inventary
+        inventary,
+        inventarySelected
       }).subscribe((data: any) => {
         observer.next(data);
       }, err => {
@@ -34,6 +35,7 @@ export class InventarioService {
 
 
   register(inventary: any): Observable<any> {
+    console.log('The value in the class inventario.service and method register ', inventary);
     return Observable.create(observer => {
       this.http.post('/api/inventary/', {
         inventary
@@ -41,6 +43,17 @@ export class InventarioService {
         observer.next(data);
       }, err => {
         console.log('erro', err.error.msg);
+        observer.error(err.error.msg);
+      })
+    });
+  }
+
+  listInventary(idInventary): Observable<any> {
+    return Observable.create(observer => {
+      this.http.get('/api/inventary/inventary/' + idInventary, {
+      }).subscribe((data: any) => {
+        observer.next(data);
+      }, err => {
         observer.error(err.error.msg);
       })
     });

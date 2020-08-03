@@ -2,12 +2,34 @@ const mongoose = require('mongoose');
 
 const InventarySchema = new mongoose.Schema({
 
-  fullname: {
+ fullname: {
     type: String,
     required: true
   },
   observations: {
-    type: String
+    type: String,
+    required: true
+  },
+  datebegin: {
+    type: Date,
+  },
+  dateend: {
+    type: Date,
+  },
+  //Empresa que fará o inventário
+  idclient: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Client'
+  },
+  idemployee: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Employee'
+  },
+  headFile: {
+    type: String,
+  },
+  fileClient: {
+    type: String,
   },
   // Inicio Chaves
   //Usuario criado
@@ -15,17 +37,6 @@ const InventarySchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
-  //Empresa que fará o inventário
-  cliente: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Client'
-  },
-  //Filial que será feito o inventário
-  // clientBranch: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: 'ClientBranch'
-  // },
-
   collectors: [{
     //usuario da empresa que fara a coleta
     user: {
@@ -45,21 +56,9 @@ const InventarySchema = new mongoose.Schema({
       }
     }]
   }],
-
   //Fim chaves
-
   //produtos do arquivo do cliente a serem inventariados
-  productsClient: [{
-    name: { type: String },
-    cod: { type: String },
-  }],
-
-  begin: {
-    type: Date
-  },
-  end: {
-    type: Date
-  },
+  clientFile: [],
   createdAt: {
     type: Date,
     default: Date.now
