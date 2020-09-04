@@ -44,6 +44,7 @@ import { from } from 'rxjs';
 import { ListarCollectorComponent } from './collector/listar-collector/listar-collector.component';
 import { ManterCollectorComponent } from './collector/manter-collector/manter-collector.component';
 import { PickListModule } from 'primeng/picklist';
+import { FolhaDePontoComponent } from './folha-de-ponto/folha-de-ponto.component';
 
 export let options: Partial<IConfig> | (() => Partial<IConfig>);
 
@@ -66,7 +67,8 @@ export let options: Partial<IConfig> | (() => Partial<IConfig>);
     ListarCollectorComponent,
     ManterCollectorComponent,
     MasterEmployeeComponent,
-    ManterMasterEmployeeComponent
+    ManterMasterEmployeeComponent,
+    FolhaDePontoComponent
   ],
   imports: [
     CommonModule,

@@ -19,6 +19,7 @@ import { RegisteremployeeComponent } from './employee/registeremployee/registere
 import { ListarCollectorComponent } from './collector/listar-collector/listar-collector.component';
 import { MasterEmployeeComponent } from './masteremployee/cadastro/masteremployee.component';
 import {ManterMasterEmployeeComponent} from './masteremployee/manter/manter-masteremployee.component';
+import { FolhaDePontoComponent } from './folha-de-ponto/folha-de-ponto.component';
 
 
 const routes: Routes = [{
@@ -44,8 +45,7 @@ const routes: Routes = [{
     , { path: 'collector', component: ListarCollectorComponent }
     , { path: 'usuarioselecionar', component: MasterEmployeeComponent }
     , { path: 'manterusuarioselecionar', component: ManterMasterEmployeeComponent }
-    
-   
+    , { path: 'folha-ponto', component: FolhaDePontoComponent }
 
   ]
 }];
