@@ -45,8 +45,10 @@ import { ListarCollectorComponent } from './collector/listar-collector/listar-co
 import { ManterCollectorComponent } from './collector/manter-collector/manter-collector.component';
 import { PickListModule } from 'primeng/picklist';
 import { FolhaDePontoComponent } from './folha-de-ponto/folha-de-ponto.component';
+import { MasterEmployeeModule } from './masteremployee/cadastro/masteremployee.module';
 
-export let options: Partial<IConfig> | (() => Partial<IConfig>);
+//export let options: Partial<IConfig> | (() => Partial<IConfig>);
+export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
 @NgModule({
   declarations: [
@@ -82,6 +84,7 @@ export let options: Partial<IConfig> | (() => Partial<IConfig>);
     BrowserAnimationsModule,
     MatCardModule,
     MatFormFieldModule,
+    MasterEmployeeModule,
     PickListModule
   ],
   providers: [

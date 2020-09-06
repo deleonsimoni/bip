@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-//import { CarService } from './carservice';
+
 import { StructureEmployee } from './structureemployee';
 import { EmployeeService } from '../../../resources/services/admin/employee.service';
 import { MasterEmployeeService } from '../../../resources/services/admin/masteremployee.service';
@@ -21,11 +21,12 @@ export class MasterEmployeeComponent implements OnInit {
     gruposSelecionados: StructureEmployee[];
     itensArmazenados: StructureEmployee[];
     itensEncontrados: StructureEmployee[];
-    private innerValue: FormGroup;
-    private changed = new Array<(value: FormGroup) => void>();
+    //private innerValue: FormGroup;
+    //private changed = new Array<(value: FormGroup) => void>();
     
 
-    constructor(private fb: FormBuilder, private employeeService: EmployeeService, private masterEmployeeService: MasterEmployeeService,
+    constructor(private fb: FormBuilder, private employeeService: EmployeeService, 
+      private masterEmployeeService: MasterEmployeeService,
       private modalConfirm: ConfirmDialogService, private toastr: ToastrService,private router: Router) { 
       this.masteremployeeSelected = this.router.getCurrentNavigation().extras.state;
     }
@@ -37,21 +38,6 @@ export class MasterEmployeeComponent implements OnInit {
       });
       this.listMasterEmployeeRegister();
       this.listMasterEmployee();
-      //console.log('Lista dos empregados ', this.employees);
-     // this.sourceCars = this.employees;
-       /* this.sourceCars = [
-          {"brand": "VW", "year": 2012, "color": "Orange", "vin": "dsad231ff"},
-          {"brand": "Audi", "year": 2011, "color": "Black", "vin": "gwregre345"},
-          {"brand": "Renault", "year": 2005, "color": "Gray", "vin": "h354htr"},
-          {"brand": "BMW", "year": 2003, "color": "Blue", "vin": "j6w54qgh"},
-          {"brand": "Mercedes", "year": 1995, "color": "Orange", "vin": "hrtwy34"},
-          {"brand": "Volvo", "year": 2005, "color": "Black", "vin": "jejtyj"},
-          {"brand": "Honda", "year": 2012, "color": "Yellow", "vin": "g43gr"},
-          {"brand": "Jaguar", "year": 2013, "color": "Orange", "vin": "greg34"},
-          {"brand": "Ford", "year": 2000, "color": "Black", "vin": "h54hw5"},
-          {"brand": "Fiat", "year": 2013, "color": "Red", "vin": "245t2s"}
-      ]; */
-       // this.targetCars = [];
        this.gruposSelecionados = [];
     }
 
@@ -61,16 +47,6 @@ export class MasterEmployeeComponent implements OnInit {
 
       if (!this.masteremployeeForm.valid) return;
 
-    /*  if (this.targetCars) {
-        console.log('Register of master and employee 1. ');
-        this.employeeService.update(this.masteremployeeForm.value)
-          .subscribe(() => {
-            this.toastr.success('Funcionário atualizado com sucesso.');
-            this.router.navigate(['/admin/supportemployee']);
-          }, err => {
-            this.toastr.error('Problema ao atualizar o funcionário.' + err.error.msg, 'Erro: ');
-          });
-      } else {*/
         console.log('Register of master and employee 1. ');
         let enterprise = (<any>window).user._id;
         

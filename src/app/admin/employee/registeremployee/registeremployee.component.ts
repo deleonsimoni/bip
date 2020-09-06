@@ -6,7 +6,6 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { NgModel } from '@angular/forms';
 import { UtilService } from "../../../services/util.service";
-import { UsersType } from "./userstype";
 
 @Component({
   selector: 'app-registeremployee',
@@ -20,12 +19,12 @@ export class RegisteremployeeComponent implements OnInit {
   address: any[];
   clients: any[];
 
-  userType = [
-    new UsersType(2, 'Sócio' ),
-    new UsersType(3, 'Gerente' ),
-    new UsersType(4, 'Empregado')
- ];
-  
+  userType: Array<{ id: number, nome: string}> = [
+    { id: 2, nome: 'Sócio'},
+    { id: 3, nome: 'Gerente'},
+    { id: 4, nome: 'Empregado'}
+  ];
+
   exibirComboEmpresa = false;
   exibirComboCliente = false;
 
