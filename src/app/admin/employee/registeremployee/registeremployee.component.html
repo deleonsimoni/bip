@@ -7,13 +7,13 @@
         <form class="user" [formGroup]="employeeForm">
             <!--input type="hidden" formControlName="idaddress" name="idaddress" /-->
             <div class="form-check">
-                <input (click)="exibirComboEmpresa=true;exibirComboCliente=false;employeeForm.get('idclient').value ='';"
+                <input (click)="exibirComboEmpresa=true;exibirComboCliente=false;employeeForm.get('idclient');"
                     class="form-check-input" type="radio" [checked]="exibirComboEmpresa" name="exampleRadios" id="exampleRadios1"
                     value="option1">
                 <label class="form-check-label" for="exampleRadios1"> Empresa </label>
             </div>
             <div class="form-check">
-                <input (click)="exibirComboCliente=true;exibirComboEmpresa=false;employeeForm.get('idcompany').value ='';"
+                <input (click)="exibirComboCliente=true;exibirComboEmpresa=false;employeeForm.get('idcompany');"
                     class="form-check-input" type="radio" [checked]="exibirComboCliente" name="exampleRadios" id="exampleRadios2"
                     value="option2">
                 <label class="form-check-label" for="exampleRadios2"> Cliente </label>

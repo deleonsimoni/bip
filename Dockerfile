@@ -13,8 +13,8 @@ EXPOSE 4040 80
 FROM nginx:alpine
 
 RUN mkdir -p /var/www/html/bip
-COPY --from=node nginix.conf /etc/nginx/conf.d/default.conf
-COPY --from=node /dist /usr/share/nginx/html
+COPY --from=node ./nginix.conf /etc/nginx/conf.d/default.conf
+COPY --from=node ./dist /usr/share/nginx/html
 
 
 

@@ -17,6 +17,7 @@ export class CadastroempresaComponent implements OnInit {
   empresaForm: FormGroup;
   empresaSelecionado: any;
   address: any[];
+  clienteSelecionado: any;
 
   constructor(private fb: FormBuilder, private utilService: UtilService, private employeeService: EmployeeService, private empresaService: EmpresaService, private toastr: ToastrService,
     private router: Router) {

@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Pais } from '../../../admin/masteremployee/backlog/pais';
-import { Cidade } from '../../../admin/masteremployee/backlog/cidade';
+//import { Pais } from '../../../admin/masteremployee/backlog/pais';
+//import { Cidade } from '../../../admin/masteremployee/backlog/cidade';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MasterEmployeeService {
 
-  getPaises() {
+ /* getPaises() {
     return [
       new Pais(1, 'Brasil'),
       new Pais(2, 'USA'),
@@ -30,7 +30,7 @@ export class MasterEmployeeService {
       new Cidade(10, 3, 'Veneza')
     ];
   }
-
+    */
 
   constructor(private http: HttpClient) { }
 
