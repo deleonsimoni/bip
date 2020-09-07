@@ -5,7 +5,8 @@ RUN npm i npm@latest -g
 RUN npm install
 COPY ./ /app/
 
-RUN npm run build --prod--aot true
+#RUN npm run build --prod--aot false
+RUN npm run build --prod --aot=false --build-optimizer=false
 EXPOSE 4040 80
 
 ####Stage 1, Build Nginx backend
